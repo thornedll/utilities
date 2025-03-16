@@ -1,0 +1,14 @@
+.nav {
+  margin: 0;
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.navLink {
+  color: #000000;
+  text-decoration: none;
+  &:hover {
+    border-bottom: 1px solid red;
+  }
+}
