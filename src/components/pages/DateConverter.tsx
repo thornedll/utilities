@@ -1,7 +1,13 @@
-import React from 'react'
+import React from "react";
+import DateTimePicker from "../UI/DateTimePicker";
 
 export default function DateConverter() {
   return (
-    <div>DateConverter</div>
-  )
+    <>
+      <h2>Конвертер дат UNIX-ISO</h2>
+      <div>
+        <DateTimePicker />
+      </div>
+    </>
+  );
 }
