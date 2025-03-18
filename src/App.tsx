@@ -1,8 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router";
-import DateConverter from "./components/pages/DateConverter";
-import JsonConverter from "./components/pages/JsonConverter";
-import JsonDiff from "./components/pages/JsonDiff";
-import Navigation from "./components/blocks/Navigation";
+import { DateConverter, JsonConverter, JsonDiff } from "./components/pages";
+import { Navigation } from "./components/blocks";
 
 function App() {
   return (

@@ -1,7 +1,5 @@
-import React from 'react'
+import React from "react";
 
-export default function JsonConverter() {
-  return (
-    <div>JsonConverter</div>
-  )
-}
+export const JsonConverter = () => {
+  return <div>JsonConverter</div>;
+};

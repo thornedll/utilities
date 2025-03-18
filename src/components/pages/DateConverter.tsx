@@ -1,13 +1,21 @@
-import React from "react";
-import DateTimePicker from "../UI/DateTimePicker";
+import { DateTimePicker, BaseSelect } from "../UI";
+import styles from "./styles.module.scss";
 
-export default function DateConverter() {
+const timezones = [
+  { label: "+00:00", value: "00" },
+  { label: "+01:00", value: "01" },
+  { label: "+02:00", value: "02" },
+  { label: "+03:00", value: "03" },
+];
+
+export const DateConverter = () => {
   return (
     <>
       <h2>Конвертер дат UNIX-ISO</h2>
-      <div>
+      <div className={styles.optionsWrapper}>
         <DateTimePicker />
+        <BaseSelect options={timezones} />
       </div>
     </>
   );
-}
+};

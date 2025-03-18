@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import styles from "./styles.module.scss";
-import DatePicker from "react-datepicker";
+import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { ru } from "date-fns/locale/ru";
+
+registerLocale("ru", ru);
 
 interface DatePickerProps {}
 
-const DateTimePicker: React.FC<DatePickerProps> = () => {
+export const DateTimePicker: React.FC<DatePickerProps> = () => {
   const [date, setDate] = useState<Date | null>(new Date());
   const handleChange = (date: Date | null) => {
     setDate(date);
@@ -14,14 +17,13 @@ const DateTimePicker: React.FC<DatePickerProps> = () => {
   return (
     <DatePicker
       locale="ru"
-      // showIcon
+      showIcon
       selected={date}
       onChange={handleChange} //only when value has changed
       timeInputLabel="Время:"
       dateFormat="dd.MM.yyyy hh:mm:ss"
       showTimeInput
+      className={styles.dataPicker}
     />
   );
 };
-
-export default DateTimePicker;

@@ -1,7 +1,7 @@
 import { NavLink } from "react-router";
 import styles from "./styles.module.scss";
 
-export default function Navigation() {
+export const Navigation = () => {
   return (
     <nav className={styles.nav}>
       <NavLink to="/" className={styles.navLink}>
@@ -15,4 +15,4 @@ export default function Navigation() {
       </NavLink>
     </nav>
   );
-}
+};

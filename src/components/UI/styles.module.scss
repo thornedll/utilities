@@ -1,0 +1,8 @@
+.select .container,
+.dataPicker {
+  border-radius: 4px;
+  cursor: pointer;
+  &:hover {
+    border-color: #8a8a8a;
+  }
+}
