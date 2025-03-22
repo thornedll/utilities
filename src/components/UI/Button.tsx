@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import styles from "./styles.module.scss";
 
 interface ButtonProps {
   text: string;
@@ -6,9 +7,13 @@ interface ButtonProps {
   disabled?: boolean;
 }
 
-export const Button: React.FC<ButtonProps> = ({ text, onClick, disabled = false }) => {
+export const Button: React.FC<ButtonProps> = ({
+  text,
+  onClick,
+  disabled = false,
+}) => {
   return (
-    <button onClick={onClick} disabled={disabled}>
+    <button onClick={onClick} disabled={disabled} className={styles.btnPrimary}>
       {text}
     </button>
   );

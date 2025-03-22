@@ -15,15 +15,18 @@ export const DateTimePicker: React.FC<DatePickerProps> = () => {
   };
 
   return (
-    <DatePicker
-      locale="ru"
-      showIcon
-      selected={date}
-      onChange={handleChange} //only when value has changed
-      timeInputLabel="Время:"
-      dateFormat="dd.MM.yyyy hh:mm:ss"
-      showTimeInput
-      className={styles.dataPicker}
-    />
+    <div>
+      <DatePicker
+        locale="ru"
+        showIcon
+        selected={date}
+        onChange={handleChange}
+        timeInputLabel="Время:"
+        dateFormat="dd.MM.yyyy hh:mm:ss"
+        showTimeInput
+        className={styles.datePicker}
+        popperPlacement="bottom-end"
+      />
+    </div>
   );
 };

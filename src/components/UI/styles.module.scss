@@ -1,8 +1,36 @@
-.select .container,
-.dataPicker {
+.select,
+.datePicker {
   border-radius: 4px;
   cursor: pointer;
+  font-size: 14px;
+  max-height: 30px;
   &:hover {
     border-color: #8a8a8a;
   }
+}
+
+.datePicker {
+  border: 1px solid hsl(0, 0%, 80%);
+  height: 18px;
+}
+
+.btnPrimary {
+  border: none;
+  border-radius: 6px;
+  background-color: #4cba00;
+  color: ghostwhite;
+  padding: 4px 8px;
+  font-size: 14px;
+  cursor: pointer;
+  &:hover {
+    background-color: #49b000;
+  }
+}
+
+.textInput {
+  height: 18px;
+  padding: 4px 8px;
+  font-size: 14px;
+  border: 1px solid hsl(0, 0%, 80%);
+  border-radius: 6px;
 }

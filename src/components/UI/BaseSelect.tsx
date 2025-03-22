@@ -1,40 +1,51 @@
 import React from "react";
-import Select from "react-select";
+import Select, { StylesConfig } from "react-select";
 import styles from "./styles.module.scss";
 
-type Options = {
+type Option = {
   label: String;
   value: String;
 };
 
 interface BaseSelectProps {
-  options: Options[];
+  options: Option[];
+  defaultValue: Option;
 }
 
-export const BaseSelect: React.FC<BaseSelectProps> = ({ options }) => {
+const selectStyles: StylesConfig = {
+  control: (styles) => ({
+    ...styles,
+    minHeight: "31px",
+    maxHeight: "31px",
+    alignContent: "center",
+    fontSize: "14px",
+    fontFamily: "Arial",
+    cursor: "pointer",
+  }),
+  menuList: (styles) => ({
+    ...styles,
+    fontSize: "14px",
+    fontFamily: "Arial",
+  }),
+  indicatorSeparator: () => ({
+    display: "none",
+  }),
+  valueContainer: (styles) => ({
+    ...styles,
+    padding: "0 8px",
+  }),
+};
+
+export const BaseSelect: React.FC<BaseSelectProps> = ({
+  options,
+  defaultValue,
+}) => {
   return (
     <Select
-      styles={{
-        control: (baseStyles) => ({
-          ...baseStyles,
-          minHeight: "30px",
-          maxHeight: "30px",
-          alignContent: "center",
-        }),
-        indicatorSeparator: () => ({
-          display: "none",
-        }),
-        indicatorsContainer: (baseStyles) => ({
-          ...baseStyles,
-          // padding: "0 8px",
-        }),
-        valueContainer: (baseStyles) => ({
-          ...baseStyles,
-          padding: "0 8px",
-        }),
-      }}
+      styles={selectStyles}
       options={options}
       className={styles.select}
+      defaultValue={defaultValue}
     ></Select>
   );
 };
