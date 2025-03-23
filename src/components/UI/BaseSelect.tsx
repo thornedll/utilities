@@ -3,13 +3,14 @@ import Select, { StylesConfig } from "react-select";
 import styles from "./styles.module.scss";
 
 type Option = {
-  label: String;
-  value: String;
+  label: string;
+  value: string;
 };
 
 interface BaseSelectProps {
   options: Option[];
-  defaultValue: Option;
+  value: Option;
+  changeTimezone: (timezone: Option) => void;
 }
 
 const selectStyles: StylesConfig = {
@@ -38,14 +39,16 @@ const selectStyles: StylesConfig = {
 
 export const BaseSelect: React.FC<BaseSelectProps> = ({
   options,
-  defaultValue,
+  value,
+  changeTimezone,
 }) => {
   return (
     <Select
       styles={selectStyles}
       options={options}
       className={styles.select}
-      defaultValue={defaultValue}
+      value={value}
+      onChange={(timezone: any) => changeTimezone(timezone)}
     ></Select>
   );
 };
