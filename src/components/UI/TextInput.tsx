@@ -1,33 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./styles.module.scss";
 
 interface TextInputProps {
-  inputValue?: string | (() => string);
+  inputValue: React.InputHTMLAttributes<HTMLInputElement>["value"];
   placeholder?: string;
   disabled?: boolean;
+  handleChange?: () => void;
 }
 
 export const TextInput: React.FC<TextInputProps> = ({
   placeholder,
-  inputValue = "",
+  inputValue,
   disabled = false,
+  handleChange,
 }) => {
-  //TODO useState вынести на верхний уровень
-  const [text, setText] = useState<string>(inputValue);
-  const handleChange = (text: string) => {
-    setText(text);
-  };
-
-  useEffect(() => {
-    setText(inputValue);
-  }, [inputValue]);
-
   return (
     <input
       type="text"
       placeholder={placeholder}
       onChange={() => handleChange}
-      value={text}
+      value={inputValue}
       className={styles.textInput}
       disabled={disabled}
     ></input>
