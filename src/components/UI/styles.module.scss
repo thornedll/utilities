@@ -27,6 +27,21 @@
   }
 }
 
+.btnIcon {
+  position: absolute;
+  left: 132px;
+  top: 1px;
+  border: none;
+  border-radius: 6px;
+  background-color: transparent;
+  color: rgb(70, 70, 70);
+  padding: 4px 8px;
+  cursor: pointer;
+  &:hover {
+    color: black;
+  }
+}
+
 .textInput {
   height: 18px;
   padding: 4px 8px;

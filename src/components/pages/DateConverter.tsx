@@ -13,15 +13,23 @@ export const DateConverter: React.FC = () => {
   const [text, setText] = useState<string>("");
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [timezone, setTimezone] = useState<Option>(timezones[3]);
+  const [btnType, setBtnType] = useState<string>("copy");
 
   const handleChange = (text: string) => {
     setText(text);
   };
   const changeDate = (startDate: Date | null) => {
     setStartDate(startDate);
+    console.log(startDate);
   };
   const changeTimezone = (timezone: Option) => {
     setTimezone(timezone);
+  };
+
+  const copy = async () => {
+    await navigator.clipboard.writeText(text);
+    setBtnType("success");
+    setTimeout(() => setBtnType("copy"), 1000);
   };
 
   return (
@@ -40,8 +48,11 @@ export const DateConverter: React.FC = () => {
         <Button
           text="Конвертировать"
           onClick={() =>
-            handleChange(startDate ? getUnixTimeString(startDate, timezone.value) : "")
+            handleChange(
+              startDate ? getUnixTimeString(startDate, timezone.value) : ""
+            )
           }
+          type="primary"
         />
       </div>
       <div className={styles.resultWrapper}>
@@ -51,6 +62,7 @@ export const DateConverter: React.FC = () => {
           disabled
           handleChange={() => handleChange}
         />
+        <Button text="" onClick={copy} type={btnType} />
       </div>
     </>
   );
