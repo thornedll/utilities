@@ -11,7 +11,7 @@ export const Navigation = () => {
         JSON Converter
       </NavLink>
       <NavLink to="/jsonDiff" className={styles.navLink}>
-        JSON Diff
+        JSON Difference
       </NavLink>
     </nav>
   );

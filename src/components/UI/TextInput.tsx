@@ -6,6 +6,7 @@ interface TextInputProps {
   placeholder?: string;
   disabled?: boolean;
   handleChange?: () => void;
+  id?: string;
 }
 
 export const TextInput: React.FC<TextInputProps> = ({
@@ -13,15 +14,20 @@ export const TextInput: React.FC<TextInputProps> = ({
   inputValue,
   disabled = false,
   handleChange,
+  id,
 }) => {
   return (
-    <input
-      type="text"
-      placeholder={placeholder}
-      onChange={() => handleChange}
-      value={inputValue}
-      className={styles.textInput}
-      disabled={disabled}
-    ></input>
+    <>
+      <label htmlFor={id}>Result:&nbsp;</label>
+      <input
+        type="text"
+        placeholder={placeholder}
+        onChange={() => handleChange}
+        value={inputValue}
+        className={styles.textInput}
+        disabled={disabled}
+        id={id}
+      ></input>
+    </>
   );
 };

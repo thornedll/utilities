@@ -1,8 +1,15 @@
+.pageWrapper {
+  padding: 0 16px;
+}
+
 .optionsWrapper {
   display: flex;
-  gap: 5px;
+  gap: 8px;
+  margin-top: 8px;
 }
 
 .resultWrapper {
   position: relative;
+  margin-top: 8px;
+  width: fit-content;
 }

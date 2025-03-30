@@ -11,7 +11,7 @@
 
 .datePicker {
   border: 1px solid hsl(0, 0%, 80%);
-  height: 18px;
+  height: 31px;
 }
 
 .btnPrimary {
@@ -29,8 +29,8 @@
 
 .btnIcon {
   position: absolute;
-  left: 132px;
-  top: 1px;
+  right: 0;
+  top: 3px;
   border: none;
   border-radius: 6px;
   background-color: transparent;
@@ -43,7 +43,8 @@
 }
 
 .textInput {
-  height: 18px;
+  height: 31px;
+  width: 140px;
   padding: 4px 8px;
   font-size: 14px;
   border: 1px solid hsl(0, 0%, 80%);

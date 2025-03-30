@@ -1,0 +1,25 @@
+*,
+::after,
+::before {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+h1 {
+  font-size: 28px;
+  margin-right: 16px;
+  cursor: default;
+}
+
+h2 {
+  font-size: 22px;
+  cursor: default;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  margin-bottom: 16px;
+}

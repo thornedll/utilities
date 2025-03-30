@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./styles.module.scss";
 import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import styles from "./styles.module.scss";
 import { ru } from "date-fns/locale/ru";
 
 registerLocale("ru", ru);
@@ -23,7 +23,7 @@ export const DateTimePicker: React.FC<DatePickerProps> = ({
         selected={startDate}
         onChange={(date) => changeDate(date)}
         timeInputLabel="Время:"
-        dateFormat="dd.MM.yyyy hh:mm:ss"
+        dateFormat="Pp:ss"
         showTimeInput
         className={styles.datePicker}
         popperPlacement="bottom-end"
