@@ -7,6 +7,7 @@ interface TextInputProps {
   disabled?: boolean;
   handleChange?: () => void;
   id?: string;
+  labelText?: string;
 }
 
 export const TextInput: React.FC<TextInputProps> = ({
@@ -15,10 +16,16 @@ export const TextInput: React.FC<TextInputProps> = ({
   disabled = false,
   handleChange,
   id,
+  labelText,
 }) => {
   return (
     <>
-      <label htmlFor={id}>Result:&nbsp;</label>
+      <label
+        htmlFor={id}
+        style={labelText ? { display: "inline-block" } : { display: "none" }}
+      >
+        {labelText}
+      </label>
       <input
         type="text"
         placeholder={placeholder}
