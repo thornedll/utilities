@@ -13,9 +13,9 @@ function App() {
           <Navigation />
         </div>
         <Routes>
-          <Route path="/" element={<DateConverter />}></Route>
-          <Route path="/jsonConverter" element={<JsonConverter />}></Route>
-          <Route path="/jsonDiff" element={<JsonDiff />}></Route>
+          <Route path="utilities/" element={<DateConverter />}></Route>
+          <Route path="utilities/jsonConverter" element={<JsonConverter />}></Route>
+          <Route path="utilities/jsonDiff" element={<JsonDiff />}></Route>
         </Routes>
       </Router>
     </div>
