@@ -16,17 +16,17 @@ interface BaseSelectProps {
 const selectStyles: StylesConfig = {
   control: (styles) => ({
     ...styles,
-    minHeight: "31px",
-    maxHeight: "31px",
+    minHeight: "32px",
+    maxHeight: "32px",
     alignContent: "center",
-    fontSize: "14px",
-    fontFamily: "Arial",
+    fontSize: "16px",
+    fontFamily: "Inter",
     cursor: "pointer",
   }),
   menuList: (styles) => ({
     ...styles,
-    fontSize: "14px",
-    fontFamily: "Arial",
+    fontSize: "16px",
+    fontFamily: "Inter",
   }),
   indicatorSeparator: () => ({
     display: "none",

@@ -34,7 +34,7 @@ export const TextInput: React.FC<TextInputProps> = ({
         className={styles.textInput}
         disabled={disabled}
         id={id}
-      ></input>
+      />
     </>
   );
 };

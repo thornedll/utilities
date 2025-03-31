@@ -47,7 +47,7 @@ export const DateConverter: React.FC = () => {
           changeTimezone={(timezone: Option) => changeTimezone(timezone)}
         />
         <Button
-          text="Конвертировать"
+          text="Convert"
           onClick={() =>
             handleChange(
               startDate ? getUnixTimeString(startDate, timezone.value) : ""

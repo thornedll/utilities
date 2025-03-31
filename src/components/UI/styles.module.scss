@@ -2,8 +2,8 @@
 .datePicker {
   border-radius: 4px;
   cursor: pointer;
-  font-size: 14px;
-  max-height: 30px;
+  font-size: 16px;
+  max-height: 32px;
   &:hover {
     border-color: #8a8a8a;
   }
@@ -11,42 +11,57 @@
 
 .datePicker {
   border: 1px solid hsl(0, 0%, 80%);
-  height: 31px;
+  height: 32px;
 }
 
-.btnPrimary {
-  border: none;
-  border-radius: 6px;
+.btnPrimary,
+.fileInputLabel {
+  padding: 4px 8px;
   background-color: #4cba00;
   color: ghostwhite;
-  padding: 4px 8px;
-  font-size: 14px;
-  cursor: pointer;
+  font-size: 16px;
   &:hover {
     background-color: #49b000;
   }
 }
 
-.btnIcon {
-  position: absolute;
-  right: 0;
-  top: 3px;
-  border: none;
+.fileInputLabel {
   border-radius: 6px;
-  background-color: transparent;
-  color: rgb(70, 70, 70);
   padding: 4px 8px;
   cursor: pointer;
+}
+
+.btnIcon {
+  padding: 4px 8px;
+  position: absolute;
+  right: 0;
+  top: 1px;
+  background-color: transparent;
+  color: rgb(70, 70, 70);
   &:hover {
     color: black;
   }
 }
 
 .textInput {
-  height: 31px;
-  width: 140px;
+  width: 162px;
   padding: 4px 8px;
-  font-size: 14px;
+  font-size: 16px;
   border: 1px solid hsl(0, 0%, 80%);
   border-radius: 6px;
+}
+
+.fileInput {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.check {
+  gap: 8px;
+  align-items: center;
+  input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+  }
 }
