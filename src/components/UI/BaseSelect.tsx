@@ -22,6 +22,7 @@ const selectStyles: StylesConfig = {
     fontSize: "16px",
     fontFamily: "Inter",
     cursor: "pointer",
+    borderRadius: "6px",
   }),
   menuList: (styles) => ({
     ...styles,

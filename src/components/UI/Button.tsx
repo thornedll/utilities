@@ -2,14 +2,14 @@ import React from "react";
 import styles from "./styles.module.scss";
 
 interface ButtonProps {
-  text: string;
-  onClick: () => void;
+  text?: string;
   disabled?: boolean;
   type: string;
+  onClick: () => void;
 }
 
 export const Button: React.FC<ButtonProps> = ({
-  text,
+  text = "",
   onClick,
   disabled = false,
   type,
@@ -28,8 +28,8 @@ export const Button: React.FC<ButtonProps> = ({
       {type === "primary" ? null : type === "copy" ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
+          width="18"
+          height="18"
           fill="currentColor"
           viewBox="0 0 16 16"
         >
@@ -41,8 +41,8 @@ export const Button: React.FC<ButtonProps> = ({
       ) : (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
+          width="18"
+          height="18"
           fill="#4cba00"
           viewBox="0 0 16 16"
         >

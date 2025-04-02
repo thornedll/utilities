@@ -1,21 +1,23 @@
 import React from "react";
 import styles from "./styles.module.scss";
 
-interface TextInputProps {
-  inputValue: React.InputHTMLAttributes<HTMLInputElement>["value"];
+interface TextAreaProps {
+  value: React.InputHTMLAttributes<HTMLInputElement>["value"];
   placeholder?: string;
   disabled?: boolean;
   id?: string;
   labelText?: string;
+  readOnly: boolean;
   handleChange?: () => void;
 }
 
-export const TextInput: React.FC<TextInputProps> = ({
+export const TextArea: React.FC<TextAreaProps> = ({
   placeholder,
-  inputValue,
+  value,
   disabled = false,
   id,
   labelText,
+  readOnly = false,
   handleChange,
 }) => {
   return (
@@ -28,14 +30,14 @@ export const TextInput: React.FC<TextInputProps> = ({
       >
         {labelText}
       </label>
-      <input
-        type="text"
+      <textarea
         placeholder={placeholder}
         onChange={() => handleChange}
-        value={inputValue}
-        className={styles.textInput}
+        value={value}
+        className={styles.textArea}
         disabled={disabled}
         id={id}
+        readOnly={readOnly}
       />
     </>
   );

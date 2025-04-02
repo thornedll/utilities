@@ -2,17 +2,19 @@ import React from "react";
 import styles from "./styles.module.scss";
 
 interface CheckProps {
+  checked: boolean;
   disabled?: boolean;
-  handleChange?: () => void;
   id?: string;
   labelText?: string;
+  handleChange: (state: boolean) => void;
 }
 
 export const Check: React.FC<CheckProps> = ({
+  checked,
   disabled = false,
-  handleChange,
   id,
   labelText,
+  handleChange,
 }) => {
   return (
     <>
@@ -23,9 +25,10 @@ export const Check: React.FC<CheckProps> = ({
       >
         <input
           type="checkbox"
-          onChange={() => handleChange}
+          checked={checked}
           disabled={disabled}
           id={id}
+          onChange={() => handleChange(!checked)}
         />
         {labelText}
       </label>

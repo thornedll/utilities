@@ -66,7 +66,6 @@ export const DateConverter: React.FC = () => {
           labelText="Result:&nbsp;"
         />
         <Button
-          text=""
           onClick={copy}
           type={btnType}
           disabled={text === "" ? true : false}
