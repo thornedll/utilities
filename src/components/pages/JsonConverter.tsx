@@ -38,7 +38,6 @@ export const JsonConverter = () => {
           if (isConvertCaseChange) {
             const result = convertToUpper(JSON.parse(rawText));
             const jsonStr = JSON.stringify(result, null, 2);
-            console.log(jsonStr);
             setJsonString(jsonStr);
           }
         }
