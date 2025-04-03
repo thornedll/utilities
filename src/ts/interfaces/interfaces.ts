@@ -53,3 +53,9 @@ export interface TextInputProps {
   labelText?: string;
   handleChange?: () => void;
 }
+
+export interface DoubleInputProps extends TextInputProps {
+  key: string;
+  secondInputValue: InputHTMLAttributes<HTMLInputElement>["value"];
+  secondPlaceholder?: string;
+}

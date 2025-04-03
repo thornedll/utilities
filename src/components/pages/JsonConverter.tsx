@@ -1,13 +1,21 @@
 import { useState, ChangeEvent } from "react";
 import { BtnType } from "../../ts/types/types";
-import { Button, Check, FileInput, TextArea } from "../UI";
+import { Button, Check, DoubleInput, FileInput, TextArea } from "../UI";
 import { convertToUpper, copy } from "../../utils";
 import styles from "./styles.module.scss";
+
+type KeyValueChange = {
+  key: string;
+  value: string;
+};
 
 export const JsonConverter = () => {
   const [file, setFile] = useState<File>();
   const [isCaseChange, setIsCaseChange] = useState<boolean>(false);
   const [isKeyValuesChange, setIsKeyValuesChange] = useState<boolean>(false);
+  const [keyValuesChanges, setKeyValuesChanges] = useState<[KeyValueChange]>([
+    { key: "", value: "" },
+  ]);
   const [jsonString, setJsonString] = useState<string>("");
   const [btnType, setBtnType] = useState<BtnType>("copy");
 
@@ -18,6 +26,8 @@ export const JsonConverter = () => {
   const handleKeyValuesChange = (state: boolean) => {
     setIsKeyValuesChange(state);
   };
+
+  const handleKeyValuesSettings = (isAdd: boolean) => {};
 
   const uploadFile = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -53,6 +63,20 @@ export const JsonConverter = () => {
     }
   };
 
+  const keyValueInputs = () => {
+    for (let i = 0; i < keyValuesChanges.length; i++) {
+      return (
+        <DoubleInput
+          key={"key" + i}
+          inputValue={keyValuesChanges[i].key}
+          secondInputValue={keyValuesChanges[i].value}
+          placeholder="Key"
+          secondPlaceholder="New value"
+        />
+      );
+    }
+  };
+
   const copyText = () => {
     copy(jsonString, setBtnType);
   };
@@ -78,6 +102,7 @@ export const JsonConverter = () => {
             checked={isKeyValuesChange}
             handleChange={handleKeyValuesChange}
           />
+          <div className={styles.keyValueInputs}>{keyValueInputs()}</div>
         </div>
       </div>
       <div className={styles.optionsWrapper}>
