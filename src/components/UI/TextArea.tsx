@@ -1,15 +1,6 @@
 import React from "react";
+import { TextAreaProps } from "../../ts/interfaces/interfaces";
 import styles from "./styles.module.scss";
-
-interface TextAreaProps {
-  value: React.InputHTMLAttributes<HTMLInputElement>["value"];
-  placeholder?: string;
-  disabled?: boolean;
-  id?: string;
-  labelText?: string;
-  readOnly: boolean;
-  handleChange?: () => void;
-}
 
 export const TextArea: React.FC<TextAreaProps> = ({
   placeholder,

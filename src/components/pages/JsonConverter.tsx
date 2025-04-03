@@ -1,18 +1,22 @@
 import { useState, ChangeEvent } from "react";
+import { BtnType } from "../../ts/types/types";
 import { Button, Check, FileInput, TextArea } from "../UI";
-import { convertToUpper } from "../../utils";
+import { convertToUpper, copy } from "../../utils";
 import styles from "./styles.module.scss";
-
-type BtnType = "copy" | "success" | "primary";
 
 export const JsonConverter = () => {
   const [file, setFile] = useState<File>();
   const [isCaseChange, setIsCaseChange] = useState<boolean>(false);
+  const [isKeyValuesChange, setIsKeyValuesChange] = useState<boolean>(false);
   const [jsonString, setJsonString] = useState<string>("");
   const [btnType, setBtnType] = useState<BtnType>("copy");
 
   const handleCaseChange = (state: boolean) => {
     setIsCaseChange(state);
+  };
+
+  const handleKeyValuesChange = (state: boolean) => {
+    setIsKeyValuesChange(state);
   };
 
   const uploadFile = (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +30,10 @@ export const JsonConverter = () => {
     }
   };
 
-  const convertFile = (isConvertCaseChange: boolean, file: File | undefined) => {
+  const convertFile = (
+    isConvertCaseChange: boolean,
+    file: File | undefined
+  ) => {
     if (file) {
       const reader = new FileReader();
       reader.onerror = () => {
@@ -46,10 +53,8 @@ export const JsonConverter = () => {
     }
   };
 
-  const copy = async () => {
-    await navigator.clipboard.writeText(jsonString);
-    setBtnType("success");
-    setTimeout(() => setBtnType("copy"), 1000);
+  const copyText = () => {
+    copy(jsonString, setBtnType);
   };
 
   return (
@@ -62,11 +67,18 @@ export const JsonConverter = () => {
       </div>
       <h4>2. Choose settings</h4>
       <div className={styles.optionsWrapper}>
-        <Check
-          labelText="camelCase -> UpperCamelCase"
-          checked={isCaseChange}
-          handleChange={handleCaseChange}
-        />
+        <div className={styles.checksWrapper}>
+          <Check
+            labelText="camelCase -> UpperCamelCase"
+            checked={isCaseChange}
+            handleChange={handleCaseChange}
+          />
+          <Check
+            labelText="Change key values"
+            checked={isKeyValuesChange}
+            handleChange={handleKeyValuesChange}
+          />
+        </div>
       </div>
       <div className={styles.optionsWrapper}>
         <Button
@@ -79,7 +91,7 @@ export const JsonConverter = () => {
       <div className={styles.resultWrapper}>
         <TextArea value={jsonString} readOnly={true}></TextArea>
         <Button
-          onClick={copy}
+          onClick={copyText}
           type={btnType}
           disabled={jsonString === "" ? true : false}
         />

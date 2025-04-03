@@ -9,6 +9,12 @@
   align-items: center;
 }
 
+.checksWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .resultWrapper {
   position: relative;
   margin-top: 8px;

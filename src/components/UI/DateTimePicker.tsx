@@ -1,15 +1,11 @@
 import React from "react";
 import DatePicker, { registerLocale } from "react-datepicker";
+import { DatePickerProps } from "../../ts/interfaces/interfaces";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "./styles.module.scss";
 import { ru } from "date-fns/locale/ru";
 
 registerLocale("ru", ru);
-
-interface DatePickerProps {
-  startDate: Date | null;
-  changeDate: (date: Date | null) => void;
-}
 
 export const DateTimePicker: React.FC<DatePickerProps> = ({
   startDate,

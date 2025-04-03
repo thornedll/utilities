@@ -1,13 +1,6 @@
-import React, { ChangeEvent } from "react";
+import React from "react";
+import { FileInputProps } from "../../ts/interfaces/interfaces";
 import styles from "./styles.module.scss";
-
-interface FileInputProps {
-  id?: string;
-  labelText?: string;
-  disabled?: boolean;
-  accept?: string;
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
-}
 
 export const FileInput: React.FC<FileInputProps> = ({
   id,

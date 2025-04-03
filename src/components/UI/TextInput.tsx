@@ -1,14 +1,6 @@
 import React from "react";
+import { TextInputProps } from "../../ts/interfaces/interfaces";
 import styles from "./styles.module.scss";
-
-interface TextInputProps {
-  inputValue: React.InputHTMLAttributes<HTMLInputElement>["value"];
-  placeholder?: string;
-  disabled?: boolean;
-  id?: string;
-  labelText?: string;
-  handleChange?: () => void;
-}
 
 export const TextInput: React.FC<TextInputProps> = ({
   placeholder,

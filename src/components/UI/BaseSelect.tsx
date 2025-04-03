@@ -1,17 +1,7 @@
 import React from "react";
 import Select, { StylesConfig } from "react-select";
+import { BaseSelectProps } from "../../ts/interfaces/interfaces";
 import styles from "./styles.module.scss";
-
-type Option = {
-  label: string;
-  value: string;
-};
-
-interface BaseSelectProps {
-  options: Option[];
-  value: Option;
-  changeTimezone: (timezone: Option) => void;
-}
 
 const selectStyles: StylesConfig = {
   control: (styles) => ({

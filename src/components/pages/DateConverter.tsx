@@ -1,15 +1,9 @@
 import React, { useState } from "react";
+import { Option, BtnType } from "../../ts/types/types";
 import { DateTimePicker, BaseSelect, Button, TextInput } from "../UI";
-import { getUnixTimeString } from "../../utils";
+import { copy, getUnixTimeString } from "../../utils";
 import { timezones } from "../../constants";
 import styles from "./styles.module.scss";
-
-type Option = {
-  label: string;
-  value: string;
-};
-
-type BtnType = "copy" | "success" | "primary";
 
 export const DateConverter: React.FC = () => {
   const [text, setText] = useState<string>("");
@@ -27,10 +21,8 @@ export const DateConverter: React.FC = () => {
     setTimezone(timezone);
   };
 
-  const copy = async () => {
-    await navigator.clipboard.writeText(text);
-    setBtnType("success");
-    setTimeout(() => setBtnType("copy"), 1000);
+  const copyText = () => {
+    copy(text, setBtnType);
   };
 
   return (
@@ -66,7 +58,7 @@ export const DateConverter: React.FC = () => {
           labelText="Result:&nbsp;"
         />
         <Button
-          onClick={copy}
+          onClick={copyText}
           type={btnType}
           disabled={text === "" ? true : false}
         />

@@ -1,4 +1,15 @@
+import { Dispatch, SetStateAction } from "react";
 import _ from "lodash";
+import { BtnType } from "../ts/types/types";
+
+export const copy = async (
+  text: string,
+  changeBtnType: Dispatch<SetStateAction<BtnType>>
+) => {
+  await navigator.clipboard.writeText(text);
+  changeBtnType("success");
+  setTimeout(() => changeBtnType("copy"), 1000);
+};
 
 export const getUnixTimeString = (date: Date, timezone: string) => {
   const timezoneInt = Number(timezone);

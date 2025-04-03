@@ -1,12 +1,6 @@
 import React from "react";
+import { ButtonProps } from "../../ts/interfaces/interfaces";
 import styles from "./styles.module.scss";
-
-interface ButtonProps {
-  text?: string;
-  disabled?: boolean;
-  type: string;
-  onClick: () => void;
-}
 
 export const Button: React.FC<ButtonProps> = ({
   text = "",

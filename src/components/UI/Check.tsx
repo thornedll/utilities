@@ -1,13 +1,6 @@
 import React from "react";
+import { CheckProps } from "../../ts/interfaces/interfaces";
 import styles from "./styles.module.scss";
-
-interface CheckProps {
-  checked: boolean;
-  disabled?: boolean;
-  id?: string;
-  labelText?: string;
-  handleChange: (state: boolean) => void;
-}
 
 export const Check: React.FC<CheckProps> = ({
   checked,
