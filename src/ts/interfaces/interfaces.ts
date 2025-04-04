@@ -46,7 +46,7 @@ export interface TextAreaProps {
 }
 
 export interface TextInputProps {
-  inputValue: InputHTMLAttributes<HTMLInputElement>["value"];
+  inputValue: string; // InputHTMLAttributes<HTMLInputElement>["value"]
   placeholder?: string;
   disabled?: boolean;
   id?: string;
@@ -56,6 +56,8 @@ export interface TextInputProps {
 
 export interface DoubleInputProps extends TextInputProps {
   key: string;
-  secondInputValue: InputHTMLAttributes<HTMLInputElement>["value"];
+  numberKey: number;
+  secondInputValue: string;
   secondPlaceholder?: string;
+  handleInputsChange: (itemKey: number, key?: string, value?: string) => void;
 }

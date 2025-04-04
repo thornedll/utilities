@@ -4,19 +4,22 @@ import styles from "./styles.module.scss";
 
 export const DoubleInput: React.FC<DoubleInputProps> = ({
   key,
+  numberKey,
   inputValue,
   secondInputValue,
   placeholder,
   secondPlaceholder,
   disabled = false,
-  handleChange,
+  handleInputsChange,
 }) => {
   return (
     <div className={styles.doubleInputWrapper} key={key}>
       <input
         type="text"
         placeholder={placeholder}
-        onChange={() => handleChange}
+        onChange={(e) =>
+          handleInputsChange(numberKey - 1, e.target.value, undefined)
+        }
         value={inputValue}
         className={styles.doubleInput}
         disabled={disabled}
@@ -24,7 +27,9 @@ export const DoubleInput: React.FC<DoubleInputProps> = ({
       <input
         type="text"
         placeholder={secondPlaceholder}
-        onChange={() => handleChange}
+        onChange={(e) =>
+          handleInputsChange(numberKey - 1, undefined, e.target.value)
+        }
         value={secondInputValue}
         className={styles.doubleInput}
         disabled={disabled}
