@@ -9,7 +9,8 @@ export const DoubleInput: React.FC<DoubleInputProps> = ({
   placeholder,
   secondPlaceholder,
   disabled = false,
-  handleInputsChange,
+  handleKeyChange,
+  handleValueChange,
   addInputs,
   removeInputs,
 }) => {
@@ -18,9 +19,7 @@ export const DoubleInput: React.FC<DoubleInputProps> = ({
       <input
         type="text"
         placeholder={placeholder}
-        onChange={(e) =>
-          handleInputsChange(numberKey - 1, e.target.value, undefined)
-        }
+        onChange={(e) => handleKeyChange(numberKey - 1, e.target.value)}
         value={inputValue}
         className={styles.doubleInput}
         disabled={disabled}
@@ -28,9 +27,7 @@ export const DoubleInput: React.FC<DoubleInputProps> = ({
       <input
         type="text"
         placeholder={secondPlaceholder}
-        onChange={(e) =>
-          handleInputsChange(numberKey - 1, undefined, e.target.value)
-        }
+        onChange={(e) => handleValueChange(numberKey - 1, e.target.value)}
         value={secondInputValue}
         className={styles.doubleInput}
         disabled={disabled}

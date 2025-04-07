@@ -1,19 +1,18 @@
-import React, { useState, ChangeEvent, useEffect } from "react";
+import { useState, ChangeEvent, useEffect, ReactNode } from "react";
 import { BtnType, KeyValueChange } from "../../ts/types/types";
 import { Button, Check, DoubleInput, FileInput, TextArea } from "../UI";
 import { convertToUpper, copy } from "../../utils";
+import { emptyKeyValueObject } from "../../constants";
 import styles from "./styles.module.scss";
-
-const emptyKeyValueObject = { key: "", value: "" };
 
 export const JsonConverter = () => {
   const [file, setFile] = useState<File>();
   const [isCaseChange, setIsCaseChange] = useState<boolean>(false);
-  const [isKeyValuesChange, setIsKeyValuesChange] = useState<boolean>(false);
-  const [keyValuesChanges, setKeyValuesChanges] = useState<
-    KeyValueChange[] | []
-  >([]);
-  const [inputs, setInputs] = useState<React.ReactNode[]>();
+  const [isKeyValueChange, setIsKeyValueChange] = useState<boolean>(false);
+  const [keyValueChanges, setKeyValueChanges] = useState<KeyValueChange[] | []>(
+    []
+  );
+  const [inputs, setInputs] = useState<ReactNode[]>();
   const [jsonString, setJsonString] = useState<string>("");
   const [btnType, setBtnType] = useState<BtnType>("copy");
 
@@ -21,41 +20,36 @@ export const JsonConverter = () => {
     setIsCaseChange(state);
   };
 
-  const toggleKeyValuesChange = (state: boolean) => {
-    setIsKeyValuesChange(state);
-    if (state === false) {
-      setKeyValuesChanges([]);
-    } else if (state === true) {
-      setKeyValuesChanges([emptyKeyValueObject]);
+  const toggleKeyValueChange = (state: boolean) => {
+    setIsKeyValueChange(state);
+    state ? setKeyValueChanges([emptyKeyValueObject]) : setKeyValueChanges([]);
+  };
+
+  const addKeyValueChange = () => {
+    setKeyValueChanges([...keyValueChanges, emptyKeyValueObject]);
+  };
+
+  const removeKeyValueChange = (idx: number) => {
+    if (keyValueChanges.length > 1) {
+      setKeyValueChanges(
+        keyValueChanges.filter((i, index) => i && index !== idx)
+      );
     }
   };
 
-  const addKeyValuesChange = () => {
-    setKeyValuesChanges([...keyValuesChanges, emptyKeyValueObject]);
+  const handleKeyChange = (itemKey: number, key: string) => {
+    if (keyValueChanges.length > 0) {
+      let newKeyValueChanges = keyValueChanges;
+      newKeyValueChanges[itemKey].key = key;
+      setKeyValueChanges(newKeyValueChanges);
+    }
   };
 
-  const removeKeyValuesChange = (idx: number) => {
-    setKeyValuesChanges(
-      keyValuesChanges.filter((i, index) => i && index !== idx)
-    );
-  };
-
-  const handleKeyValuesChange = (
-    itemKey: number,
-    key?: string,
-    value?: string
-  ) => {
-    if (keyValuesChanges.length > 0) {
-      if (key) {
-        let newKeyValuesChanges = keyValuesChanges;
-        newKeyValuesChanges[itemKey].key = key;
-        setKeyValuesChanges(newKeyValuesChanges);
-      }
-      if (value) {
-        let newKeyValuesChanges = keyValuesChanges;
-        newKeyValuesChanges[itemKey].value = value;
-        setKeyValuesChanges(newKeyValuesChanges);
-      }
+  const handleValueChange = (itemKey: number, value: string) => {
+    if (keyValueChanges.length > 0) {
+      let newKeyValueChanges = keyValueChanges;
+      newKeyValueChanges[itemKey].value = value;
+      setKeyValueChanges(newKeyValueChanges);
     }
   };
 
@@ -65,7 +59,7 @@ export const JsonConverter = () => {
       if (file.name.split(".").at(-1) === "json") {
         setFile(file);
       } else {
-        window.alert(`File does not support. File type must be JSON`);
+        window.alert("File does not support. File type must be JSON");
       }
     }
   };
@@ -95,24 +89,27 @@ export const JsonConverter = () => {
 
   useEffect(() => {
     let newInputs = [];
-    for (let i = 0; i < keyValuesChanges.length; i++) {
+    console.log(keyValueChanges);
+    for (let i = 0; i < keyValueChanges.length; i++) {
+      let key = "key" + (i + 1);
       newInputs.push(
-        <li key={"key" + (i + 1)}>
+        <li key={key} id={key}>
           <DoubleInput
             numberKey={i + 1}
-            inputValue={keyValuesChanges[i].key}
-            secondInputValue={keyValuesChanges[i].value}
+            inputValue={keyValueChanges[i].key}
+            secondInputValue={keyValueChanges[i].value}
             placeholder="Key"
             secondPlaceholder="New value"
-            handleInputsChange={handleKeyValuesChange}
-            addInputs={addKeyValuesChange}
-            removeInputs={removeKeyValuesChange}
+            handleKeyChange={handleKeyChange}
+            handleValueChange={handleValueChange}
+            addInputs={addKeyValueChange}
+            removeInputs={removeKeyValueChange}
           />
         </li>
       );
     }
     setInputs(newInputs);
-  }, [keyValuesChanges]);
+  }, [keyValueChanges]);
 
   const copyText = () => {
     copy(jsonString, setBtnType);
@@ -136,8 +133,8 @@ export const JsonConverter = () => {
           />
           <Check
             labelText="Change key values"
-            checked={isKeyValuesChange}
-            handleChange={toggleKeyValuesChange}
+            checked={isKeyValueChange}
+            handleChange={toggleKeyValueChange}
           />
           <ul className={styles.keyValueInputs}>{inputs}</ul>
         </div>
