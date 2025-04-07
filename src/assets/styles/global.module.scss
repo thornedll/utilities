@@ -33,6 +33,17 @@ button {
   cursor: pointer;
 }
 
+ul {
+  padding: 0;
+  li {
+    display: block;
+    margin-bottom: 8px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
 .header {
   display: flex;
   align-items: center;

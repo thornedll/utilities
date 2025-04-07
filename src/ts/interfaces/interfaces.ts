@@ -55,9 +55,10 @@ export interface TextInputProps {
 }
 
 export interface DoubleInputProps extends TextInputProps {
-  key: string;
   numberKey: number;
   secondInputValue: string;
   secondPlaceholder?: string;
   handleInputsChange: (itemKey: number, key?: string, value?: string) => void;
+  addInputs: () => void;
+  removeInputs: (idx: number) => void;
 }

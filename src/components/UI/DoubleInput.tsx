@@ -3,7 +3,6 @@ import { DoubleInputProps } from "../../ts/interfaces/interfaces";
 import styles from "./styles.module.scss";
 
 export const DoubleInput: React.FC<DoubleInputProps> = ({
-  key,
   numberKey,
   inputValue,
   secondInputValue,
@@ -11,9 +10,11 @@ export const DoubleInput: React.FC<DoubleInputProps> = ({
   secondPlaceholder,
   disabled = false,
   handleInputsChange,
+  addInputs,
+  removeInputs,
 }) => {
   return (
-    <div className={styles.doubleInputWrapper} key={key}>
+    <div className={styles.doubleInputWrapper}>
       <input
         type="text"
         placeholder={placeholder}
@@ -34,8 +35,8 @@ export const DoubleInput: React.FC<DoubleInputProps> = ({
         className={styles.doubleInput}
         disabled={disabled}
       />
-      <button>+</button>
-      <button>-</button>
+      <button onClick={addInputs}>+</button>
+      <button onClick={() => removeInputs(numberKey - 1)}>-</button>
     </div>
   );
 };
