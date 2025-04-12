@@ -1,4 +1,10 @@
 /*!
+	Copyright (c) 2018 Jed Watson.
+	Licensed under the MIT License (MIT), see
+	http://jedwatson.github.io/classnames
+*/
+
+/*!
   react-datepicker v8.2.1
   https://github.com/Hacker0x01/react-datepicker
   Released under the MIT License.
