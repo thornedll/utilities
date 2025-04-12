@@ -37,3 +37,25 @@ export const convertToUpper = (obj: string): Object => {
   }
   return obj;
 };
+
+export const updateNestedKey = (
+  obj: any,
+  keyPath: string,
+  newValue: string | number | boolean
+): void => {
+  const keys = keyPath.split(".");
+  let current = obj;
+
+  for (let i = 0; i < keys.length - 1; i++) {
+    const key = keys[i];
+    if (!current[key]) {
+      return; // If key doesn't exist do nothing
+    }
+    current = current[key];
+  }
+
+  const lastKey = keys[keys.length - 1];
+  if (current[lastKey] !== undefined) {
+    current[lastKey] = newValue;
+  }
+};

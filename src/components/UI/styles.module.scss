@@ -34,14 +34,26 @@
 }
 
 .btnIcon {
+  display: flex;
+  align-items: center;
   padding: 4px 8px;
-  position: absolute;
-  right: 0;
-  top: 1px;
   background-color: transparent;
   color: rgb(70, 70, 70);
   &:hover {
     color: black;
+  }
+}
+
+.btnAbsolute {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.btnControl {
+  &:hover {
+    background-color: hsl(0, 0%, 95%);
+    border-radius: 6px;
   }
 }
 
@@ -84,6 +96,7 @@
 .check {
   gap: 8px;
   align-items: center;
+  width: fit-content;
   input[type="checkbox"] {
     width: 14px;
     height: 14px;

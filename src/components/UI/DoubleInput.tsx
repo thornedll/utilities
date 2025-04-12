@@ -1,6 +1,7 @@
 import React from "react";
 import { DoubleInputProps } from "../../ts/interfaces/interfaces";
 import styles from "./styles.module.scss";
+import { Button } from "./";
 
 export const DoubleInput: React.FC<DoubleInputProps> = ({
   numberKey,
@@ -19,21 +20,21 @@ export const DoubleInput: React.FC<DoubleInputProps> = ({
       <input
         type="text"
         placeholder={placeholder}
-        onChange={(e) => handleKeyChange(numberKey - 1, e.target.value)}
         value={inputValue}
+        onChange={(e) => handleKeyChange(numberKey - 1, e.target.value)}
         className={styles.doubleInput}
         disabled={disabled}
       />
       <input
         type="text"
         placeholder={secondPlaceholder}
-        onChange={(e) => handleValueChange(numberKey - 1, e.target.value)}
         value={secondInputValue}
+        onChange={(e) => handleValueChange(numberKey - 1, e.target.value)}
         className={styles.doubleInput}
         disabled={disabled}
       />
-      <button onClick={addInputs}>+</button>
-      <button onClick={() => removeInputs(numberKey - 1)}>-</button>
+      <Button type="add" onClick={addInputs} />
+      <Button type="remove" onClick={() => removeInputs(numberKey - 1)} />
     </div>
   );
 };
