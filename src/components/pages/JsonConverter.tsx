@@ -90,6 +90,7 @@ export const JsonConverter = () => {
         if (rawText && typeof rawText === "string") {
           const result = JSON.parse(rawText);
           let res = result;
+
           const convertCaseChange = () => {
             res = convertToUpper(result);
           };
@@ -98,6 +99,7 @@ export const JsonConverter = () => {
               updateNestedKey(res, change.key, change.value);
             });
           };
+
           if (isConvertCaseChange && !isConvertKeyValueChange) {
             convertCaseChange();
           }
@@ -148,7 +150,7 @@ export const JsonConverter = () => {
                   numberKey={key + 1}
                   inputValue={i.key}
                   secondInputValue={i.value}
-                  placeholder="Key"
+                  placeholder="Key (full path)"
                   secondPlaceholder="New value"
                   handleKeyChange={handleKeyChange}
                   handleValueChange={handleValueChange}
@@ -165,6 +167,7 @@ export const JsonConverter = () => {
           text="Convert"
           onClick={() => convertFile(isCaseChange, isKeyValueChange, file)}
           type="primary"
+          disabled={file && (isCaseChange || isKeyValueChange) ? false : true}
         />
       </div>
       <h4>Result</h4>

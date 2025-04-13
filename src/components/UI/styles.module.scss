@@ -33,6 +33,13 @@
   cursor: pointer;
 }
 
+.btnPrimary {
+  &:disabled {
+    background-color: #a9a9a9;
+    cursor: not-allowed;
+  }
+}
+
 .btnIcon {
   display: flex;
   align-items: center;
