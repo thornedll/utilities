@@ -211,7 +211,15 @@ export const JsonConverter = () => {
           disabled={file && (isCaseChange || isKeyValueChange) ? false : true}
         />
       </div>
-      <h4>Current file & Result</h4>
+      <h4
+        style={{
+          width: "508px",
+          display: "flex",
+          justifyContent: "space-around",
+        }}
+      >
+        Current file<span>Result</span>
+      </h4>
       <div className={styles.resultWrapper}>
         <TextArea value={fileString} readOnly={true}></TextArea>
         <TextArea value={jsonString} readOnly={true}></TextArea>

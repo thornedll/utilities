@@ -59,15 +59,19 @@
 }
 
 .textInput {
-  width: 162px;
+  width: 160px;
   padding: 4px 8px;
   font-size: 16px;
   border: 1px solid hsl(0, 0%, 80%);
   border-radius: 6px;
+  &Label {
+    align-items: center;
+    font-size: 16px;
+  }
 }
 
 .doubleInput {
-  width: 162px;
+  width: 180px;
   padding: 4px 8px;
   font-size: 14px;
   border: 1px solid hsl(0, 0%, 80%);
@@ -83,6 +87,7 @@
   width: 250px;
   padding: 4px 8px;
   font-size: 12px;
+  font-family: monospace;
   border: 1px solid hsl(0, 0%, 80%);
   border-radius: 6px;
   resize: none;

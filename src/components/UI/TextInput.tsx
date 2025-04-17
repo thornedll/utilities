@@ -14,9 +14,8 @@ export const TextInput: React.FC<TextInputProps> = ({
     <>
       <label
         htmlFor={id}
-        style={
-          labelText && id ? { display: "inline-block" } : { display: "none" }
-        }
+        style={labelText && id ? { display: "flex" } : { display: "none" }}
+        className={styles.textInputLabel}
       >
         {labelText}
       </label>

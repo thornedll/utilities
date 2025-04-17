@@ -57,7 +57,7 @@ export const DateConverter: React.FC = () => {
           disabled
           handleChange={() => handleChange}
           id="result"
-          labelText="Result:&nbsp;"
+          labelText="Result:"
         />
         <div className={styles.buttonsWrapper}>
           <Button
