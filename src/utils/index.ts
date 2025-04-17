@@ -11,6 +11,23 @@ export const copy = async (
   setTimeout(() => changeBtnType("copy"), 1000);
 };
 
+const generateFileName = () => {
+  return new Date().toISOString().replace(/[:.]/g, "-");
+};
+
+export const downloadFile = (fileString: string, extension: string) => {
+  const fileName = generateFileName();
+  const blob = new Blob([fileString], {
+    type: extension === "json" ? "application/json" : undefined,
+  });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `${fileName}.${extension}`;
+  a.click();
+  URL.revokeObjectURL(url);
+};
+
 export const getUnixTimeString = (date: Date, timezone: string) => {
   const timezoneInt = Number(timezone);
   const localTimezoneOffset = new Date().getTimezoneOffset();
@@ -57,5 +74,22 @@ export const updateNestedKey = (
   const lastKey = keys[keys.length - 1];
   if (current[lastKey] !== undefined) {
     current[lastKey] = newValue;
+  }
+};
+
+export const convertValueToType = (value: string, type: string) => {
+  switch (type) {
+    case "string":
+      return value;
+    case "number":
+      return Number(value);
+    case "boolean":
+      return value === "true"
+        ? true
+        : value === "false"
+        ? false
+        : Boolean(value);
+    default:
+      return value;
   }
 };

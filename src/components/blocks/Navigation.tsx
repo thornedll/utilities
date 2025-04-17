@@ -19,8 +19,8 @@ const navigation = [
 export const Navigation = () => {
   return (
     <nav className={styles.nav}>
-      {navigation.map((link) => (
-        <div className={styles.navLinkContainer}>
+      {navigation.map((link, i) => (
+        <div className={styles.navLinkContainer} key={i}>
           <NavLink to={link.url} className={styles.navLink}>
             {link.visibleName}
           </NavLink>

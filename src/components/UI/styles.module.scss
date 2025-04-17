@@ -51,12 +51,6 @@
   }
 }
 
-.btnAbsolute {
-  position: absolute;
-  right: 0;
-  top: 0;
-}
-
 .btnControl {
   &:hover {
     background-color: hsl(0, 0%, 95%);
@@ -85,8 +79,8 @@
 }
 
 .textArea {
-  height: 200px;
-  width: 200px;
+  height: 250px;
+  width: 250px;
   padding: 4px 8px;
   font-size: 12px;
   border: 1px solid hsl(0, 0%, 80%);

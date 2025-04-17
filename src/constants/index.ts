@@ -1,6 +1,12 @@
-export const emptyKeyValueObject = { key: "", value: "" };
+import { KeyValueChange, Option } from "../ts/types/types";
 
-export const timezones = [
+export const emptyKeyValueObject: KeyValueChange = {
+  key: "",
+  value: "",
+  type: "string",
+};
+
+export const timezones: Option[] = [
   { label: "+00:00", value: "+00" },
   { label: "+01:00", value: "+01" },
   { label: "+02:00", value: "+02" },
@@ -14,4 +20,10 @@ export const timezones = [
   { label: "+10:00", value: "+10" },
   { label: "+11:00", value: "+11" },
   { label: "+12:00", value: "+12" },
+];
+
+export const valueTypes: Option[] = [
+  { label: "string", value: "string" },
+  { label: "number", value: "number" },
+  { label: "boolean", value: "boolean" },
 ];

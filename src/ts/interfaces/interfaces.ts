@@ -1,10 +1,10 @@
 import { ChangeEvent, InputHTMLAttributes } from "react";
-import { Option } from "../types/types";
+import { Option, ValueType } from "../types/types";
 
 export interface BaseSelectProps {
   options: Option[];
   value: Option;
-  changeTimezone: (timezone: Option) => void;
+  handleChange: (value: Option) => void;
 }
 
 export interface ButtonProps {
@@ -57,9 +57,11 @@ export interface TextInputProps {
 export interface DoubleInputProps extends TextInputProps {
   numberKey: number;
   secondInputValue: string;
+  selectValue: ValueType;
   secondPlaceholder?: string;
   handleKeyChange: (itemKey: number, key: string) => void;
   handleValueChange: (itemKey: number, value: string) => void;
+  handleTypeChange: (itemKey: number, type: ValueType) => void;
   addInputs: () => void;
   removeInputs: (idx: number) => void;
 }

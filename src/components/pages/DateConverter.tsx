@@ -7,7 +7,9 @@ import styles from "./styles.module.scss";
 
 export const DateConverter: React.FC = () => {
   const [text, setText] = useState<string>("");
-  const [startDate, setStartDate] = useState<Date | null>(new Date());
+  const [startDate, setStartDate] = useState<Date | null>(
+    new Date(new Date().setMilliseconds(0))
+  );
   const [timezone, setTimezone] = useState<Option>(timezones[3]);
   const [btnType, setBtnType] = useState<BtnType>("copy");
 
@@ -36,7 +38,7 @@ export const DateConverter: React.FC = () => {
         <BaseSelect
           options={timezones}
           value={timezone}
-          changeTimezone={(timezone: Option) => changeTimezone(timezone)}
+          handleChange={(timezone: Option) => changeTimezone(timezone)}
         />
         <Button
           text="Convert"
@@ -57,11 +59,13 @@ export const DateConverter: React.FC = () => {
           id="result"
           labelText="Result:&nbsp;"
         />
-        <Button
-          onClick={copyText}
-          type={btnType}
-          disabled={text === "" ? true : false}
-        />
+        <div className={styles.buttonsWrapper}>
+          <Button
+            onClick={copyText}
+            type={btnType}
+            disabled={text === "" ? true : false}
+          />
+        </div>
       </div>
     </div>
   );

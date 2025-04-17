@@ -19,6 +19,10 @@ const selectStyles: StylesConfig = {
     fontSize: "16px",
     fontFamily: "Inter",
   }),
+  menu: (styles) => ({
+    ...styles,
+    margin: "4px 0",
+  }),
   indicatorSeparator: () => ({
     display: "none",
   }),
@@ -31,7 +35,7 @@ const selectStyles: StylesConfig = {
 export const BaseSelect: React.FC<BaseSelectProps> = ({
   options,
   value,
-  changeTimezone,
+  handleChange,
 }) => {
   return (
     <Select
@@ -39,7 +43,7 @@ export const BaseSelect: React.FC<BaseSelectProps> = ({
       options={options}
       className={styles.select}
       value={value}
-      onChange={(timezone: any) => changeTimezone(timezone)}
+      onChange={(value: any) => handleChange(value)}
     ></Select>
   );
 };
