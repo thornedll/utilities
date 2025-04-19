@@ -50,10 +50,10 @@ export const DateConverter: React.FC = () => {
           type="primary"
         />
       </div>
-      <div className={styles.resultWrapper}>
+      <div className={styles.resultWrapper} style={{ width: "fit-content" }}>
         <TextInput
           placeholder=""
-          inputValue={text}
+          value={text}
           disabled
           handleChange={() => handleChange}
           id="result"

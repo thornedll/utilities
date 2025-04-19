@@ -4,7 +4,8 @@ export type BtnType =
   | "success"
   | "primary"
   | "add"
-  | "remove";
+  | "remove"
+  | "format";
 
 export type ValueType = "string" | "number" | "boolean";
 

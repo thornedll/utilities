@@ -1,5 +1,5 @@
 import { ChangeEvent, InputHTMLAttributes } from "react";
-import { Option, ValueType } from "../types/types";
+import { BtnType, Option, ValueType } from "../types/types";
 
 export interface BaseSelectProps {
   options: Option[];
@@ -10,7 +10,7 @@ export interface BaseSelectProps {
 export interface ButtonProps {
   text?: string;
   disabled?: boolean;
-  type: string;
+  type: BtnType;
   onClick: () => void;
 }
 
@@ -42,21 +42,21 @@ export interface TextAreaProps {
   id?: string;
   labelText?: string;
   readOnly: boolean;
-  handleChange?: () => void;
+  handleChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 export interface TextInputProps {
-  inputValue: string; // InputHTMLAttributes<HTMLInputElement>["value"]
+  value: InputHTMLAttributes<HTMLInputElement>["value"];
   placeholder?: string;
   disabled?: boolean;
   id?: string;
   labelText?: string;
-  handleChange?: () => void;
+  handleChange?: (e: any) => void;
 }
 
 export interface DoubleInputProps extends TextInputProps {
   numberKey: number;
-  secondInputValue: string;
+  secondValue: string;
   selectValue: ValueType;
   secondPlaceholder?: string;
   handleKeyChange: (itemKey: number, key: string) => void;

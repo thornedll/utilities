@@ -6,8 +6,8 @@ import styles from "./styles.module.scss";
 
 export const DoubleInput: React.FC<DoubleInputProps> = ({
   numberKey,
-  inputValue,
-  secondInputValue,
+  value,
+  secondValue,
   selectValue,
   placeholder,
   secondPlaceholder,
@@ -25,7 +25,7 @@ export const DoubleInput: React.FC<DoubleInputProps> = ({
       <input
         type="text"
         placeholder={placeholder}
-        value={inputValue}
+        value={value}
         onChange={(e) => handleKeyChange(numberKey - 1, e.target.value)}
         className={styles.doubleInput}
         disabled={disabled}
@@ -33,7 +33,7 @@ export const DoubleInput: React.FC<DoubleInputProps> = ({
       <input
         type={inputType}
         placeholder={secondPlaceholder}
-        value={secondInputValue}
+        value={secondValue}
         onChange={(e) => handleValueChange(numberKey - 1, e.target.value)}
         className={styles.doubleInput}
         disabled={disabled}

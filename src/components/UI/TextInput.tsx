@@ -4,7 +4,7 @@ import styles from "./styles.module.scss";
 
 export const TextInput: React.FC<TextInputProps> = ({
   placeholder,
-  inputValue,
+  value,
   disabled = false,
   id,
   labelText,
@@ -23,7 +23,7 @@ export const TextInput: React.FC<TextInputProps> = ({
         type="text"
         placeholder={placeholder}
         onChange={() => handleChange}
-        value={inputValue}
+        value={value}
         className={styles.textInput}
         disabled={disabled}
         id={id}

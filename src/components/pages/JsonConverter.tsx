@@ -11,7 +11,7 @@ import {
 import { emptyKeyValueObject } from "../../constants";
 import styles from "./styles.module.scss";
 
-export const JsonConverter = () => {
+export const JsonConverter: React.FC = () => {
   const [file, setFile] = useState<File>();
   const [isCaseChange, setIsCaseChange] = useState<boolean>(false);
   const [isKeyValueChange, setIsKeyValueChange] = useState<boolean>(false);
@@ -159,70 +159,74 @@ export const JsonConverter = () => {
     copy(jsonString, setBtnType);
   };
 
-  const isDisplay = file ? {} : { display: "none" };
-
   return (
     <div className={styles.pageWrapper}>
       <h2>JSON Converter</h2>
-      <h4>1. Upload file</h4>
+      <h4 className={styles["mt-8"]}>1. Upload file</h4>
       <div className={styles.optionsWrapper}>
         <FileInput handleChange={uploadFile} accept="application/json" />
         <div>{file && `Current file: ${file.name}`}</div>
       </div>
-      <h4 style={isDisplay}>2. Choose settings</h4>
-      <div className={styles.optionsWrapper} style={isDisplay}>
-        <div className={styles.checksWrapper}>
-          <Check
-            labelText="camelCase -> UpperCamelCase"
-            checked={isCaseChange}
-            handleChange={handleCaseChange}
-          />
-          <Check
-            labelText="Change key values"
-            checked={isKeyValueChange}
-            handleChange={toggleKeyValueChange}
-          />
-          <ul className={styles.keyValueInputs}>
-            {keyValueChanges.map((element, key) => (
-              <li key={key}>
-                <DoubleInput
-                  numberKey={key + 1}
-                  inputValue={element.key}
-                  secondInputValue={element.value}
-                  selectValue={element.type}
-                  placeholder="Key (full path)"
-                  secondPlaceholder="New value"
-                  handleKeyChange={handleKeyChange}
-                  handleValueChange={handleValueChange}
-                  handleTypeChange={handleTypeChange}
-                  addInputs={addKeyValueChange}
-                  removeInputs={removeKeyValueChange}
-                />
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-      <div className={styles.optionsWrapper} style={isDisplay}>
-        <Button
-          text="Convert"
-          onClick={() => convertFile(isCaseChange, isKeyValueChange, file)}
-          type="primary"
-          disabled={file && (isCaseChange || isKeyValueChange) ? false : true}
-        />
-      </div>
+      {file && (
+        <>
+          <h4 className={styles["mt-8"]}>2. Choose settings</h4>
+          <div className={styles.optionsWrapper}>
+            <div className={styles.checksWrapper}>
+              <Check
+                labelText="camelCase -> UpperCamelCase"
+                checked={isCaseChange}
+                handleChange={handleCaseChange}
+              />
+              <Check
+                labelText="Change key values"
+                checked={isKeyValueChange}
+                handleChange={toggleKeyValueChange}
+              />
+              <ul className={styles.keyValueInputs}>
+                {keyValueChanges.map((element, key) => (
+                  <li key={key}>
+                    <DoubleInput
+                      numberKey={key + 1}
+                      value={element.key}
+                      secondValue={element.value}
+                      selectValue={element.type}
+                      placeholder="Key (full path)"
+                      secondPlaceholder="New value"
+                      handleKeyChange={handleKeyChange}
+                      handleValueChange={handleValueChange}
+                      handleTypeChange={handleTypeChange}
+                      addInputs={addKeyValueChange}
+                      removeInputs={removeKeyValueChange}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div className={styles.optionsWrapper}>
+            <Button
+              text="Convert"
+              onClick={() => convertFile(isCaseChange, isKeyValueChange, file)}
+              type="primary"
+              disabled={
+                file && (isCaseChange || isKeyValueChange) ? false : true
+              }
+            />
+          </div>
+        </>
+      )}
       <h4
         style={{
-          width: "508px",
           display: "flex",
           justifyContent: "space-around",
         }}
+        className={styles["mt-8"]}
       >
         Current file<span>Result</span>
       </h4>
       <div className={styles.resultWrapper}>
-        <TextArea value={fileString} readOnly={true}></TextArea>
-        <TextArea value={jsonString} readOnly={true}></TextArea>
+        <TextArea value={fileString} readOnly={true} />
+        <TextArea value={jsonString} readOnly={true} />
         <div className={styles.buttonsWrapper}>
           <Button
             onClick={copyText}

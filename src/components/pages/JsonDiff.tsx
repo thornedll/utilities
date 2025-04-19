@@ -1,11 +1,211 @@
-import React from "react";
+import React, { useState } from "react";
+import classNames from "classnames/bind";
+import { Button, FileInput } from "../UI";
 import styles from "./styles.module.scss";
 
-export const JsonDiff = () => {
+const cx = classNames.bind(styles);
+interface DiffResult {
+  key: string;
+  value1: string | number | boolean | undefined;
+  value2: string | number | boolean | undefined;
+}
+
+const JsonTextareaPlaceholder = "Enter JSON to compare";
+
+export const JsonDiff: React.FC = () => {
+  const [json1, setJson1] = useState<string>("");
+  const [json2, setJson2] = useState<string>("");
+  const [fileName1, setFileName1] = useState<string>("");
+  const [fileName2, setFileName2] = useState<string>("");
+  const [diffs, setDiffs] = useState<DiffResult[]>([]);
+  const [error, setError] = useState<string | null>(null);
+
+  const compareJson = () => {
+    try {
+      setError(null);
+      setDiffs([]);
+
+      const obj1 = json1 ? JSON.parse(json1) : {};
+      const obj2 = json2 ? JSON.parse(json2) : {};
+
+      const differences: DiffResult[] = [];
+
+      const compareObjects = (obj1: any, obj2: any, path = "") => {
+        const allKeys = new Set([...Object.keys(obj1), ...Object.keys(obj2)]);
+
+        allKeys.forEach((key) => {
+          const currentPath = path ? `${path}.${key}` : key;
+          if (key in obj1 && key in obj2) {
+            if (
+              typeof obj1[key] === "object" &&
+              obj1[key] !== null &&
+              typeof obj2[key] === "object" &&
+              obj2[key] !== null
+            ) {
+              compareObjects(obj1[key], obj2[key], currentPath);
+            } else if (
+              JSON.stringify(obj1[key]) !== JSON.stringify(obj2[key])
+            ) {
+              differences.push({
+                key: currentPath,
+                value1: obj1[key],
+                value2: obj2[key],
+              });
+            }
+          } else if (key in obj1) {
+            differences.push({
+              key: currentPath,
+              value1: obj1[key],
+              value2: undefined,
+            });
+          } else {
+            differences.push({
+              key: currentPath,
+              value1: undefined,
+              value2: obj2[key],
+            });
+          }
+        });
+      };
+
+      compareObjects(obj1, obj2);
+      setDiffs(differences);
+    } catch (err) {
+      setError("Error parsing JSON");
+      console.error(err);
+    }
+  };
+
+  const handleFileUpload = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    contentSetter: React.Dispatch<React.SetStateAction<string>>,
+    fileNameSetter: React.Dispatch<React.SetStateAction<string>>
+  ) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    fileNameSetter(file.name);
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const content = event.target?.result as string;
+      contentSetter(content);
+    };
+    reader.readAsText(file);
+  };
+
+  const setFormattedJson = (
+    jsonString: string,
+    jsonSetter: React.Dispatch<React.SetStateAction<string>>
+  ) => {
+    jsonSetter(JSON.stringify(JSON.parse(jsonString), null, 2));
+  };
+  console.log(json1);
+
   return (
     <div className={styles.pageWrapper}>
       <h2>JSON Difference</h2>
-      <div className={styles.optionsWrapper}>Nothing to see here...</div>
+      <div className={styles.optionsWrapper}>
+        <div className={styles.jsonInputWrapper}>
+          <h4>JSON 1</h4>
+          <div className={cx({ resultWrapper: 1, "mt-0": 1 })}>
+            <textarea
+              value={json1}
+              onChange={(e) => setJson1(e.target.value)}
+              placeholder={JsonTextareaPlaceholder}
+            />
+            <div className={styles.buttonsWrapper}>
+              <Button
+                type="format"
+                onClick={() => setFormattedJson(json1, setJson1)}
+              />
+            </div>
+          </div>
+          <div className={cx({ optionsWrapper: 1, "mt-0": 1 })}>
+            or{" "}
+            <FileInput
+              handleChange={(e) => handleFileUpload(e, setJson1, setFileName1)}
+              accept="application/json"
+            />
+            <div>{fileName1 && `Current file: ${fileName1}`}</div>
+          </div>
+        </div>
+        <div className={styles.jsonInputWrapper}>
+          <h4>JSON 2</h4>
+          <div className={cx({ resultWrapper: 1, "mt-0": 1 })}>
+            <textarea
+              value={json2}
+              onChange={(e) => setJson2(e.target.value)}
+              placeholder={JsonTextareaPlaceholder}
+            />
+            <div className={styles.buttonsWrapper}>
+              <Button
+                type="format"
+                onClick={() => setFormattedJson(json2, setJson2)}
+              />
+            </div>
+          </div>
+          <div className={cx({ optionsWrapper: 1, "mt-0": 1 })}>
+            or{" "}
+            <FileInput
+              handleChange={(e) => handleFileUpload(e, setJson2, setFileName2)}
+              accept="application/json"
+            />
+            <div>{fileName2 && `Current file: ${fileName2}`}</div>
+          </div>
+        </div>
+      </div>
+      <div className={styles.optionsWrapper}>
+        <Button
+          type="primary"
+          onClick={compareJson}
+          text="Compare"
+          disabled={json1 && json2 ? false : true}
+        />
+        {error && <div className={styles.error}>{error}</div>}
+      </div>
+      <div className={styles.resultWrapper}>
+        {diffs.length > 0 && (
+          <div className={styles.results}>
+            <h3>Differences</h3>
+            <table className={styles["mt-8"]}>
+              <thead>
+                <tr>
+                  <th>Key (full path)</th>
+                  <th>JSON 1 value</th>
+                  <th>JSON 2 value</th>
+                </tr>
+              </thead>
+              <tbody>
+                {diffs.map((diff, index) => (
+                  <tr
+                    key={index}
+                    className={
+                      styles[
+                        diff.value1 === undefined
+                          ? "added"
+                          : diff.value2 === undefined
+                          ? "removed"
+                          : "changed"
+                      ]
+                    }
+                  >
+                    <td>{diff.key}</td>
+                    <td>
+                      {diff.value1 !== undefined
+                        ? JSON.stringify(diff.value1)
+                        : "—"}
+                    </td>
+                    <td>
+                      {diff.value2 !== undefined
+                        ? JSON.stringify(diff.value2)
+                        : "—"}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

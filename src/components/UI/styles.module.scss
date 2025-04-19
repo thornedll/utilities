@@ -82,15 +82,15 @@
   }
 }
 
-.textArea {
+textarea {
   height: 250px;
-  width: 250px;
+  width: 100%;
   padding: 4px 8px;
   font-size: 12px;
   font-family: monospace;
   border: 1px solid hsl(0, 0%, 80%);
   border-radius: 6px;
-  resize: none;
+  resize: vertical;
 }
 
 .fileInput {
