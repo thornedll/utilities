@@ -116,6 +116,7 @@ export const JsonDiff: React.FC = () => {
               <Button
                 type="format"
                 onClick={() => setFormattedJson(json1, setJson1)}
+                disabled={json1 ? false : true}
               />
             </div>
           </div>
@@ -140,6 +141,7 @@ export const JsonDiff: React.FC = () => {
               <Button
                 type="format"
                 onClick={() => setFormattedJson(json2, setJson2)}
+                disabled={json2 ? false : true}
               />
             </div>
           </div>
