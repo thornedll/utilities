@@ -1,4 +1,5 @@
 import { useState, ChangeEvent } from "react";
+import classNames from "classnames/bind";
 import { BtnType, KeyValueChange, ValueType } from "../../ts/types/types";
 import { Button, Check, DoubleInput, FileInput, TextArea } from "../UI";
 import {
@@ -10,6 +11,8 @@ import {
 } from "../../utils";
 import { emptyKeyValueObject } from "../../constants";
 import styles from "./styles.module.scss";
+
+const cx = classNames.bind(styles);
 
 export const JsonConverter: React.FC = () => {
   const [file, setFile] = useState<File>();
@@ -85,6 +88,10 @@ export const JsonConverter: React.FC = () => {
     }
   };
 
+  const handleFileString = (newFileString: string) => {
+    setFileString(newFileString);
+  };
+
   const uploadFile = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const file = e.target.files[0];
@@ -98,7 +105,7 @@ export const JsonConverter: React.FC = () => {
           const rawText = reader.result;
           if (rawText && typeof rawText === "string") {
             let res = JSON.parse(rawText);
-            setFileString(JSON.stringify(res, null, 2));
+            handleFileString(JSON.stringify(res, null, 2));
           }
         };
         reader.readAsText(file);
@@ -106,6 +113,41 @@ export const JsonConverter: React.FC = () => {
         window.alert("File does not support. File type must be JSON");
       }
     }
+  };
+
+  const convertFileString = (
+    isConvertCaseChange: boolean,
+    isConvertKeyValueChange: boolean,
+    fileString: string
+  ) => {
+    const result = JSON.parse(fileString);
+    let res = result;
+
+    const convertCaseChange = () => {
+      res = convertToUpper(result);
+    };
+    const convertKeyValueChange = () => {
+      keyValueChanges.forEach((change) => {
+        updateNestedKey(
+          res,
+          change.key,
+          convertValueToType(change.value, change.type)
+        );
+      });
+    };
+
+    if (isConvertCaseChange && !isConvertKeyValueChange) {
+      convertCaseChange();
+    }
+    if (!isConvertCaseChange && isConvertKeyValueChange) {
+      convertKeyValueChange();
+    }
+    if (isConvertCaseChange && isConvertKeyValueChange) {
+      convertCaseChange();
+      convertKeyValueChange();
+    }
+    const jsonStr = JSON.stringify(res, null, 2);
+    setJsonString(jsonStr);
   };
 
   const convertFile = (
@@ -121,34 +163,11 @@ export const JsonConverter: React.FC = () => {
       reader.onload = () => {
         const rawText = reader.result;
         if (rawText && typeof rawText === "string") {
-          const result = JSON.parse(rawText);
-          let res = result;
-
-          const convertCaseChange = () => {
-            res = convertToUpper(result);
-          };
-          const convertKeyValueChange = () => {
-            keyValueChanges.forEach((change) => {
-              updateNestedKey(
-                res,
-                change.key,
-                convertValueToType(change.value, change.type)
-              );
-            });
-          };
-
-          if (isConvertCaseChange && !isConvertKeyValueChange) {
-            convertCaseChange();
-          }
-          if (!isConvertCaseChange && isConvertKeyValueChange) {
-            convertKeyValueChange();
-          }
-          if (isConvertCaseChange && isConvertKeyValueChange) {
-            convertCaseChange();
-            convertKeyValueChange();
-          }
-          const jsonStr = JSON.stringify(res, null, 2);
-          setJsonString(jsonStr);
+          convertFileString(
+            isConvertCaseChange,
+            isConvertKeyValueChange,
+            rawText
+          );
         }
       };
       reader.readAsText(file);
@@ -162,12 +181,15 @@ export const JsonConverter: React.FC = () => {
   return (
     <div className={styles.pageWrapper}>
       <h2>JSON Converter</h2>
-      <h4 className={styles["mt-8"]}>1. Upload file</h4>
+      <h4 className={styles["mt-8"]}>1. Upload file*</h4>
       <div className={styles.optionsWrapper}>
         <FileInput handleChange={uploadFile} accept="application/json" />
         <div>{file && `Current file: ${file.name}`}</div>
       </div>
-      {file && (
+      <span className={cx({ hint: 1, "mt-8": 1 })}>
+        * or fill in the "Current file" field
+      </span>
+      {fileString && (
         <>
           <h4 className={styles["mt-8"]}>2. Choose settings</h4>
           <div className={styles.optionsWrapper}>
@@ -206,38 +228,54 @@ export const JsonConverter: React.FC = () => {
           <div className={styles.optionsWrapper}>
             <Button
               text="Convert"
-              onClick={() => convertFile(isCaseChange, isKeyValueChange, file)}
-              type="primary"
               disabled={
-                file && (isCaseChange || isKeyValueChange) ? false : true
+                fileString && (isCaseChange || isKeyValueChange) ? false : true
+              }
+              type="primary"
+              onClick={
+                file
+                  ? () => convertFile(isCaseChange, isKeyValueChange, file)
+                  : () =>
+                      convertFileString(
+                        isCaseChange,
+                        isKeyValueChange,
+                        fileString
+                      )
               }
             />
           </div>
         </>
       )}
-      <h4
-        style={{
-          display: "flex",
-          justifyContent: "space-around",
-        }}
-        className={styles["mt-8"]}
-      >
-        Current file<span>Result</span>
-      </h4>
-      <div className={styles.resultWrapper}>
-        <TextArea value={fileString} readOnly={true} />
-        <TextArea value={jsonString} readOnly={true} />
-        <div className={styles.buttonsWrapper}>
-          <Button
-            onClick={copyText}
-            type={btnType}
-            disabled={jsonString === "" ? true : false}
-          />
-          <Button
-            onClick={() => downloadFile(jsonString, "json")}
-            type="download"
-            disabled={jsonString === "" ? true : false}
-          />
+      <div className={styles.optionsWrapper}>
+        <div className={styles.jsonInputWrapper}>
+          <h4>Current file</h4>
+          <div className={cx({ resultWrapper: 1, "mt-0": 1 })}>
+            <TextArea
+              value={fileString}
+              readOnly={false}
+              handleChange={handleFileString}
+            />
+          </div>
+        </div>
+        <div className={styles.jsonInputWrapper}>
+          <h4>Result</h4>
+          <div className={cx({ resultWrapper: 1, "mt-0": 1 })}>
+            <TextArea value={jsonString} readOnly={true} />
+            <div className={styles.buttonsWrapper}>
+              <Button
+                disabled={jsonString === "" ? true : false}
+                type={btnType}
+                tooltipPlace="left"
+                onClick={copyText}
+              />
+              <Button
+                disabled={jsonString === "" ? true : false}
+                type="download"
+                tooltipPlace="left"
+                onClick={() => downloadFile(jsonString, "json")}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>

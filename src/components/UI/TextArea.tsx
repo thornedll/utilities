@@ -9,7 +9,7 @@ export const TextArea: React.FC<TextAreaProps> = ({
   id,
   labelText,
   readOnly = false,
-  handleChange,
+  handleChange = () => {},
 }) => {
   return (
     <>
@@ -23,12 +23,19 @@ export const TextArea: React.FC<TextAreaProps> = ({
       </label>
       <textarea
         placeholder={placeholder}
-        onChange={() => handleChange}
+        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+          handleChange(e.target.value)
+        }
         value={value}
         className={styles.textArea}
         disabled={disabled}
         id={id}
         readOnly={readOnly}
+        onKeyDown={(e) => {
+          if (e.key === "Tab") {
+            e.preventDefault()
+          };
+        }}
       />
     </>
   );

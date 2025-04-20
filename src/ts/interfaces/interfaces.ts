@@ -1,5 +1,6 @@
 import { ChangeEvent, InputHTMLAttributes } from "react";
 import { BtnType, Option, ValueType } from "../types/types";
+import { PlacesType } from "react-tooltip";
 
 export interface BaseSelectProps {
   options: Option[];
@@ -11,6 +12,7 @@ export interface ButtonProps {
   text?: string;
   disabled?: boolean;
   type: BtnType;
+  tooltipPlace?: PlacesType;
   onClick: () => void;
 }
 
@@ -42,7 +44,7 @@ export interface TextAreaProps {
   id?: string;
   labelText?: string;
   readOnly: boolean;
-  handleChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  handleChange?: (e: string) => void;
 }
 
 export interface TextInputProps {
@@ -64,4 +66,10 @@ export interface DoubleInputProps extends TextInputProps {
   handleTypeChange: (itemKey: number, type: ValueType) => void;
   addInputs: () => void;
   removeInputs: (idx: number) => void;
+}
+
+export interface BaseTooltipProps {
+  id: string;
+  text: string;
+  place?: PlacesType;
 }

@@ -98,7 +98,6 @@ export const JsonDiff: React.FC = () => {
   ) => {
     jsonSetter(JSON.stringify(JSON.parse(jsonString), null, 2));
   };
-  console.log(json1);
 
   return (
     <div className={styles.pageWrapper}>
@@ -114,9 +113,10 @@ export const JsonDiff: React.FC = () => {
             />
             <div className={styles.buttonsWrapper}>
               <Button
-                type="format"
-                onClick={() => setFormattedJson(json1, setJson1)}
                 disabled={json1 ? false : true}
+                type="format"
+                tooltipPlace="left"
+                onClick={() => setFormattedJson(json1, setJson1)}
               />
             </div>
           </div>
@@ -139,9 +139,10 @@ export const JsonDiff: React.FC = () => {
             />
             <div className={styles.buttonsWrapper}>
               <Button
-                type="format"
-                onClick={() => setFormattedJson(json2, setJson2)}
                 disabled={json2 ? false : true}
+                type="format"
+                tooltipPlace="left"
+                onClick={() => setFormattedJson(json2, setJson2)}
               />
             </div>
           </div>

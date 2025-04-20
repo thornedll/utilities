@@ -108,3 +108,11 @@ textarea {
     height: 14px;
   }
 }
+
+.tooltip {
+  font-size: 12px !important;
+  padding: 4px 8px !important;
+  &::first-letter {
+    text-transform: capitalize;
+  }
+}
