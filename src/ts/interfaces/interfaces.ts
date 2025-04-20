@@ -26,7 +26,7 @@ export interface CheckProps {
 
 export interface DatePickerProps {
   startDate: Date | null;
-  changeDate: (date: Date | null) => void;
+  changeDate: (date: Date) => void;
 }
 
 export interface FileInputProps {
@@ -53,7 +53,7 @@ export interface TextInputProps {
   disabled?: boolean;
   id?: string;
   labelText?: string;
-  handleChange?: (e: any) => void;
+  handleChange?: (e: string) => void;
 }
 
 export interface DoubleInputProps extends TextInputProps {

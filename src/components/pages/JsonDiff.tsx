@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import classNames from "classnames/bind";
-import { Button, FileInput } from "../UI";
+import { Button, FileInput, TextArea } from "../UI";
 import styles from "./styles.module.scss";
 
 const cx = classNames.bind(styles);
@@ -106,9 +106,10 @@ export const JsonDiff: React.FC = () => {
         <div className={styles.jsonInputWrapper}>
           <h4>JSON 1</h4>
           <div className={cx({ resultWrapper: 1, "mt-0": 1 })}>
-            <textarea
+            <TextArea
               value={json1}
-              onChange={(e) => setJson1(e.target.value)}
+              readOnly={false}
+              handleChange={setJson1}
               placeholder={JsonTextareaPlaceholder}
             />
             <div className={styles.buttonsWrapper}>
@@ -132,9 +133,10 @@ export const JsonDiff: React.FC = () => {
         <div className={styles.jsonInputWrapper}>
           <h4>JSON 2</h4>
           <div className={cx({ resultWrapper: 1, "mt-0": 1 })}>
-            <textarea
+            <TextArea
               value={json2}
-              onChange={(e) => setJson2(e.target.value)}
+              readOnly={false}
+              handleChange={setJson2}
               placeholder={JsonTextareaPlaceholder}
             />
             <div className={styles.buttonsWrapper}>

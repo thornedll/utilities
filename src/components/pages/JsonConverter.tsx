@@ -195,13 +195,15 @@ export const JsonConverter: React.FC = () => {
           <div className={styles.optionsWrapper}>
             <div className={styles.checksWrapper}>
               <Check
-                labelText="camelCase -> UpperCamelCase"
                 checked={isCaseChange}
+                id="changeCase"
+                labelText="camelCase -> UpperCamelCase"
                 handleChange={handleCaseChange}
               />
               <Check
-                labelText="Change key values"
                 checked={isKeyValueChange}
+                id="changeKeyValues"
+                labelText="Change key values"
                 handleChange={toggleKeyValueChange}
               />
               <ul className={styles.keyValueInputs}>

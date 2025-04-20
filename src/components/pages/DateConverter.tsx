@@ -7,7 +7,7 @@ import styles from "./styles.module.scss";
 
 export const DateConverter: React.FC = () => {
   const [text, setText] = useState<string>("");
-  const [startDate, setStartDate] = useState<Date | null>(
+  const [startDate, setStartDate] = useState<Date>(
     new Date(new Date().setMilliseconds(0))
   );
   const [timezone, setTimezone] = useState<Option>(timezones[3]);
@@ -16,7 +16,7 @@ export const DateConverter: React.FC = () => {
   const handleChange = (text: string) => {
     setText(text);
   };
-  const changeDate = (startDate: Date | null) => {
+  const changeDate = (startDate: Date) => {
     setStartDate(startDate);
   };
   const changeTimezone = (timezone: Option) => {
@@ -33,7 +33,7 @@ export const DateConverter: React.FC = () => {
       <div className={styles.optionsWrapper}>
         <DateTimePicker
           startDate={startDate}
-          changeDate={(date: Date | null) => changeDate(date)}
+          changeDate={(date: Date) => changeDate(date)}
         />
         <BaseSelect
           options={timezones}

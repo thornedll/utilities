@@ -8,13 +8,13 @@ export const TextInput: React.FC<TextInputProps> = ({
   disabled = false,
   id,
   labelText,
-  handleChange,
+  handleChange = () => {},
 }) => {
   return (
     <>
       <label
         htmlFor={id}
-        style={labelText && id ? { display: "flex" } : { display: "none" }}
+        style={labelText && id ? {} : { display: "none" }}
         className={styles.textInputLabel}
       >
         {labelText}
@@ -22,7 +22,9 @@ export const TextInput: React.FC<TextInputProps> = ({
       <input
         type="text"
         placeholder={placeholder}
-        onChange={() => handleChange}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          handleChange(e.target.value)
+        }
         value={value}
         className={styles.textInput}
         disabled={disabled}

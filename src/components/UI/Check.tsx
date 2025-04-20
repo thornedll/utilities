@@ -13,7 +13,7 @@ export const Check: React.FC<CheckProps> = ({
     <>
       <label
         htmlFor={id}
-        style={labelText ? { display: "flex" } : { display: "none" }}
+        style={labelText ? {} : { display: "none" }}
         className={styles.check}
       >
         <input

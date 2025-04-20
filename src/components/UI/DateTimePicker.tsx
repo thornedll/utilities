@@ -17,7 +17,7 @@ export const DateTimePicker: React.FC<DatePickerProps> = ({
         locale="ru"
         showIcon
         selected={startDate}
-        onChange={(date) => changeDate(date)}
+        onChange={(date) => date && changeDate(date)}
         timeInputLabel="Время:"
         dateFormat="Pp:ss"
         showTimeInput
