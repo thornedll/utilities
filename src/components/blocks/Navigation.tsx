@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { NavLink } from "react-router";
 import styles from "./styles.module.scss";
 
@@ -16,7 +17,7 @@ const navigation = [
   },
 ];
 
-export const Navigation = () => {
+export const Navigation: FC = () => {
   return (
     <nav className={styles.nav}>
       {navigation.map((link, i) => (

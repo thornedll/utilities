@@ -1,18 +1,14 @@
-import React, { useState } from "react";
+import { useState, FC } from "react";
 import classNames from "classnames/bind";
 import { Button, FileInput, TextArea } from "../UI";
+import { DiffResult } from "../../ts/interfaces/interfaces";
+import { placeholders } from "../../constants";
+import { setFormattedJson } from "../../utils";
 import styles from "./styles.module.scss";
 
 const cx = classNames.bind(styles);
-interface DiffResult {
-  key: string;
-  value1: string | number | boolean | undefined;
-  value2: string | number | boolean | undefined;
-}
 
-const JsonTextareaPlaceholder = "Enter JSON to compare";
-
-export const JsonDiff: React.FC = () => {
+export const JsonDiff: FC = () => {
   const [json1, setJson1] = useState<string>("");
   const [json2, setJson2] = useState<string>("");
   const [fileName1, setFileName1] = useState<string>("");
@@ -92,13 +88,6 @@ export const JsonDiff: React.FC = () => {
     reader.readAsText(file);
   };
 
-  const setFormattedJson = (
-    jsonString: string,
-    jsonSetter: React.Dispatch<React.SetStateAction<string>>
-  ) => {
-    jsonSetter(JSON.stringify(JSON.parse(jsonString), null, 2));
-  };
-
   return (
     <div className={styles.pageWrapper}>
       <h2>JSON Difference</h2>
@@ -110,11 +99,11 @@ export const JsonDiff: React.FC = () => {
               value={json1}
               readOnly={false}
               handleChange={setJson1}
-              placeholder={JsonTextareaPlaceholder}
+              placeholder={placeholders.JsonDiffTextarea}
             />
             <div className={styles.buttonsWrapper}>
               <Button
-                disabled={json1 ? false : true}
+                disabled={!json1}
                 type="format"
                 tooltipPlace="left"
                 onClick={() => setFormattedJson(json1, setJson1)}
@@ -137,11 +126,11 @@ export const JsonDiff: React.FC = () => {
               value={json2}
               readOnly={false}
               handleChange={setJson2}
-              placeholder={JsonTextareaPlaceholder}
+              placeholder={placeholders.JsonDiffTextarea}
             />
             <div className={styles.buttonsWrapper}>
               <Button
-                disabled={json2 ? false : true}
+                disabled={!json2}
                 type="format"
                 tooltipPlace="left"
                 onClick={() => setFormattedJson(json2, setJson2)}

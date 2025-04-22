@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import Select, { StylesConfig } from "react-select";
 import { BaseSelectProps } from "../../ts/interfaces/interfaces";
 import styles from "./styles.module.scss";
@@ -32,7 +32,7 @@ const selectStyles: StylesConfig = {
   }),
 };
 
-export const BaseSelect: React.FC<BaseSelectProps> = ({
+export const BaseSelect: FC<BaseSelectProps> = ({
   options,
   value,
   handleChange,

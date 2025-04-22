@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, FC } from "react";
 import classNames from "classnames/bind";
 import { BtnType, KeyValueChange, ValueType } from "../../ts/types/types";
 import { Button, Check, DoubleInput, FileInput, TextArea } from "../UI";
@@ -8,13 +8,14 @@ import {
   downloadFile,
   updateNestedKey,
   convertValueToType,
+  setFormattedJson,
 } from "../../utils";
-import { emptyKeyValueObject } from "../../constants";
+import { emptyKeyValueObject, placeholders } from "../../constants";
 import styles from "./styles.module.scss";
 
 const cx = classNames.bind(styles);
 
-export const JsonConverter: React.FC = () => {
+export const JsonConverter: FC = () => {
   const [file, setFile] = useState<File>();
   const [isCaseChange, setIsCaseChange] = useState<boolean>(false);
   const [isKeyValueChange, setIsKeyValueChange] = useState<boolean>(false);
@@ -174,10 +175,6 @@ export const JsonConverter: React.FC = () => {
     }
   };
 
-  const copyText = () => {
-    copy(jsonString, setBtnType);
-  };
-
   return (
     <div className={styles.pageWrapper}>
       <h2>JSON Converter</h2>
@@ -253,10 +250,19 @@ export const JsonConverter: React.FC = () => {
           <h4>Current file</h4>
           <div className={cx({ resultWrapper: 1, "mt-0": 1 })}>
             <TextArea
+              placeholder={placeholders.JsonConverterTextarea}
               value={fileString}
               readOnly={false}
               handleChange={handleFileString}
             />
+            <div className={styles.buttonsWrapper}>
+              <Button
+                disabled={!fileString}
+                type="format"
+                tooltipPlace="left"
+                onClick={() => setFormattedJson(fileString, setFileString)}
+              />
+            </div>
           </div>
         </div>
         <div className={styles.jsonInputWrapper}>
@@ -265,13 +271,13 @@ export const JsonConverter: React.FC = () => {
             <TextArea value={jsonString} readOnly={true} />
             <div className={styles.buttonsWrapper}>
               <Button
-                disabled={jsonString === "" ? true : false}
+                disabled={jsonString === ""}
                 type={btnType}
                 tooltipPlace="left"
-                onClick={copyText}
+                onClick={() => copy(jsonString, setBtnType)}
               />
               <Button
-                disabled={jsonString === "" ? true : false}
+                disabled={jsonString === ""}
                 type="download"
                 tooltipPlace="left"
                 onClick={() => downloadFile(jsonString, "json")}

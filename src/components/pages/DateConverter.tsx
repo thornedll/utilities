@@ -1,72 +1,151 @@
-import React, { useState } from "react";
+import { useState, FC } from "react";
+import classNames from "classnames/bind";
 import { Option, BtnType } from "../../ts/types/types";
-import { DateTimePicker, BaseSelect, Button, TextInput } from "../UI";
-import { copy, getUnixTimeString } from "../../utils";
-import { timezones } from "../../constants";
+import { DateTimePicker, BaseSelect, Button, TextInput, Check } from "../UI";
+import {
+  changeIsoFromUnixDateTimezone,
+  copy,
+  getUnixTimeString,
+} from "../../utils";
+import { placeholders, timezones } from "../../constants";
 import styles from "./styles.module.scss";
 
-export const DateConverter: React.FC = () => {
+const cx = classNames.bind(styles);
+
+export const DateConverter: FC = () => {
+  // Global states
+  const [toUnix, setToUnix] = useState<boolean>(true);
+  const [btnType, setBtnType] = useState<BtnType>("copy");
+  // ISO -> UNIX states
   const [text, setText] = useState<string>("");
   const [startDate, setStartDate] = useState<Date>(
     new Date(new Date().setMilliseconds(0))
   );
-  const [timezone, setTimezone] = useState<Option>(timezones[3]);
-  const [btnType, setBtnType] = useState<BtnType>("copy");
-
-  const handleChange = (text: string) => {
-    setText(text);
-  };
-  const changeDate = (startDate: Date) => {
-    setStartDate(startDate);
-  };
-  const changeTimezone = (timezone: Option) => {
-    setTimezone(timezone);
-  };
-
-  const copyText = () => {
-    copy(text, setBtnType);
-  };
+  const [ISOTimezone, setISOTimezone] = useState<Option>(timezones[3]);
+  // UNIX -> ISO states
+  const [unixDate, setUnixDate] = useState<string>("");
+  const [isoFromUnixDate, setIsoFromUnixDate] = useState<string | null>(null);
+  const [UNIXTimezone, setUNIXTimezone] = useState<Option>(timezones[0]);
 
   return (
     <div className={styles.pageWrapper}>
       <h2>Date Converter (ISO-UNIX)</h2>
       <div className={styles.optionsWrapper}>
-        <DateTimePicker
-          startDate={startDate}
-          changeDate={(date: Date) => changeDate(date)}
-        />
-        <BaseSelect
-          options={timezones}
-          value={timezone}
-          handleChange={(timezone: Option) => changeTimezone(timezone)}
-        />
-        <Button
-          text="Convert"
-          onClick={() =>
-            handleChange(
-              startDate ? getUnixTimeString(startDate, timezone.value) : ""
-            )
-          }
-          type="primary"
+        <Check
+          checked={toUnix}
+          handleChange={() => setToUnix(!toUnix)}
+          id="toUnix"
+          labelText="ISO -> UNIX"
         />
       </div>
-      <div className={styles.resultWrapper} style={{ width: "fit-content" }}>
-        <TextInput
-          placeholder=""
-          value={text}
-          disabled
-          handleChange={() => handleChange}
-          id="result"
-          labelText="Result:"
-        />
-        <div className={styles.buttonsWrapper}>
-          <Button
-            onClick={copyText}
-            type={btnType}
-            disabled={text === "" ? true : false}
-          />
-        </div>
-      </div>
+      {toUnix ? (
+        <>
+          <div className={styles.optionsWrapper}>
+            <DateTimePicker
+              startDate={startDate}
+              changeDate={(date: Date) => setStartDate(date)}
+            />
+            <BaseSelect
+              options={timezones}
+              value={ISOTimezone}
+              handleChange={(timezone: Option) => setISOTimezone(timezone)}
+            />
+            <Button
+              text="Convert"
+              onClick={() =>
+                setText(
+                  startDate && getUnixTimeString(startDate, ISOTimezone.value)
+                )
+              }
+              type="primary"
+            />
+          </div>
+          <div
+            className={styles.resultWrapper}
+            style={{ width: "fit-content" }}
+          >
+            <TextInput
+              value={text}
+              disabled
+              id="resultUNIX"
+              labelText="Result:"
+            />
+            <div className={styles.buttonsWrapper}>
+              <Button
+                type={btnType}
+                disabled={text === ""}
+                onClick={() => copy(text, setBtnType)}
+              />
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className={styles.optionsWrapper}>
+            <div style={{ position: "relative" }}>
+              <TextInput
+                value={unixDate}
+                handleChange={setUnixDate}
+                placeholder={placeholders.DateConverterUNIXTextInput}
+              />
+              {unixDate && (
+                <div className={styles.buttonsWrapper}>
+                  <Button type="delete" onClick={() => setUnixDate("")} />
+                </div>
+              )}
+            </div>
+            <Button
+              text="Convert"
+              onClick={() =>
+                setIsoFromUnixDate(
+                  new Date(Number(unixDate) * 1000).toISOString()
+                )
+              }
+              type="primary"
+            />
+          </div>
+          <div
+            className={styles.resultWrapper}
+            style={{ width: "fit-content" }}
+          >
+            <div className={cx({ resultWrapper: 1, "mt-0": 1 })}>
+              <TextInput
+                value={isoFromUnixDate ? isoFromUnixDate : ""}
+                disabled
+                id="resultISO"
+                labelText="Result:"
+                style={{ width: "300px" }}
+              />
+              <div className={styles.buttonsWrapper}>
+                <Button
+                  type={btnType}
+                  disabled={!isoFromUnixDate}
+                  onClick={
+                    isoFromUnixDate
+                      ? () => copy(isoFromUnixDate, setBtnType)
+                      : () => {}
+                  }
+                />
+              </div>
+            </div>
+            <BaseSelect
+              options={timezones}
+              value={UNIXTimezone}
+              handleChange={
+                isoFromUnixDate
+                  ? (timezone: Option) =>
+                      changeIsoFromUnixDateTimezone(
+                        isoFromUnixDate,
+                        timezone,
+                        setIsoFromUnixDate,
+                        setUNIXTimezone
+                      )
+                  : () => {}
+              }
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 };

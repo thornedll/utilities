@@ -1,8 +1,8 @@
-import React from "react";
+import { FC } from "react";
 import { TextAreaProps } from "../../ts/interfaces/interfaces";
 import styles from "./styles.module.scss";
 
-export const TextArea: React.FC<TextAreaProps> = ({
+export const TextArea: FC<TextAreaProps> = ({
   placeholder,
   value,
   disabled = false,

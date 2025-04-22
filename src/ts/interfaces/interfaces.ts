@@ -1,4 +1,4 @@
-import { ChangeEvent, InputHTMLAttributes } from "react";
+import { ChangeEvent, CSSProperties, InputHTMLAttributes } from "react";
 import { BtnType, Option, ValueType } from "../types/types";
 import { PlacesType } from "react-tooltip";
 
@@ -29,6 +29,12 @@ export interface DatePickerProps {
   changeDate: (date: Date) => void;
 }
 
+export interface DiffResult {
+  key: string;
+  value1: string | number | boolean | undefined;
+  value2: string | number | boolean | undefined;
+}
+
 export interface FileInputProps {
   id?: string;
   labelText?: string;
@@ -53,6 +59,7 @@ export interface TextInputProps {
   disabled?: boolean;
   id?: string;
   labelText?: string;
+  style?: CSSProperties;
   handleChange?: (e: string) => void;
 }
 

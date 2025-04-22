@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import _ from "lodash";
-import { BtnType } from "../ts/types/types";
+import { BtnType, Option } from "../ts/types/types";
 
 export const copy = async (
   text: string,
@@ -8,7 +8,7 @@ export const copy = async (
 ) => {
   await navigator.clipboard.writeText(text);
   changeBtnType("success");
-  setTimeout(() => changeBtnType("copy"), 1000);
+  setTimeout(() => changeBtnType("copy"), 1500);
 };
 
 const generateFileName = () => {
@@ -91,5 +91,33 @@ export const convertValueToType = (value: string, type: string) => {
         : Boolean(value);
     default:
       return value;
+  }
+};
+
+export const setFormattedJson = (
+  jsonString: string,
+  jsonSetter: Dispatch<SetStateAction<string>>
+) => {
+  jsonSetter(JSON.stringify(JSON.parse(jsonString), null, 2));
+};
+
+export const changeIsoFromUnixDateTimezone = (
+  isoDateString: string,
+  timezone: Option,
+  dateSetter: Dispatch<SetStateAction<string | null>>,
+  timezoneSetter: Dispatch<SetStateAction<Option>>
+): void => {
+  timezoneSetter(timezone);
+  //! TO DO: Change hours in date with changing timezone
+  if (isoDateString.charAt(isoDateString.length - 1) === "Z") {
+    if (timezone.label !== "+00:00") {
+      dateSetter(isoDateString.split("Z")[0] + timezone.label);
+    } else return;
+  } else {
+    if (timezone.label !== "+00:00") {
+      dateSetter(isoDateString.split("+")[0] + timezone.label);
+    } else {
+      dateSetter(isoDateString.split("+")[0] + "Z");
+    }
   }
 };

@@ -1,8 +1,8 @@
-import React from "react";
+import { FC } from "react";
 import { FileInputProps } from "../../ts/interfaces/interfaces";
 import styles from "./styles.module.scss";
 
-export const FileInput: React.FC<FileInputProps> = ({
+export const FileInput: FC<FileInputProps> = ({
   id,
   labelText = "Choose file",
   disabled = false,

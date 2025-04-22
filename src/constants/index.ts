@@ -27,3 +27,9 @@ export const valueTypes: Option[] = [
   { label: "number", value: "number" },
   { label: "boolean", value: "boolean" },
 ];
+
+export const placeholders = {
+  DateConverterUNIXTextInput: "Enter UNIX date",
+  JsonConverterTextarea: "Enter JSON to convert",
+  JsonDiffTextarea: "Enter JSON to compare",
+};

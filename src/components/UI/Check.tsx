@@ -1,8 +1,8 @@
-import React from "react";
+import { FC } from "react";
 import { CheckProps } from "../../ts/interfaces/interfaces";
 import styles from "./styles.module.scss";
 
-export const Check: React.FC<CheckProps> = ({
+export const Check: FC<CheckProps> = ({
   checked,
   disabled = false,
   id,

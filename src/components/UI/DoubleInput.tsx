@@ -1,10 +1,10 @@
-import React from "react";
+import { FC } from "react";
 import { BaseSelect, Button } from "./";
 import { DoubleInputProps } from "../../ts/interfaces/interfaces";
 import { valueTypes } from "../../constants";
 import styles from "./styles.module.scss";
 
-export const DoubleInput: React.FC<DoubleInputProps> = ({
+export const DoubleInput: FC<DoubleInputProps> = ({
   numberKey,
   value,
   secondValue,

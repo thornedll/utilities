@@ -1,13 +1,14 @@
-import React from "react";
+import { FC } from "react";
 import { TextInputProps } from "../../ts/interfaces/interfaces";
 import styles from "./styles.module.scss";
 
-export const TextInput: React.FC<TextInputProps> = ({
-  placeholder,
+export const TextInput: FC<TextInputProps> = ({
+  placeholder = "",
   value,
   disabled = false,
   id,
   labelText,
+  style,
   handleChange = () => {},
 }) => {
   return (
@@ -29,6 +30,7 @@ export const TextInput: React.FC<TextInputProps> = ({
         className={styles.textInput}
         disabled={disabled}
         id={id}
+        style={style}
       />
     </>
   );
