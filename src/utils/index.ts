@@ -107,17 +107,18 @@ export const changeIsoFromUnixDateTimezone = (
   dateSetter: Dispatch<SetStateAction<string | null>>,
   timezoneSetter: Dispatch<SetStateAction<Option>>
 ): void => {
+  const timezoneInt = Number(timezone.value);
+  const newTimezone = timezone.label === "+00:00" ? "Z" : timezone.label;
+  let modifiedIsoDateString = isoDateString;
+
+  modifiedIsoDateString = (
+    (new Date(isoDateString).getTime() + timezoneInt * 60 * 60 * 1000) /
+    1000
+  ).toString();
+  const result =
+    new Date(Number(modifiedIsoDateString) * 1000).toISOString().split("Z")[0] +
+    newTimezone;
+
   timezoneSetter(timezone);
-  //! TO DO: Change hours in date with changing timezone
-  if (isoDateString.charAt(isoDateString.length - 1) === "Z") {
-    if (timezone.label !== "+00:00") {
-      dateSetter(isoDateString.split("Z")[0] + timezone.label);
-    } else return;
-  } else {
-    if (timezone.label !== "+00:00") {
-      dateSetter(isoDateString.split("+")[0] + timezone.label);
-    } else {
-      dateSetter(isoDateString.split("+")[0] + "Z");
-    }
-  }
+  dateSetter(result);
 };

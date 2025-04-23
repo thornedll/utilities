@@ -27,9 +27,14 @@ export const DateConverter: FC = () => {
   const [isoFromUnixDate, setIsoFromUnixDate] = useState<string | null>(null);
   const [UNIXTimezone, setUNIXTimezone] = useState<Option>(timezones[0]);
 
+  const convertUnixToIsoDate = (): void => {
+    setIsoFromUnixDate(new Date(Number(unixDate) * 1000).toISOString());
+    setUNIXTimezone(timezones[0]);
+  };
+
   return (
     <div className={styles.pageWrapper}>
-      <h2>Date Converter (ISO-UNIX)</h2>
+      <h2>Date Converter ({toUnix ? "ISO -> UNIX" : "ISO <- UNIX"})</h2>
       <div className={styles.optionsWrapper}>
         <Check
           checked={toUnix}
@@ -96,12 +101,9 @@ export const DateConverter: FC = () => {
             </div>
             <Button
               text="Convert"
-              onClick={() =>
-                setIsoFromUnixDate(
-                  new Date(Number(unixDate) * 1000).toISOString()
-                )
-              }
+              disabled={!unixDate}
               type="primary"
+              onClick={() => convertUnixToIsoDate()}
             />
           </div>
           <div
