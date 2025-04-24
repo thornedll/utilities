@@ -1,7 +1,7 @@
 import { useState, FC } from "react";
 import classNames from "classnames/bind";
 import { Option, BtnType } from "../../ts/types/types";
-import { DateTimePicker, BaseSelect, Button, TextInput, Check } from "../UI";
+import { BaseSelect, Button, Check, DateTimePicker, TextInput } from "../UI";
 import {
   changeIsoFromUnixDateTimezone,
   copy,
@@ -34,14 +34,22 @@ export const DateConverter: FC = () => {
 
   return (
     <div className={styles.pageWrapper}>
-      <h2>Date Converter ({toUnix ? "ISO -> UNIX" : "ISO <- UNIX"})</h2>
+      <h2>Date Converter</h2>
       <div className={styles.optionsWrapper}>
+        <div className={styles.hintWrapper}>
+          <p>{toUnix ? "ISO" : "UNIX"}</p>
+          <p className={styles.hint}>Input</p>
+        </div>
         <Check
           checked={toUnix}
-          handleChange={() => setToUnix(!toUnix)}
           id="toUnix"
-          labelText="ISO -> UNIX"
+          type="arrows"
+          handleChange={() => setToUnix(!toUnix)}
         />
+        <div className={styles.hintWrapper}>
+          <p>{toUnix ? "UNIX" : "ISO"}</p>
+          <p className={styles.hint}>Output</p>
+        </div>
       </div>
       {toUnix ? (
         <>

@@ -21,8 +21,12 @@ export interface CheckProps {
   disabled?: boolean;
   id?: string;
   labelText?: string;
+  style?: CSSProperties;
+  type?: "switch" | "arrows";
   handleChange: (state: boolean) => void;
 }
+
+export interface CustomCheckboxProps extends CheckProps {}
 
 export interface DatePickerProps {
   startDate: Date | null;

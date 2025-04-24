@@ -70,6 +70,13 @@
   }
 }
 
+.hintWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40px;
+}
+
 .hint {
   display: block;
   font-size: 14px;
