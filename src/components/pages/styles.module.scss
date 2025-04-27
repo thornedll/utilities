@@ -1,25 +1,28 @@
+@use "../../assets/styles/variables.module";
+@use "../../assets/styles/global.module";
+
 .pageWrapper {
   padding: 0 16px;
 }
 
 .optionsWrapper {
   display: flex;
-  gap: 8px;
-  margin-top: 8px;
+  gap: variables.$base-gap;
+  margin-top: variables.$base-gap;
   align-items: center;
 }
 
 .checksWrapper {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: variables.$base-gap;
 }
 
 .resultWrapper {
   display: flex;
-  gap: 8px;
+  gap: variables.$base-gap;
   position: relative;
-  margin-top: 8px;
+  margin-top: variables.$base-gap;
 }
 
 .buttonsWrapper {
@@ -34,13 +37,13 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 8px;
+  gap: variables.$base-gap;
 }
 
 .error {
   display: flex;
   align-items: center;
-  color: red;
+  color: variables.$red;
 }
 
 .results {
@@ -50,8 +53,8 @@
   }
   th,
   td {
-    border: 1px solid #ddd;
-    padding: 8px;
+    border: 1px solid variables.$gray-border;
+    padding: variables.$base-gap;
     text-align: left;
   }
   th {
@@ -59,13 +62,13 @@
   }
   tr {
     &.added {
-      background-color: #e6ffe6;
+      background-color: variables.$green-light;
     }
     &.removed {
-      background-color: #ffe6e6;
+      background-color: variables.$red-light;
     }
     &.changed {
-      background-color: #fff9e6;
+      background-color: variables.$yellow-light;
     }
   }
 }
@@ -80,13 +83,5 @@
 .hint {
   display: block;
   font-size: 14px;
-  color: #777777;
-}
-
-.mt-8 {
-  margin-top: 8px;
-}
-
-.mt-0 {
-  margin-top: 0;
+  color: variables.$gray;
 }

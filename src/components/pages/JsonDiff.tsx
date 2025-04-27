@@ -160,7 +160,7 @@ export const JsonDiff: FC = () => {
         {diffs.length > 0 && (
           <div className={styles.results}>
             <h3>Differences</h3>
-            <table className={styles["mt-8"]}>
+            <table className={styles["mt-12"]}>
               <thead>
                 <tr>
                   <th>Key (full path)</th>

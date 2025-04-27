@@ -178,17 +178,17 @@ export const JsonConverter: FC = () => {
   return (
     <div className={styles.pageWrapper}>
       <h2>JSON Converter</h2>
-      <h4 className={styles["mt-8"]}>1. Upload file*</h4>
+      <h4 className={styles["mt-12"]}>1. Upload file*</h4>
       <div className={styles.optionsWrapper}>
         <FileInput handleChange={uploadFile} accept="application/json" />
         <div>{file && `Current file: ${file.name}`}</div>
       </div>
-      <span className={cx({ hint: 1, "mt-8": 1 })}>
+      <span className={cx({ hint: 1, "mt-6": 1 })}>
         * or fill in the "Current file" field
       </span>
       {fileString && (
         <>
-          <h4 className={styles["mt-8"]}>2. Choose settings</h4>
+          <h4 className={styles["mt-12"]}>2. Choose settings</h4>
           <div className={styles.optionsWrapper}>
             <div className={styles.checksWrapper}>
               <Check

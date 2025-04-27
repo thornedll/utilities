@@ -1,27 +1,29 @@
+@use "../../assets/styles/variables.module";
+
 .select,
 .datePicker {
   border-radius: 4px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: variables.$base-fs;
   max-height: 32px;
   &:hover {
-    border-color: #8a8a8a;
+    border-color: variables.$gray-border;
   }
 }
 
 .datePicker {
-  border: 1px solid hsl(0, 0%, 80%);
+  border: 1px solid variables.$light-border;
   height: 32px;
 }
 
 .btnPrimary,
 .fileInputLabel {
   padding: 4px 8px;
-  background-color: #4cba00;
+  background-color: variables.$green;
   color: ghostwhite;
-  font-size: 16px;
+  font-size: variables.$base-fs;
   &:hover {
-    background-color: #49b000;
+    background-color: variables.$green-hover;
   }
 }
 
@@ -59,15 +61,15 @@
 }
 
 .textInput {
-  width: 160px;
+  width: 156px;
   padding: 4px 8px;
-  font-size: 16px;
-  border: 1px solid hsl(0, 0%, 80%);
+  font-size: variables.$base-fs;
+  border: 1px solid variables.$light-border;
   border-radius: 6px;
   &Label {
     display: flex;
     align-items: center;
-    font-size: 16px;
+    font-size: variables.$base-fs;
   }
 }
 
@@ -75,11 +77,11 @@
   width: 180px;
   padding: 4px 8px;
   font-size: 14px;
-  border: 1px solid hsl(0, 0%, 80%);
+  border: 1px solid variables.$light-border;
   cursor: text;
   &Wrapper {
     display: flex;
-    gap: 8px;
+    gap: variables.$base-gap;
   }
 }
 
@@ -87,9 +89,9 @@ textarea {
   height: 250px;
   width: 100%;
   padding: 4px 8px;
-  font-size: 12px;
+  font-size: variables.$small-fs;
   font-family: monospace;
-  border: 1px solid hsl(0, 0%, 80%);
+  border: 1px solid variables.$light-border;
   background: transparent;
   border-radius: 6px;
   resize: vertical;
@@ -101,19 +103,8 @@ textarea {
   height: 0;
 }
 
-.check {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: fit-content;
-  input[type="checkbox"] {
-    width: 14px;
-    height: 14px;
-  }
-}
-
 .tooltip {
-  font-size: 12px !important;
+  font-size: variables.$small-fs !important;
   padding: 4px 8px !important;
   &::first-letter {
     text-transform: capitalize;
@@ -121,10 +112,18 @@ textarea {
 }
 
 .checkboxContainer {
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  background: variables.$green;
+  border-radius: 8px;
   label {
     margin-right: 8px;
+  }
+  > svg {
+    color: variables.$green;
   }
 }
 
@@ -140,7 +139,7 @@ textarea {
   visibility: hidden;
   &:checked {
     ~ .switchLabel {
-      background: #4cba00;
+      background: variables.$green;
     }
   }
 }
@@ -168,7 +167,6 @@ textarea {
   height: 12px;
   border-radius: 6px;
   transition: 0.2s;
-  background: #fff;
   box-shadow: 0 0 2px 0 rgba(2, 2, 2, 0.3);
 }
 
@@ -191,7 +189,6 @@ textarea {
 }
 
 .arrowsCheckbox:checked ~ .arrowsLabel {
-  background: none;
   transform: rotate(180deg);
 }
 
