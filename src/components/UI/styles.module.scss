@@ -119,11 +119,12 @@ textarea {
   justify-content: center;
   background: variables.$green;
   border-radius: 8px;
+  cursor: pointer;
   label {
     margin-right: 8px;
   }
-  > svg {
-    color: variables.$green;
+  &:hover {
+    background: variables.$green-hover;
   }
 }
 
@@ -137,11 +138,6 @@ textarea {
   height: 0;
   width: 0;
   visibility: hidden;
-  &:checked {
-    ~ .switchLabel {
-      background: variables.$green;
-    }
-  }
 }
 
 .switchLabel,
@@ -181,9 +177,11 @@ textarea {
 
 .arrowsLabel {
   background: none;
-  width: 24px;
-  height: 24px;
+  width: 100%;
+  height: 100%;
   background-image: url("./arrows-left-right.svg") !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
   margin-right: 0 !important;
   transition: transform 0.5s;
 }

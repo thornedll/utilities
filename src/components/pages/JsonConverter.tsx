@@ -250,7 +250,7 @@ export const JsonConverter: FC = () => {
           <h4>Current file</h4>
           <div className={cx({ resultWrapper: 1, "mt-0": 1 })}>
             <TextArea
-              placeholder={placeholders.JsonConverterTextarea}
+              placeholder={placeholders.JsonConverterInputTextarea}
               value={fileString}
               readOnly={false}
               handleChange={handleFileString}
@@ -268,7 +268,11 @@ export const JsonConverter: FC = () => {
         <div className={styles.jsonInputWrapper}>
           <h4>Result</h4>
           <div className={cx({ resultWrapper: 1, "mt-0": 1 })}>
-            <TextArea value={jsonString} readOnly={true} />
+            <TextArea
+              value={jsonString}
+              readOnly={true}
+              placeholder={placeholders.JsonConverterOutputTextarea}
+            />
             <div className={styles.buttonsWrapper}>
               <Button
                 disabled={jsonString === ""}

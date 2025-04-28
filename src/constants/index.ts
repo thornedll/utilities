@@ -30,6 +30,7 @@ export const valueTypes: Option[] = [
 
 export const placeholders = {
   DateConverterUNIXTextInput: "Enter UNIX date",
-  JsonConverterTextarea: "Enter JSON to convert",
+  JsonConverterInputTextarea: "Enter JSON to convert",
+  JsonConverterOutputTextarea: "Here will be the result",
   JsonDiffTextarea: "Enter JSON to compare",
 };

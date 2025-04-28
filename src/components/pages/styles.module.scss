@@ -1,15 +1,12 @@
 @use "../../assets/styles/variables.module";
 @use "../../assets/styles/global.module";
 
-.pageWrapper {
-  padding: 0 16px;
-}
-
 .optionsWrapper {
   display: flex;
   gap: variables.$base-gap;
   margin-top: variables.$base-gap;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .checksWrapper {
@@ -47,13 +44,8 @@
 }
 
 .results {
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
   th,
   td {
-    border: 1px solid variables.$gray-border;
     padding: variables.$base-gap;
     text-align: left;
   }

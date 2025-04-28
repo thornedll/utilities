@@ -91,7 +91,7 @@ export const JsonDiff: FC = () => {
   return (
     <div className={styles.pageWrapper}>
       <h2>JSON Difference</h2>
-      <div className={styles.optionsWrapper}>
+      <div className={cx({ optionsWrapper: 1, "align-start": 1 })}>
         <div className={styles.jsonInputWrapper}>
           <h4>JSON 1</h4>
           <div className={cx({ resultWrapper: 1, "mt-0": 1 })}>
@@ -111,7 +111,7 @@ export const JsonDiff: FC = () => {
             </div>
           </div>
           <div className={cx({ optionsWrapper: 1, "mt-0": 1 })}>
-            or{" "}
+            <p>or </p>
             <FileInput
               handleChange={(e) => handleFileUpload(e, setJson1, setFileName1)}
               accept="application/json"
@@ -138,7 +138,7 @@ export const JsonDiff: FC = () => {
             </div>
           </div>
           <div className={cx({ optionsWrapper: 1, "mt-0": 1 })}>
-            or{" "}
+            <p>or </p>
             <FileInput
               handleChange={(e) => handleFileUpload(e, setJson2, setFileName2)}
               accept="application/json"
@@ -157,9 +157,9 @@ export const JsonDiff: FC = () => {
         {error && <div className={styles.error}>{error}</div>}
       </div>
       <div className={styles.resultWrapper}>
-        {diffs.length > 0 && (
-          <div className={styles.results}>
-            <h3>Differences</h3>
+        <div className={styles.results}>
+          <h3>Differences</h3>
+          {diffs.length > 0 ? (
             <table className={styles["mt-12"]}>
               <thead>
                 <tr>
@@ -197,8 +197,10 @@ export const JsonDiff: FC = () => {
                 ))}
               </tbody>
             </table>
-          </div>
-        )}
+          ) : (
+            <p className={cx({ hint: 1, "mt-6": 1 })}>No difference yet...</p>
+          )}
+        </div>
       </div>
     </div>
   );
