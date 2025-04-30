@@ -1,5 +1,11 @@
 @use "../../assets/styles/variables.module";
 
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: variables.$base-gap;
+}
+
 .nav {
   padding: variables.$base-gap;
   display: flex;

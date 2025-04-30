@@ -29,8 +29,27 @@ export const valueTypes: Option[] = [
 ];
 
 export const placeholders = {
-  DateConverterUNIXTextInput: "Enter UNIX date",
-  JsonConverterInputTextarea: "Enter JSON to convert",
-  JsonConverterOutputTextarea: "Here will be the result",
-  JsonDiffTextarea: "Enter JSON to compare",
+  DateConverter: {
+    UNIXTextInput: "Enter UNIX date",
+  },
+  JsonConverter: {
+    InputTextarea: "Enter JSON to convert",
+    OutputTextarea: "Here will be the result",
+  },
+  JsonDiff: {
+    Textarea: "Enter JSON to compare",
+  },
+};
+
+export const hints = {
+  DateConverter: {
+    Input: "Input",
+    Output: "Output",
+  },
+  JsonConverter: {
+    UploadFile: "* or fill in the field below",
+  },
+  JsonDiff: {
+    NoDifference: "No difference yet...",
+  },
 };

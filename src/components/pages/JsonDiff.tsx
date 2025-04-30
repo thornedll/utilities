@@ -2,7 +2,7 @@ import { useState, FC } from "react";
 import classNames from "classnames/bind";
 import { Button, FileInput, TextArea } from "../UI";
 import { DiffResult } from "../../ts/interfaces/interfaces";
-import { placeholders } from "../../constants";
+import { hints, placeholders } from "../../constants";
 import { setFormattedJson } from "../../utils";
 import styles from "./styles.module.scss";
 
@@ -99,7 +99,7 @@ export const JsonDiff: FC = () => {
               value={json1}
               readOnly={false}
               handleChange={setJson1}
-              placeholder={placeholders.JsonDiffTextarea}
+              placeholder={placeholders.JsonDiff.Textarea}
             />
             <div className={styles.buttonsWrapper}>
               <Button
@@ -126,7 +126,7 @@ export const JsonDiff: FC = () => {
               value={json2}
               readOnly={false}
               handleChange={setJson2}
-              placeholder={placeholders.JsonDiffTextarea}
+              placeholder={placeholders.JsonDiff.Textarea}
             />
             <div className={styles.buttonsWrapper}>
               <Button
@@ -198,7 +198,9 @@ export const JsonDiff: FC = () => {
               </tbody>
             </table>
           ) : (
-            <p className={cx({ hint: 1, "mt-6": 1 })}>No difference yet...</p>
+            <p className={cx({ hint: 1, "mt-6": 1 })}>
+              {hints.JsonDiff.NoDifference}
+            </p>
           )}
         </div>
       </div>

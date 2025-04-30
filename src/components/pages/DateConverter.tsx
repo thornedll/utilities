@@ -7,7 +7,7 @@ import {
   copy,
   getUnixTimeString,
 } from "../../utils";
-import { placeholders, timezones } from "../../constants";
+import { hints, placeholders, timezones } from "../../constants";
 import styles from "./styles.module.scss";
 
 const cx = classNames.bind(styles);
@@ -38,7 +38,7 @@ export const DateConverter: FC = () => {
       <div className={styles.optionsWrapper}>
         <div className={styles.hintWrapper}>
           <p>{toUnix ? "ISO" : "UNIX"}</p>
-          <p className={styles.hint}>Input</p>
+          <p className={styles.hint}>{hints.DateConverter.Input}</p>
         </div>
         <Check
           checked={toUnix}
@@ -48,7 +48,7 @@ export const DateConverter: FC = () => {
         />
         <div className={styles.hintWrapper}>
           <p>{toUnix ? "UNIX" : "ISO"}</p>
-          <p className={styles.hint}>Output</p>
+          <p className={styles.hint}>{hints.DateConverter.Output}</p>
         </div>
       </div>
       {toUnix ? (
@@ -99,7 +99,7 @@ export const DateConverter: FC = () => {
               <TextInput
                 value={unixDate}
                 handleChange={setUnixDate}
-                placeholder={placeholders.DateConverterUNIXTextInput}
+                placeholder={placeholders.DateConverter.UNIXTextInput}
               />
               {unixDate && (
                 <div className={styles.buttonsWrapper}>

@@ -19,14 +19,17 @@ const navigation = [
 
 export const Navigation: FC = () => {
   return (
-    <nav className={styles.nav}>
-      {navigation.map((link, i) => (
-        <div className={styles.navLinkContainer} key={i}>
-          <NavLink to={link.url} className={styles.navLink}>
-            {link.visibleName}
-          </NavLink>
-        </div>
-      ))}
-    </nav>
+    <div className={styles.header}>
+      <h1>Utilities</h1>
+      <nav className={styles.nav}>
+        {navigation.map((link, i) => (
+          <div className={styles.navLinkContainer} key={i}>
+            <NavLink to={link.url} className={styles.navLink}>
+              {link.visibleName}
+            </NavLink>
+          </div>
+        ))}
+      </nav>
+    </div>
   );
 };

@@ -10,7 +10,7 @@ import {
   convertValueToType,
   setFormattedJson,
 } from "../../utils";
-import { emptyKeyValueObject, placeholders } from "../../constants";
+import { emptyKeyValueObject, placeholders, hints } from "../../constants";
 import styles from "./styles.module.scss";
 
 const cx = classNames.bind(styles);
@@ -184,7 +184,7 @@ export const JsonConverter: FC = () => {
         <div>{file && `Current file: ${file.name}`}</div>
       </div>
       <span className={cx({ hint: 1, "mt-6": 1 })}>
-        * or fill in the "Current file" field
+        {hints.JsonConverter.UploadFile}
       </span>
       {fileString && (
         <>
@@ -250,7 +250,7 @@ export const JsonConverter: FC = () => {
           <h4>Current file</h4>
           <div className={cx({ resultWrapper: 1, "mt-0": 1 })}>
             <TextArea
-              placeholder={placeholders.JsonConverterInputTextarea}
+              placeholder={placeholders.JsonConverter.InputTextarea}
               value={fileString}
               readOnly={false}
               handleChange={handleFileString}
@@ -271,7 +271,7 @@ export const JsonConverter: FC = () => {
             <TextArea
               value={jsonString}
               readOnly={true}
-              placeholder={placeholders.JsonConverterOutputTextarea}
+              placeholder={placeholders.JsonConverter.OutputTextarea}
             />
             <div className={styles.buttonsWrapper}>
               <Button
