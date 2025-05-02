@@ -21,14 +21,15 @@
 
 .navLink {
   position: relative;
-  color: #000000;
+  color: variables.$text;
   text-decoration: none;
   &::after {
     content: "";
     background-color: variables.$green;
     width: 0;
   }
-  &:hover {
+  &:hover,
+  &Active {
     &::after {
       content: "";
       display: block;

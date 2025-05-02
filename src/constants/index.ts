@@ -1,5 +1,20 @@
 import { KeyValueChange, Option } from "../ts/types/types";
 
+export const navigation = [
+  {
+    url: "utilities/",
+    visibleName: "Date Converter",
+  },
+  {
+    url: "utilities/jsonConverter",
+    visibleName: "JSON Converter",
+  },
+  {
+    url: "utilities/jsonDiff",
+    visibleName: "JSON Difference",
+  },
+];
+
 export const emptyKeyValueObject: KeyValueChange = {
   key: "",
   value: "",
