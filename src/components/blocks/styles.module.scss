@@ -43,3 +43,22 @@
     }
   }
 }
+
+.wrapper {
+  margin-top: variables.$base-gap;
+  .options {
+    width: fit-content;
+    padding: 8px;
+    background-color: variables.$wrapper-bg;
+    border-radius: variables.$wrapper-radius;
+    border-top-left-radius: 0;
+    &Header {
+      width: fit-content;
+      padding: 4px 8px;
+      background-color: variables.$wrapper-bg;
+      border-top-left-radius: variables.$wrapper-radius;
+      border-top-right-radius: variables.$wrapper-radius;
+      font-weight: 600;
+    }
+  }
+}

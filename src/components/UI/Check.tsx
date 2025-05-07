@@ -14,6 +14,11 @@ export const Check: FC<CheckProps> = ({
   type = "switch",
   handleChange,
 }) => {
+  const containerClasses = cx({
+    checkboxContainer: true,
+    arrowsContainer: type === "arrows",
+  });
+
   const checkboxClasses = cx({
     switchCheckbox: true,
     arrowsCheckbox: type === "arrows",
@@ -31,7 +36,7 @@ export const Check: FC<CheckProps> = ({
 
   return (
     <>
-      <div className={styles.checkboxContainer}>
+      <div className={containerClasses}>
         <input
           type="checkbox"
           checked={checked}

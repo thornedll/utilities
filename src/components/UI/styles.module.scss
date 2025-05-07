@@ -120,13 +120,27 @@ textarea {
 
 .checkboxContainer {
   width: 32px;
-  height: 32px;
+  height: fit-content;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: variables.$green;
+  background: none;
   border-radius: 8px;
   cursor: pointer;
+  label {
+    margin-right: 0;
+  }
+  .switchButton {
+    background: variables.$white;
+  }
+  &:hover {
+    background: none;
+  }
+}
+
+.arrowsContainer {
+  background: variables.$green;
+  height: 32px;
   label {
     margin-right: 8px;
   }
@@ -173,9 +187,14 @@ textarea {
   box-shadow: 0 0 2px 0 rgba(2, 2, 2, 0.3);
 }
 
-.switchCheckbox:checked + .switchLabel .switchButton {
-  left: calc(100% - 2px);
-  transform: translateX(-100%);
+.switchCheckbox:checked + .switchLabel {
+  &:not(.arrowsLabel) {
+    background: variables.$green;
+  }
+  .switchButton {
+    left: calc(100% - 2px);
+    transform: translateX(-100%);
+  }
 }
 
 .switchLabel:active .switchButton {

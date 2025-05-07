@@ -1,6 +1,7 @@
 import { useState, FC } from "react";
 import classNames from "classnames/bind";
 import { Option, BtnType } from "../../ts/types/types";
+import { OptionsWrapper } from "../blocks";
 import { BaseSelect, Button, Check, DateTimePicker, TextInput } from "../UI";
 import {
   changeIsoFromUnixDateTimezone,
@@ -53,26 +54,28 @@ export const DateConverter: FC = () => {
       </div>
       {toUnix ? (
         <>
-          <div className={styles.optionsWrapper}>
-            <DateTimePicker
-              startDate={startDate}
-              changeDate={(date: Date) => setStartDate(date)}
-            />
-            <BaseSelect
-              options={timezones}
-              value={ISOTimezone}
-              handleChange={(timezone: Option) => setISOTimezone(timezone)}
-            />
-            <Button
-              text="Convert"
-              onClick={() =>
-                setText(
-                  startDate && getUnixTimeString(startDate, ISOTimezone.value)
-                )
-              }
-              type="primary"
-            />
-          </div>
+          <OptionsWrapper>
+            <div className={cx({ optionsWrapper: 1, "mt-0": 1 })}>
+              <DateTimePicker
+                startDate={startDate}
+                changeDate={(date: Date) => setStartDate(date)}
+              />
+              <BaseSelect
+                options={timezones}
+                value={ISOTimezone}
+                handleChange={(timezone: Option) => setISOTimezone(timezone)}
+              />
+              <Button
+                text="Convert"
+                onClick={() =>
+                  setText(
+                    startDate && getUnixTimeString(startDate, ISOTimezone.value)
+                  )
+                }
+                type="primary"
+              />
+            </div>
+          </OptionsWrapper>
           <div
             className={styles.resultWrapper}
             style={{ width: "fit-content" }}
@@ -94,26 +97,28 @@ export const DateConverter: FC = () => {
         </>
       ) : (
         <>
-          <div className={styles.optionsWrapper}>
-            <div style={{ position: "relative" }}>
-              <TextInput
-                value={unixDate}
-                handleChange={setUnixDate}
-                placeholder={placeholders.DateConverter.UNIXTextInput}
+          <OptionsWrapper>
+            <div className={cx({ optionsWrapper: 1, "mt-0": 1 })}>
+              <div style={{ position: "relative" }}>
+                <TextInput
+                  value={unixDate}
+                  handleChange={setUnixDate}
+                  placeholder={placeholders.DateConverter.UNIXTextInput}
+                />
+                {unixDate && (
+                  <div className={styles.buttonsWrapper}>
+                    <Button type="delete" onClick={() => setUnixDate("")} />
+                  </div>
+                )}
+              </div>
+              <Button
+                text="Convert"
+                disabled={!unixDate}
+                type="primary"
+                onClick={() => convertUnixToIsoDate()}
               />
-              {unixDate && (
-                <div className={styles.buttonsWrapper}>
-                  <Button type="delete" onClick={() => setUnixDate("")} />
-                </div>
-              )}
             </div>
-            <Button
-              text="Convert"
-              disabled={!unixDate}
-              type="primary"
-              onClick={() => convertUnixToIsoDate()}
-            />
-          </div>
+          </OptionsWrapper>
           <div
             className={styles.resultWrapper}
             style={{ width: "fit-content" }}

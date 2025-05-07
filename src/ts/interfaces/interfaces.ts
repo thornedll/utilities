@@ -1,4 +1,9 @@
-import { ChangeEvent, CSSProperties, InputHTMLAttributes } from "react";
+import {
+  ChangeEvent,
+  CSSProperties,
+  InputHTMLAttributes,
+  ReactNode,
+} from "react";
 import { BtnType, Option, ValueType } from "../types/types";
 import { PlacesType } from "react-tooltip";
 
@@ -83,4 +88,9 @@ export interface BaseTooltipProps {
   id: string;
   text: string;
   place?: PlacesType;
+}
+
+export interface OptionsWrapperProps {
+  headerText?: string;
+  children?: ReactNode;
 }
