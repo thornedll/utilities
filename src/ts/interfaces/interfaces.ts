@@ -8,6 +8,7 @@ import { BtnType, Option, ValueType } from "../types/types";
 import { PlacesType } from "react-tooltip";
 
 export interface BaseSelectProps {
+  disabled?: boolean;
   options: Option[];
   value: Option;
   handleChange: (value: Option) => void;
@@ -17,6 +18,7 @@ export interface ButtonProps {
   text?: string;
   disabled?: boolean;
   type: BtnType;
+  tooltipText?: string | ReactNode;
   tooltipPlace?: PlacesType;
   onClick: () => void;
 }
@@ -86,11 +88,19 @@ export interface DoubleInputProps extends TextInputProps {
 
 export interface BaseTooltipProps {
   id: string;
-  text: string;
   place?: PlacesType;
+  children: ReactNode;
 }
 
 export interface OptionsWrapperProps {
   headerText?: string;
+  helpText?: string;
   children?: ReactNode;
+}
+
+export interface SVGSpriteProps {
+  id: string;
+  width?: string;
+  height?: string;
+  fill?: string;
 }

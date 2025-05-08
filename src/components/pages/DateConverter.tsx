@@ -1,8 +1,8 @@
 import { useState, FC } from "react";
 import classNames from "classnames/bind";
 import { Option, BtnType } from "../../ts/types/types";
-import { OptionsWrapper } from "../blocks";
 import { BaseSelect, Button, Check, DateTimePicker, TextInput } from "../UI";
+import { OptionsWrapper } from "../blocks";
 import {
   changeIsoFromUnixDateTimezone,
   copy,
@@ -54,7 +54,7 @@ export const DateConverter: FC = () => {
       </div>
       {toUnix ? (
         <>
-          <OptionsWrapper>
+          <OptionsWrapper helpText={hints.DateConverter.ISOToUnixHelp}>
             <div className={cx({ optionsWrapper: 1, "mt-0": 1 })}>
               <DateTimePicker
                 startDate={startDate}
@@ -97,7 +97,7 @@ export const DateConverter: FC = () => {
         </>
       ) : (
         <>
-          <OptionsWrapper>
+          <OptionsWrapper helpText={hints.DateConverter.UnixToISOHelp}>
             <div className={cx({ optionsWrapper: 1, "mt-0": 1 })}>
               <div style={{ position: "relative" }}>
                 <TextInput
@@ -144,6 +144,7 @@ export const DateConverter: FC = () => {
               </div>
             </div>
             <BaseSelect
+              disabled={!isoFromUnixDate}
               options={timezones}
               value={UNIXTimezone}
               handleChange={

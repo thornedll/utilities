@@ -49,7 +49,7 @@ export const placeholders = {
   },
   JsonConverter: {
     InputTextarea: "Enter JSON to convert",
-    OutputTextarea: "Here will be the result",
+    OutputTextarea: "Result will appear here",
   },
   JsonDiff: {
     Textarea: "Enter JSON to compare",
@@ -60,6 +60,10 @@ export const hints = {
   DateConverter: {
     Input: "Input",
     Output: "Output",
+    ISOToUnixHelp:
+      "<p>Enter ISO date to convert to UNIX timestamp</p><p>By default is chosen current date</p>",
+    UnixToISOHelp:
+      "<p>Enter UNIX timestamp to convert to ISO date</p><p>Changing timezone will modify the result date</p>",
   },
   JsonConverter: {
     UploadFile: "* or fill in the field below",

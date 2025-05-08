@@ -33,6 +33,7 @@ const selectStyles: StylesConfig = {
 };
 
 export const BaseSelect: FC<BaseSelectProps> = ({
+  disabled = false,
   options,
   value,
   handleChange,
@@ -44,6 +45,7 @@ export const BaseSelect: FC<BaseSelectProps> = ({
       className={styles.select}
       value={value}
       onChange={(value: any) => handleChange(value)}
+      isDisabled={disabled}
     ></Select>
   );
 };

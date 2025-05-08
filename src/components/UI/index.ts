@@ -7,3 +7,4 @@ export { FileInput } from "./FileInput";
 export { TextArea } from "./TextArea";
 export { TextInput } from "./TextInput";
 export { BaseTooltip } from "./BaseTooltip";
+export { SVGSprite } from "./SVGSprite";

@@ -175,16 +175,23 @@ textarea {
   transition: background-color 0.2s;
 }
 
-.switchLabel .switchButton {
-  content: "";
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 12px;
-  height: 12px;
-  border-radius: 6px;
-  transition: 0.2s;
-  box-shadow: 0 0 2px 0 rgba(2, 2, 2, 0.3);
+.switchLabel {
+  .switchButton {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    transition: 0.2s;
+    box-shadow: 0 0 2px 0 rgba(2, 2, 2, 0.3);
+  }
+  &:active {
+    .switchButton {
+      width: 32px;
+    }
+  }
 }
 
 .switchCheckbox:checked + .switchLabel {
@@ -195,10 +202,6 @@ textarea {
     left: calc(100% - 2px);
     transform: translateX(-100%);
   }
-}
-
-.switchLabel:active .switchButton {
-  width: 32px;
 }
 
 .arrowsLabel {
