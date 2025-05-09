@@ -33,6 +33,9 @@
   height: 32px;
   border-radius: 6px;
   cursor: pointer;
+  svg {
+    margin-left: 8px;
+  }
 }
 
 .btnPrimary {
@@ -51,11 +54,15 @@
   &:hover {
     color: variables.$text;
   }
+  &:disabled {
+    background-color: transparent;
+    color: variables.$disabled-btn;
+  }
 }
 
 .btnControl {
   &:hover {
-    background-color: hsl(0, 0%, 95%);
+    background-color: variables.$disabled-bg;
     border-radius: 6px;
   }
 }

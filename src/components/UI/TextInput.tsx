@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, ChangeEvent } from "react";
 import { TextInputProps } from "../../ts/interfaces/interfaces";
 import styles from "./styles.module.scss";
 
@@ -23,7 +23,7 @@ export const TextInput: FC<TextInputProps> = ({
       <input
         type="text"
         placeholder={placeholder}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
           handleChange(e.target.value)
         }
         value={value}

@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { FileInputProps } from "../../ts/interfaces/interfaces";
 import styles from "./styles.module.scss";
+import { SVGSprite } from "./SVGSprite";
 
 export const FileInput: FC<FileInputProps> = ({
   id,
@@ -13,6 +14,7 @@ export const FileInput: FC<FileInputProps> = ({
     <>
       <label htmlFor={id} className={styles.fileInputLabel}>
         {labelText}
+        {accept === "application/json" && <SVGSprite id="json" />}
         <input
           type="file"
           accept={accept}

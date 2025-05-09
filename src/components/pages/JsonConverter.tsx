@@ -247,7 +247,12 @@ export const JsonConverter: FC = () => {
       )}
       <div className={styles.optionsWrapper}>
         <div className={styles.jsonInputWrapper}>
-          <h4>Current file</h4>
+          <div className={styles.headerWrapper}>
+            <h4>Current file</h4>
+            {fileString && (
+              <p className={styles.hint}>{fileString.length} chars</p>
+            )}
+          </div>
           <div className={cx({ resultWrapper: 1, "mt-0": 1 })}>
             <TextArea
               placeholder={placeholders.JsonConverter.InputTextarea}
@@ -266,7 +271,12 @@ export const JsonConverter: FC = () => {
           </div>
         </div>
         <div className={styles.jsonInputWrapper}>
-          <h4>Result</h4>
+          <div className={styles.headerWrapper}>
+            <h4>Result</h4>
+            {jsonString && (
+              <p className={styles.hint}>{jsonString.length} chars</p>
+            )}
+          </div>
           <div className={cx({ resultWrapper: 1, "mt-0": 1 })}>
             <TextArea
               value={jsonString}

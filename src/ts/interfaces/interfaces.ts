@@ -100,6 +100,7 @@ export interface OptionsWrapperProps {
 
 export interface SVGSpriteProps {
   id: string;
+  viewBox?: string;
   width?: string;
   height?: string;
   fill?: string;

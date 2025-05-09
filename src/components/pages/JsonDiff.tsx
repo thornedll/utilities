@@ -93,7 +93,10 @@ export const JsonDiff: FC = () => {
       <h2>JSON Difference</h2>
       <div className={cx({ optionsWrapper: 1, "align-start": 1 })}>
         <div className={styles.jsonInputWrapper}>
-          <h4>JSON 1</h4>
+          <div className={styles.headerWrapper}>
+            <h4>JSON 1</h4>
+            {json1 && <p className={styles.hint}>{json1.length} chars</p>}
+          </div>
           <div className={cx({ resultWrapper: 1, "mt-0": 1 })}>
             <TextArea
               value={json1}
@@ -120,7 +123,10 @@ export const JsonDiff: FC = () => {
           </div>
         </div>
         <div className={styles.jsonInputWrapper}>
-          <h4>JSON 2</h4>
+          <div className={styles.headerWrapper}>
+            <h4>JSON 2</h4>
+            {json2 && <p className={styles.hint}>{json2.length} chars</p>}
+          </div>
           <div className={cx({ resultWrapper: 1, "mt-0": 1 })}>
             <TextArea
               value={json2}
