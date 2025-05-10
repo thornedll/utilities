@@ -64,15 +64,16 @@ export const hints = {
     Input: "Input",
     Output: "Output",
     ISOToUnixHelp:
-      "<p>Enter ISO date to convert to UNIX timestamp</p><p>Current date and time are chosen by default</p>",
+      "<p>Choose date and time with timezone to convert to UNIX timestamp</p><p>Current date and time are chosen by default</p>",
     UnixToISOHelp:
-      "<p>Enter UNIX timestamp to convert to ISO date</p><p>Changing timezone will modify the result date and time</p>",
+      "<p>Enter UNIX timestamp to convert to ISO 8601 formatted date</p><p>Changing timezone will modify the result date and time</p>",
   },
   JsonConverter: {
     UploadFile: "* or fill in the field below",
   },
   JsonDiff: {
     NoDifference: "No difference yet...",
+    ParsingError: "Parsing JSON Error!",
   },
 };
 

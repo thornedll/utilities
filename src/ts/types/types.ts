@@ -7,7 +7,8 @@ export type BtnType =
   | "remove"
   | "format"
   | "delete"
-  | "help";
+  | "help"
+  | "update";
 
 export type ValueType = "string" | "number" | "boolean";
 

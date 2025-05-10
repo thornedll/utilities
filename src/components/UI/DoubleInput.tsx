@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { BaseSelect, Button } from "./";
+import { Option } from "../../ts/types/types";
 import { DoubleInputProps } from "../../ts/interfaces/interfaces";
 import { valueTypes, baseValueTypes } from "../../constants";
 import styles from "./styles.module.scss";
-import { Option } from "../../ts/types/types";
 
 export const DoubleInput: FC<DoubleInputProps> = ({
   numberKey,
@@ -33,20 +33,31 @@ export const DoubleInput: FC<DoubleInputProps> = ({
     <div className={styles.doubleInputWrapper}>
       <input
         type="text"
+        disabled={disabled}
         placeholder={placeholder}
         value={value}
         onChange={(e) => handleKeyChange(numberKey - 1, e.target.value)}
         className={styles.doubleInput}
-        disabled={disabled}
       />
-      <input
-        type={inputType}
-        placeholder={secondPlaceholder}
-        value={secondValue}
-        onChange={(e) => handleValueChange(numberKey - 1, e.target.value)}
-        className={styles.doubleInput}
-        disabled={disabled || !baseValueTypes.includes(selectValue)}
-      />
+      <div className={styles.singleInputWrapper}>
+        <input
+          type={inputType}
+          disabled={disabled || !baseValueTypes.includes(selectValue)}
+          placeholder={secondPlaceholder}
+          value={secondValue}
+          onChange={(e) => handleValueChange(numberKey - 1, e.target.value)}
+          className={styles.doubleInput}
+        />
+        {!baseValueTypes.includes(selectValue) && (
+          <div className={styles.buttonsWrapper}>
+            <Button
+              type="update"
+              tooltipPlace="top"
+              onClick={() => handleSelectChange(value)}
+            />
+          </div>
+        )}
+      </div>
       <BaseSelect
         options={valueTypes}
         value={getValue()}

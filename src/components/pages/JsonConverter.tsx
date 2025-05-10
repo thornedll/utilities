@@ -17,6 +17,7 @@ import {
   baseValueTypes,
 } from "../../constants";
 import styles from "./styles.module.scss";
+import { rndRegNumber } from "../../utils/randoms";
 
 const cx = classNames.bind(styles);
 
@@ -74,8 +75,11 @@ export const JsonConverter: FC = () => {
   const handleTypeChange = (itemKey: number, type: ValueType) => {
     if (keyValueChanges.length > 0) {
       const newKeyValueChanges = [...keyValueChanges];
+      const currentType = newKeyValueChanges[itemKey].type;
       newKeyValueChanges[itemKey].type = type;
       if (!baseValueTypes.includes(type)) {
+        newKeyValueChanges[itemKey].value = rndRegNumber();
+      } else if (!baseValueTypes.includes(currentType)) {
         newKeyValueChanges[itemKey].value = "";
       }
       setKeyValueChanges(newKeyValueChanges);
@@ -197,11 +201,11 @@ export const JsonConverter: FC = () => {
                 handleChange={toggleKeyValueChange}
               />
               <ul className={styles.keyValueInputs}>
-                {keyValueChanges.map((element, key) => {
+                {keyValueChanges.map((element, index) => {
                   return (
-                    <li key={key}>
+                    <li key={index}>
                       <DoubleInput
-                        numberKey={key + 1}
+                        numberKey={index + 1}
                         value={element.key}
                         secondValue={element.value}
                         selectValue={element.type}
@@ -222,9 +226,7 @@ export const JsonConverter: FC = () => {
           <div className={styles.optionsWrapper}>
             <Button
               text="Convert"
-              disabled={
-                fileString && (isCaseChange || isKeyValueChange) ? false : true
-              }
+              disabled={!(fileString && (isCaseChange || isKeyValueChange))}
               type="primary"
               onClick={
                 file

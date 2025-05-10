@@ -117,6 +117,14 @@ tr {
   }
 }
 
+.buttonsWrapper {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 @each $mt in variables.$margins-top {
   .mt-#{$mt} {
     margin-top: $mt + px !important;

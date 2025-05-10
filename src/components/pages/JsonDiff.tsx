@@ -67,7 +67,7 @@ export const JsonDiff: FC = () => {
       compareObjects(obj1, obj2);
       setDiffs(differences);
     } catch (err) {
-      setError("Error parsing JSON");
+      setError(hints.JsonDiff.ParsingError);
       console.error(err);
     }
   };
@@ -192,12 +192,12 @@ export const JsonDiff: FC = () => {
                     <td>
                       {diff.value1 !== undefined
                         ? JSON.stringify(diff.value1)
-                        : "—"}
+                        : ""}
                     </td>
                     <td>
                       {diff.value2 !== undefined
                         ? JSON.stringify(diff.value2)
-                        : "—"}
+                        : ""}
                     </td>
                   </tr>
                 ))}
