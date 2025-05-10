@@ -10,21 +10,29 @@ import {
   convertValueToType,
   setFormattedJson,
 } from "../../utils";
-import { emptyKeyValueObject, placeholders, hints } from "../../constants";
+import {
+  emptyKeyValueObject,
+  placeholders,
+  hints,
+  baseValueTypes,
+} from "../../constants";
 import styles from "./styles.module.scss";
 
 const cx = classNames.bind(styles);
 
 export const JsonConverter: FC = () => {
+  // Global states
   const [file, setFile] = useState<File>();
+  const [btnType, setBtnType] = useState<BtnType>("copy");
+  // Settings states
   const [isCaseChange, setIsCaseChange] = useState<boolean>(false);
   const [isKeyValueChange, setIsKeyValueChange] = useState<boolean>(false);
+  // Output states
   const [keyValueChanges, setKeyValueChanges] = useState<KeyValueChange[] | []>(
     []
   );
   const [fileString, setFileString] = useState<string>("");
   const [jsonString, setJsonString] = useState<string>("");
-  const [btnType, setBtnType] = useState<BtnType>("copy");
 
   const handleCaseChange = (state: boolean) => {
     setIsCaseChange(state);
@@ -49,42 +57,27 @@ export const JsonConverter: FC = () => {
 
   const handleKeyChange = (itemKey: number, key: string) => {
     if (keyValueChanges.length > 0) {
-      const newKeyValueChanges = keyValueChanges.map((i, k) => {
-        if (k === itemKey) {
-          return {
-            ...i,
-            key: key,
-          };
-        } else return i;
-      });
+      const newKeyValueChanges = [...keyValueChanges];
+      newKeyValueChanges[itemKey].key = key;
       setKeyValueChanges(newKeyValueChanges);
     }
   };
 
   const handleValueChange = (itemKey: number, value: string) => {
     if (keyValueChanges.length > 0) {
-      const newKeyValueChanges = keyValueChanges.map((i, k) => {
-        if (k === itemKey) {
-          return {
-            ...i,
-            value: value,
-          };
-        } else return i;
-      });
+      const newKeyValueChanges = [...keyValueChanges];
+      newKeyValueChanges[itemKey].value = value;
       setKeyValueChanges(newKeyValueChanges);
     }
   };
 
   const handleTypeChange = (itemKey: number, type: ValueType) => {
     if (keyValueChanges.length > 0) {
-      const newKeyValueChanges = keyValueChanges.map((i, k) => {
-        if (k === itemKey) {
-          return {
-            ...i,
-            type: type,
-          };
-        } else return i;
-      });
+      const newKeyValueChanges = [...keyValueChanges];
+      newKeyValueChanges[itemKey].type = type;
+      if (!baseValueTypes.includes(type)) {
+        newKeyValueChanges[itemKey].value = "";
+      }
       setKeyValueChanges(newKeyValueChanges);
     }
   };
@@ -204,23 +197,25 @@ export const JsonConverter: FC = () => {
                 handleChange={toggleKeyValueChange}
               />
               <ul className={styles.keyValueInputs}>
-                {keyValueChanges.map((element, key) => (
-                  <li key={key}>
-                    <DoubleInput
-                      numberKey={key + 1}
-                      value={element.key}
-                      secondValue={element.value}
-                      selectValue={element.type}
-                      placeholder="Key (full path)"
-                      secondPlaceholder="New value"
-                      handleKeyChange={handleKeyChange}
-                      handleValueChange={handleValueChange}
-                      handleTypeChange={handleTypeChange}
-                      addInputs={addKeyValueChange}
-                      removeInputs={removeKeyValueChange}
-                    />
-                  </li>
-                ))}
+                {keyValueChanges.map((element, key) => {
+                  return (
+                    <li key={key}>
+                      <DoubleInput
+                        numberKey={key + 1}
+                        value={element.key}
+                        secondValue={element.value}
+                        selectValue={element.type}
+                        placeholder="Key (full path)"
+                        secondPlaceholder="New value"
+                        handleKeyChange={handleKeyChange}
+                        handleValueChange={handleValueChange}
+                        handleTypeChange={handleTypeChange}
+                        addInputs={addKeyValueChange}
+                        removeInputs={removeKeyValueChange}
+                      />
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </div>

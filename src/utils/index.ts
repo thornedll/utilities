@@ -89,6 +89,8 @@ export const convertValueToType = (value: string, type: string) => {
         : value === "false"
         ? false
         : Boolean(value);
+    case "rndRuGrz":
+      return value;
     default:
       return value;
   }

@@ -6,6 +6,7 @@
   cursor: pointer;
   font-size: variables.$base-fs;
   max-height: 32px;
+  transition: border-color variables.$base-transition;
   &:hover {
     border-color: variables.$gray-border;
   }
@@ -22,6 +23,7 @@
   background-color: variables.$green;
   color: ghostwhite;
   font-size: variables.$base-fs;
+  transition: background-color variables.$base-transition;
   &:hover {
     background-color: variables.$green-hover;
   }
@@ -51,6 +53,7 @@
   padding: 4px 8px;
   background-color: transparent;
   color: rgb(70, 70, 70);
+  transition: color variables.$base-transition;
   &:hover {
     color: variables.$text;
   }
@@ -61,9 +64,10 @@
 }
 
 .btnControl {
+  border-radius: 6px;
+  transition: background-color variables.$base-transition;
   &:hover {
     background-color: variables.$disabled-bg;
-    border-radius: 6px;
   }
 }
 
@@ -97,7 +101,7 @@ textarea {
   width: 100%;
   padding: 4px 8px;
   font-size: variables.$small-fs;
-  font-family: monospace;
+  font-family: variables.$font-textarea;
   border: 1px solid variables.$light-border;
   background: transparent;
   border-radius: 6px;
@@ -134,6 +138,7 @@ textarea {
   background: none;
   border-radius: 8px;
   cursor: pointer;
+  transition: background variables.$base-transition;
   label {
     margin-right: 0;
   }
@@ -148,6 +153,7 @@ textarea {
 .arrowsContainer {
   background: variables.$green;
   height: 32px;
+  transition: background variables.$base-transition;
   label {
     margin-right: 8px;
   }

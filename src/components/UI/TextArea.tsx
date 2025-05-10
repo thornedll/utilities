@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useRef, ChangeEvent, KeyboardEvent } from "react";
 import { TextAreaProps } from "../../ts/interfaces/interfaces";
 import styles from "./styles.module.scss";
 
@@ -11,6 +11,28 @@ export const TextArea: FC<TextAreaProps> = ({
   readOnly = false,
   handleChange = () => {},
 }) => {
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Tab") {
+      e.preventDefault();
+      const textarea = textareaRef.current;
+      if (!textarea) return;
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const newValue =
+        value?.toString().substring(0, start) +
+        "  " +
+        value?.toString().substring(end);
+      handleChange(newValue);
+      setTimeout(() => {
+        if (textarea) {
+          textarea.selectionStart = textarea.selectionEnd = start + 2;
+        }
+      }, 0);
+    }
+  };
+
   return (
     <>
       <label
@@ -22,8 +44,9 @@ export const TextArea: FC<TextAreaProps> = ({
         {labelText}
       </label>
       <textarea
+        ref={textareaRef}
         placeholder={placeholder}
-        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+        onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
           handleChange(e.target.value)
         }
         value={value}
@@ -31,11 +54,7 @@ export const TextArea: FC<TextAreaProps> = ({
         disabled={disabled}
         id={id}
         readOnly={readOnly}
-        onKeyDown={(e) => {
-          if (e.key === "Tab") {
-            e.preventDefault()
-          };
-        }}
+        onKeyDown={handleKeyDown}
       />
     </>
   );

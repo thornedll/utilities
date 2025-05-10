@@ -19,5 +19,5 @@ export type KeyValueChange = {
 
 export type Option = {
   label: string;
-  value: string;
+  value: string | ValueType;
 };

@@ -38,7 +38,7 @@ export const Button: FC<ButtonProps> = ({
           />
         )}
       </button>
-      {type !== "primary" && (
+      {type !== "primary" && !disabled && (
         <BaseTooltip id={type} place={tooltipPlace}>
           {tooltipText ? tooltipText : type}
         </BaseTooltip>

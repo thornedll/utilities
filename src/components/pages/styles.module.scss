@@ -18,7 +18,12 @@
 .checksWrapper {
   display: flex;
   flex-direction: column;
-  gap: variables.$base-gap;
+  > :not(div:last-of-type, ul) {
+    margin-bottom: 12px;
+  }
+  ul:has(li) {
+    margin-top: 12px;
+  }
 }
 
 .resultWrapper {

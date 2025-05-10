@@ -10,7 +10,8 @@ import { PlacesType } from "react-tooltip";
 export interface BaseSelectProps {
   disabled?: boolean;
   options: Option[];
-  value: Option;
+  value?: Option;
+  width?: string | number;
   handleChange: (value: Option) => void;
 }
 

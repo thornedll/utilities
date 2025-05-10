@@ -1,8 +1,9 @@
 import { FC } from "react";
 import { BaseSelect, Button } from "./";
 import { DoubleInputProps } from "../../ts/interfaces/interfaces";
-import { valueTypes } from "../../constants";
+import { valueTypes, baseValueTypes } from "../../constants";
 import styles from "./styles.module.scss";
+import { Option } from "../../ts/types/types";
 
 export const DoubleInput: FC<DoubleInputProps> = ({
   numberKey,
@@ -20,6 +21,14 @@ export const DoubleInput: FC<DoubleInputProps> = ({
 }) => {
   const inputType = selectValue === "number" ? selectValue : "text";
 
+  const handleSelectChange = (valueType: any) => {
+    handleTypeChange(numberKey - 1, valueType.value);
+  };
+
+  const getValue = (): Option | undefined => {
+    return valueTypes.find((i) => i.value === selectValue);
+  };
+
   return (
     <div className={styles.doubleInputWrapper}>
       <input
@@ -36,16 +45,13 @@ export const DoubleInput: FC<DoubleInputProps> = ({
         value={secondValue}
         onChange={(e) => handleValueChange(numberKey - 1, e.target.value)}
         className={styles.doubleInput}
-        disabled={disabled}
+        disabled={disabled || !baseValueTypes.includes(selectValue)}
       />
       <BaseSelect
         options={valueTypes}
-        value={
-          valueTypes.filter((i) => (i.value === selectValue ? true : false))[0]
-        }
-        handleChange={(valueType: any) =>
-          handleTypeChange(numberKey - 1, valueType.value)
-        }
+        value={getValue()}
+        width="180px"
+        handleChange={handleSelectChange}
       />
       <Button type="add" onClick={addInputs} />
       <Button type="remove" onClick={() => removeInputs(numberKey - 1)} />
