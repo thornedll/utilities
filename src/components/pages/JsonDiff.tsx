@@ -1,4 +1,4 @@
-import { useState, FC } from "react";
+import { useState, FC, Dispatch, ChangeEvent, SetStateAction } from "react";
 import classNames from "classnames/bind";
 import { Button, FileInput, TextArea } from "../UI";
 import { DiffResult } from "../../ts/interfaces/interfaces";
@@ -73,9 +73,9 @@ export const JsonDiff: FC = () => {
   };
 
   const handleFileUpload = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    contentSetter: React.Dispatch<React.SetStateAction<string>>,
-    fileNameSetter: React.Dispatch<React.SetStateAction<string>>
+    e: ChangeEvent<HTMLInputElement>,
+    contentSetter: Dispatch<SetStateAction<string>>,
+    fileNameSetter: Dispatch<SetStateAction<string>>
   ) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -86,6 +86,15 @@ export const JsonDiff: FC = () => {
       contentSetter(content);
     };
     reader.readAsText(file);
+  };
+
+  const clearJson = (
+    fileName: string,
+    contentSetter: Dispatch<SetStateAction<string>>,
+    fileNameSetter: Dispatch<SetStateAction<string>>
+  ): void => {
+    contentSetter("");
+    fileName && fileNameSetter("");
   };
 
   return (
@@ -110,6 +119,12 @@ export const JsonDiff: FC = () => {
                 type="format"
                 tooltipPlace="left"
                 onClick={() => setFormattedJson(json1, setJson1)}
+              />
+              <Button
+                disabled={!json1}
+                type="delete"
+                tooltipPlace="left"
+                onClick={() => clearJson(fileName1, setJson1, setFileName1)}
               />
             </div>
           </div>
@@ -141,6 +156,12 @@ export const JsonDiff: FC = () => {
                 tooltipPlace="left"
                 onClick={() => setFormattedJson(json2, setJson2)}
               />
+              <Button
+                disabled={!json2}
+                type="delete"
+                tooltipPlace="left"
+                onClick={() => clearJson(fileName2, setJson2, setFileName2)}
+              />
             </div>
           </div>
           <div className={cx({ optionsWrapper: 1, "mt-0": 1 })}>
@@ -157,7 +178,7 @@ export const JsonDiff: FC = () => {
         <Button
           type="primary"
           onClick={compareJson}
-          text="Compare"
+          text={hints.Global.CompareFiles}
           disabled={json1 && json2 ? false : true}
         />
         {error && <div className={styles.error}>{error}</div>}

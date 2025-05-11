@@ -172,6 +172,15 @@ export const JsonConverter: FC = () => {
     }
   };
 
+  const clearStrings = (): void => {
+    if (fileString) {
+      setFileString("");
+      setFile(undefined);
+    } else if (jsonString) {
+      setJsonString("");
+    }
+  };
+
   return (
     <div className={styles.pageWrapper}>
       <h2>JSON Converter</h2>
@@ -225,7 +234,7 @@ export const JsonConverter: FC = () => {
           </div>
           <div className={styles.optionsWrapper}>
             <Button
-              text="Convert"
+              text={hints.Global.ConvertFile}
               disabled={!(fileString && (isCaseChange || isKeyValueChange))}
               type="primary"
               onClick={
@@ -238,6 +247,13 @@ export const JsonConverter: FC = () => {
                         fileString
                       )
               }
+            />
+            <Button
+              text="Clear"
+              disabled={!(fileString || jsonString)}
+              type="primary"
+              subType={["clear"]}
+              onClick={clearStrings}
             />
           </div>
         </>

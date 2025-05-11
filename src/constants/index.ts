@@ -60,6 +60,11 @@ export const placeholders = {
 };
 
 export const hints = {
+  Global: {
+    UploadFile: "Choose file",
+    CompareFiles: "Compare",
+    ConvertFile: "Convert",
+  },
   DateConverter: {
     Input: "Input",
     Output: "Output",

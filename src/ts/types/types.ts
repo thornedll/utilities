@@ -1,14 +1,16 @@
 export type BtnType =
+  | "primary"
   | "copy"
   | "download"
   | "success"
-  | "primary"
   | "add"
   | "remove"
   | "format"
   | "delete"
   | "help"
   | "update";
+
+export type BtnSubType = "outline" | "clear";
 
 export type ValueType = "string" | "number" | "boolean";
 

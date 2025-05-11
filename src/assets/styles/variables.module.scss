@@ -9,8 +9,9 @@ $green-hover: #49b000;
 $green-light: #e6ffe6;
 $light-border: hsl(0, 0%, 80%);
 $outline: #2684ff;
-$red: red;
+$red: #ff4d4f;
 $red-light: #ffe6e6;
+$red-dark: #f90003;
 $text: #202020;
 $yellow-light: #fff9e6;
 $white: #ffffff;
@@ -22,6 +23,8 @@ $small-fs: 12px;
 $base-gap: 12px;
 $table-radius: 6px;
 $wrapper-radius: 8px;
+$base-shadow: 0 0 2px 0 rgba(1, 1, 1, 0.1);
+$large-shadow: 0 0 4px 0 rgba(1, 1, 1, 0.2);
 $margins-top: 0 6 12;
 
 // fonts

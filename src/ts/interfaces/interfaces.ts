@@ -4,7 +4,7 @@ import {
   InputHTMLAttributes,
   ReactNode,
 } from "react";
-import { BtnType, Option, ValueType } from "../types/types";
+import { BtnSubType, BtnType, Option, ValueType } from "../types/types";
 import { PlacesType } from "react-tooltip";
 
 export interface BaseSelectProps {
@@ -19,6 +19,7 @@ export interface ButtonProps {
   text?: string;
   disabled?: boolean;
   type: BtnType;
+  subType?: BtnSubType[];
   tooltipText?: string | ReactNode;
   tooltipPlace?: PlacesType;
   onClick: () => void;

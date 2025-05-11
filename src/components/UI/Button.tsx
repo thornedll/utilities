@@ -10,6 +10,7 @@ export const Button: FC<ButtonProps> = ({
   text = "",
   disabled = false,
   type,
+  subType,
   tooltipText,
   tooltipPlace = "top",
   onClick,
@@ -18,6 +19,8 @@ export const Button: FC<ButtonProps> = ({
     btnPrimary: type === "primary",
     btnIcon: type !== "primary",
     btnControl: type === "add" || type === "remove",
+    btnOutline: subType?.includes("outline"),
+    btnClear: subType?.includes("clear"),
   });
 
   return (

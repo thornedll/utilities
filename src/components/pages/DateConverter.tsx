@@ -66,7 +66,7 @@ export const DateConverter: FC = () => {
                 handleChange={(timezone: Option) => setISOTimezone(timezone)}
               />
               <Button
-                text="Convert"
+                text={hints.Global.ConvertFile}
                 onClick={() =>
                   setText(
                     startDate && getUnixTimeString(startDate, ISOTimezone.value)

@@ -2,10 +2,11 @@ import { FC } from "react";
 import { FileInputProps } from "../../ts/interfaces/interfaces";
 import styles from "./styles.module.scss";
 import { SVGSprite } from "./SVGSprite";
+import { hints } from "../../constants";
 
 export const FileInput: FC<FileInputProps> = ({
   id,
-  labelText = "Choose file",
+  labelText = hints.Global.UploadFile,
   disabled = false,
   accept,
   handleChange,

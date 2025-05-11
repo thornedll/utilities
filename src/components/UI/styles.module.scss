@@ -1,12 +1,19 @@
 @use "../../assets/styles/variables.module";
-@use "../../assets/styles/global.module";
+
+.buttonsWrapper {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 
 .select,
 .datePicker {
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   font-size: variables.$base-fs;
   max-height: 32px;
+  box-shadow: variables.$base-shadow;
   transition: border-color variables.$base-transition;
   &:hover {
     border-color: variables.$gray-border;
@@ -24,6 +31,7 @@
   background-color: variables.$green;
   color: ghostwhite;
   font-size: variables.$base-fs;
+  box-shadow: variables.$base-shadow;
   transition: background-color variables.$base-transition;
   &:hover {
     background-color: variables.$green-hover;
@@ -41,10 +49,37 @@
   }
 }
 
-.btnPrimary {
-  &:disabled {
-    background-color: #a9a9a9;
-    cursor: not-allowed;
+.btn {
+  &Primary {
+    &:disabled {
+      background-color: #a9a9a9;
+      cursor: not-allowed;
+    }
+  }
+  &Outline {
+    border: 1px solid variables.$green;
+    color: variables.$green;
+    transition: background-color variables.$base-transition;
+    &:hover {
+      background-color: variables.$green-light;
+    }
+  }
+  &Clear {
+    box-shadow: none;
+    color: variables.$red;
+    transition: color variables.$base-transition;
+    &:hover {
+      color: variables.$red-dark;
+      background-color: transparent;
+    }
+  }
+  &Outline,
+  &Clear {
+    background-color: transparent;
+    &:disabled {
+      color: variables.$disabled-btn;
+      background-color: transparent;
+    }
   }
 }
 
@@ -78,6 +113,7 @@
   font-size: variables.$base-fs;
   border: 1px solid variables.$light-border;
   border-radius: 6px;
+  box-shadow: variables.$base-shadow;
   &Label {
     display: flex;
     align-items: center;
@@ -91,6 +127,7 @@
   font-size: 14px;
   border: 1px solid variables.$light-border;
   cursor: text;
+  box-shadow: variables.$base-shadow;
   &Wrapper {
     display: flex;
     gap: variables.$base-gap;
@@ -114,6 +151,7 @@ textarea {
   border-radius: 6px;
   resize: vertical;
   outline-color: variables.$light-border;
+  box-shadow: variables.$base-shadow;
   transition: outline-color variables.$base-transition;
   &:focus {
     outline-color: variables.$outline;
@@ -133,6 +171,7 @@ textarea {
 .tooltip {
   font-size: variables.$small-fs !important;
   padding: 4px 8px !important;
+  box-shadow: variables.$large-shadow;
   &::first-letter {
     text-transform: capitalize;
   }
@@ -198,6 +237,9 @@ textarea {
 }
 
 .switchLabel {
+  &:not(.arrowsLabel) {
+    box-shadow: inset variables.$base-shadow;
+  }
   .switchButton {
     content: "";
     position: absolute;
@@ -207,7 +249,7 @@ textarea {
     height: 12px;
     border-radius: 6px;
     transition: 0.2s;
-    box-shadow: 0 0 2px 0 rgba(2, 2, 2, 0.3);
+    box-shadow: variables.$base-shadow;
   }
   &:active {
     .switchButton {
