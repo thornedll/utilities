@@ -18,19 +18,23 @@ export const DateConverter: FC = () => {
   const [toUnix, setToUnix] = useState<boolean>(true);
   const [btnType, setBtnType] = useState<BtnType>("copy");
   // ISO -> UNIX states
-  const [text, setText] = useState<string>("");
+  const [unixResult, setUnixResult] = useState<string>("");
   const [startDate, setStartDate] = useState<Date>(
     new Date(new Date().setMilliseconds(0))
   );
-  const [ISOTimezone, setISOTimezone] = useState<Option>(timezones[3]);
+  const [isoTimezone, setIsoTimezone] = useState<Option>(timezones[3]);
   // UNIX -> ISO states
   const [unixDate, setUnixDate] = useState<string>("");
-  const [isoFromUnixDate, setIsoFromUnixDate] = useState<string | null>(null);
-  const [UNIXTimezone, setUNIXTimezone] = useState<Option>(timezones[0]);
+  const [isoResult, setIsoResult] = useState<string | null>(null);
+  const [unixTimezone, setUnixTimezone] = useState<Option>(timezones[0]);
 
   const convertUnixToIsoDate = (): void => {
-    setIsoFromUnixDate(new Date(Number(unixDate) * 1000).toISOString());
-    setUNIXTimezone(timezones[0]);
+    setIsoResult(new Date(Number(unixDate) * 1000).toISOString());
+    setUnixTimezone(timezones[0]);
+  };
+
+  const convertIsoToUnixDate = (): void => {
+    setUnixResult(startDate && getUnixTimeString(startDate, isoTimezone.value));
   };
 
   return (
@@ -62,16 +66,12 @@ export const DateConverter: FC = () => {
               />
               <BaseSelect
                 options={timezones}
-                value={ISOTimezone}
-                handleChange={(timezone: Option) => setISOTimezone(timezone)}
+                value={isoTimezone}
+                handleChange={(timezone: Option) => setIsoTimezone(timezone)}
               />
               <Button
                 text={hints.Global.ConvertFile}
-                onClick={() =>
-                  setText(
-                    startDate && getUnixTimeString(startDate, ISOTimezone.value)
-                  )
-                }
+                onClick={convertIsoToUnixDate}
                 type="primary"
               />
             </div>
@@ -81,7 +81,7 @@ export const DateConverter: FC = () => {
             style={{ width: "fit-content" }}
           >
             <TextInput
-              value={text}
+              value={unixResult}
               disabled
               id="resultUNIX"
               labelText="Result:"
@@ -89,8 +89,8 @@ export const DateConverter: FC = () => {
             <div className={styles.buttonsWrapper}>
               <Button
                 type={btnType}
-                disabled={text === ""}
-                onClick={() => copy(text, setBtnType)}
+                disabled={unixResult === ""}
+                onClick={() => copy(unixResult, setBtnType)}
               />
             </div>
           </div>
@@ -115,7 +115,7 @@ export const DateConverter: FC = () => {
                 text="Convert"
                 disabled={!unixDate}
                 type="primary"
-                onClick={() => convertUnixToIsoDate()}
+                onClick={convertUnixToIsoDate}
               />
             </div>
           </OptionsWrapper>
@@ -125,7 +125,7 @@ export const DateConverter: FC = () => {
           >
             <div className={cx({ resultWrapper: 1, "mt-0": 1 })}>
               <TextInput
-                value={isoFromUnixDate ? isoFromUnixDate : ""}
+                value={isoResult ? isoResult : ""}
                 disabled
                 id="resultISO"
                 labelText="Result:"
@@ -134,27 +134,23 @@ export const DateConverter: FC = () => {
               <div className={styles.buttonsWrapper}>
                 <Button
                   type={btnType}
-                  disabled={!isoFromUnixDate}
-                  onClick={
-                    isoFromUnixDate
-                      ? () => copy(isoFromUnixDate, setBtnType)
-                      : () => {}
-                  }
+                  disabled={!isoResult}
+                  onClick={() => copy(isoResult, setBtnType)}
                 />
               </div>
             </div>
             <BaseSelect
-              disabled={!isoFromUnixDate}
+              disabled={!isoResult}
               options={timezones}
-              value={UNIXTimezone}
+              value={unixTimezone}
               handleChange={
-                isoFromUnixDate
+                isoResult
                   ? (timezone: Option) =>
                       changeIsoFromUnixDateTimezone(
-                        isoFromUnixDate,
+                        isoResult,
                         timezone,
-                        setIsoFromUnixDate,
-                        setUNIXTimezone
+                        setIsoResult,
+                        setUnixTimezone
                       )
                   : () => {}
               }

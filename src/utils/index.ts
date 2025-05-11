@@ -3,12 +3,14 @@ import _ from "lodash";
 import { BtnType, Option } from "../ts/types/types";
 
 export const copy = async (
-  text: string,
+  text: string | null,
   changeBtnType: Dispatch<SetStateAction<BtnType>>
 ) => {
-  await navigator.clipboard.writeText(text);
-  changeBtnType("success");
-  setTimeout(() => changeBtnType("copy"), 1500);
+  if (text) {
+    await navigator.clipboard.writeText(text);
+    changeBtnType("success");
+    setTimeout(() => changeBtnType("copy"), 1500);
+  } else return;
 };
 
 const generateFileName = () => {
