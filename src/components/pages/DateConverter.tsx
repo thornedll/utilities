@@ -76,10 +76,7 @@ export const DateConverter: FC = () => {
               />
             </div>
           </OptionsWrapper>
-          <div
-            className={styles.resultWrapper}
-            style={{ width: "fit-content" }}
-          >
+          <div className={cx({ resultWrapper: 1, "fit-content": 1 })}>
             <TextInput
               value={unixResult}
               disabled
@@ -119,10 +116,7 @@ export const DateConverter: FC = () => {
               />
             </div>
           </OptionsWrapper>
-          <div
-            className={styles.resultWrapper}
-            style={{ width: "fit-content" }}
-          >
+          <div className={cx({ resultWrapper: 1, "fit-content": 1 })}>
             <div className={cx({ resultWrapper: 1, "mt-0": 1 })}>
               <TextInput
                 value={isoResult ? isoResult : ""}

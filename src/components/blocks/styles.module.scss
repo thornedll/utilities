@@ -69,3 +69,31 @@
     }
   }
 }
+
+.timeWrapper {
+  margin-left: auto;
+  width: 160px;
+  span {
+    color: variables.$gray;
+  }
+  p {
+    &:not(:first-of-type) {
+      position: relative;
+      margin-left: 18%;
+    }
+  }
+}
+
+.buttonsWrapper {
+  display: flex;
+  position: absolute;
+  top: 20%;
+  right: 18px;
+  button {
+    padding: 0 !important;
+    height: 12px !important;
+    svg {
+      width: 12px !important;
+    }
+  }
+}

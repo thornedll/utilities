@@ -11,6 +11,7 @@ export const Button: FC<ButtonProps> = ({
   disabled = false,
   type,
   subType,
+  isTooltip = true,
   tooltipText,
   tooltipPlace = "top",
   onClick,
@@ -29,9 +30,9 @@ export const Button: FC<ButtonProps> = ({
         onClick={onClick}
         disabled={disabled}
         className={btnClass}
-        data-tooltip-id={type}
+        data-tooltip-id={type + text}
       >
-        {text}
+        {type === "primary" && text}
         {type !== "primary" && (
           <SVGSprite
             id={type}
@@ -41,8 +42,8 @@ export const Button: FC<ButtonProps> = ({
           />
         )}
       </button>
-      {type !== "primary" && !disabled && (
-        <BaseTooltip id={type} place={tooltipPlace}>
+      {type !== "primary" && disabled === false && isTooltip === true && (
+        <BaseTooltip id={type + text} place={tooltipPlace}>
           {tooltipText ? tooltipText : type}
         </BaseTooltip>
       )}

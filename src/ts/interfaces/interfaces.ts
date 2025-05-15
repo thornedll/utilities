@@ -20,6 +20,7 @@ export interface ButtonProps {
   disabled?: boolean;
   type: BtnType;
   subType?: BtnSubType[];
+  isTooltip?: boolean;
   tooltipText?: string | ReactNode;
   tooltipPlace?: PlacesType;
   onClick: () => void;
