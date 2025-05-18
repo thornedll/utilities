@@ -1,10 +1,10 @@
 import { FC } from "react";
-import { FileInputProps } from "../../ts/interfaces/interfaces";
+import { IFileInputProps } from "../../ts/interfaces/interfaces";
 import styles from "./styles.module.scss";
 import { SVGSprite } from "./SVGSprite";
 import { hints } from "../../constants";
 
-export const FileInput: FC<FileInputProps> = ({
+export const FileInput: FC<IFileInputProps> = ({
   id,
   labelText = hints.Global.UploadFile,
   disabled = false,

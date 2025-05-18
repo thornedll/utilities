@@ -1,5 +1,10 @@
 import { Route, Routes } from "react-router";
-import { DateConverter, JsonConverter, JsonDiff } from "./components/pages";
+import {
+  DateConverter,
+  JsonConverter,
+  JsonDiff,
+  RandomGenerators,
+} from "./components/pages";
 import { Navigation } from "./components/blocks";
 
 function App() {
@@ -13,6 +18,10 @@ function App() {
           element={<JsonConverter />}
         ></Route>
         <Route path="utilities/jsonDiff" element={<JsonDiff />}></Route>
+        <Route
+          path="utilities/randomGenerators"
+          element={<RandomGenerators />}
+        ></Route>
       </Routes>
     </div>
   );

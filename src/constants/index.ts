@@ -1,17 +1,31 @@
-import { KeyValueChange, Option } from "../ts/types/types";
+import {
+  KeyValueChange,
+  Option,
+  PagesData,
+  RandomDecimalSettings,
+  RandomIntSettings,
+} from "../ts/types/types";
 
-export const navigation = [
+export const navigation: PagesData = [
   {
     url: "utilities/",
     visibleName: "Date Converter",
+    component: "DateConverter",
   },
   {
     url: "utilities/jsonConverter",
     visibleName: "JSON Converter",
+    component: "JsonConverter",
   },
   {
     url: "utilities/jsonDiff",
     visibleName: "JSON Difference",
+    component: "JsonDiff",
+  },
+  {
+    url: "utilities/randomGenerators",
+    visibleName: "Random Generators",
+    component: "RandomGenerators",
   },
 ];
 
@@ -19,6 +33,17 @@ export const emptyKeyValueObject: KeyValueChange = {
   key: "",
   value: "",
   type: "string",
+};
+
+export const defaultIntSettings: RandomIntSettings = {
+  min: 0,
+  max: 10,
+};
+
+export const defaultDecimalSettings: RandomDecimalSettings = {
+  min: 0,
+  max: 10,
+  digits: 2,
 };
 
 export const timezones: Option[] = [
@@ -64,6 +89,7 @@ export const hints = {
     UploadFile: "Choose file",
     CompareFiles: "Compare",
     ConvertFile: "Convert",
+    UploadFileHint: "* or fill in the field below",
   },
   DateConverter: {
     Input: "Input",
@@ -74,11 +100,17 @@ export const hints = {
       "<p>Enter UNIX timestamp to convert to ISO 8601 formatted date</p><p>Changing timezone will modify the result date and time</p>",
   },
   JsonConverter: {
-    UploadFile: "* or fill in the field below",
+    UploadHeader: "1. Upload file to convert*",
+    SettingsHeader: "2. Choose settings",
   },
   JsonDiff: {
+    UploadHeader: "Upload files to compare*",
     NoDifference: "No difference yet...",
     ParsingError: "Parsing JSON Error!",
+  },
+  RandomGenerators: {
+    StringHeader: "String Generators",
+    NumberHeader: "Number Generators",
   },
 };
 

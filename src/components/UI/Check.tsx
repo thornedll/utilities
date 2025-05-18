@@ -1,11 +1,11 @@
 import { FC } from "react";
 import classNames from "classnames/bind";
-import { CheckProps } from "../../ts/interfaces/interfaces";
+import { ICheckProps } from "../../ts/interfaces/interfaces";
 import styles from "./styles.module.scss";
 
 const cx = classNames.bind(styles);
 
-export const Check: FC<CheckProps> = ({
+export const Check: FC<ICheckProps> = ({
   checked,
   disabled = false,
   id,

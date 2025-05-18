@@ -1,4 +1,4 @@
-import { useState, FC } from "react";
+import { FC, useState } from "react";
 import classNames from "classnames/bind";
 import { Option, BtnType } from "../../ts/types/types";
 import { BaseSelect, Button, Check, DateTimePicker, TextInput } from "../UI";
@@ -99,7 +99,7 @@ export const DateConverter: FC = () => {
               <div style={{ position: "relative" }}>
                 <TextInput
                   value={unixDate}
-                  handleChange={setUnixDate}
+                  handleChange={() => setUnixDate}
                   placeholder={placeholders.DateConverter.UNIXTextInput}
                 />
                 {unixDate && (

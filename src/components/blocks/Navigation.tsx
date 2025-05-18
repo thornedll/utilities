@@ -54,10 +54,10 @@ export const Navigation: FC = () => {
         ))}
       </nav>
       <div className={styles.timeWrapper}>
-        <p>
+        <div className={styles.wrapper}>
           <span>{currentDateView}</span> {currentTime.toLocaleTimeString()}
-        </p>
-        <p>
+        </div>
+        <div className={styles.wrapper}>
           {currentSecondsView}
           <div className={styles.buttonsWrapper}>
             <Button
@@ -67,7 +67,7 @@ export const Navigation: FC = () => {
               onClick={() => copy(currentSecondsView, setBtnType)}
             />
           </div>
-        </p>
+        </div>
       </div>
     </div>
   );

@@ -2,6 +2,12 @@ import { Dispatch, SetStateAction } from "react";
 import _ from "lodash";
 import { BtnType, Option } from "../ts/types/types";
 
+export {
+  randomIntFromInterval,
+  randomFractionFromInterval,
+  rndRegNumber,
+} from "./randoms";
+
 export const copy = async (
   text: string | null,
   changeBtnType: Dispatch<SetStateAction<BtnType>>

@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, FC } from "react";
+import { FC, useState, ChangeEvent } from "react";
 import classNames from "classnames/bind";
 import { BtnType, KeyValueChange, ValueType } from "../../ts/types/types";
 import { Button, Check, DoubleInput, FileInput, TextArea } from "../UI";
@@ -184,17 +184,19 @@ export const JsonConverter: FC = () => {
   return (
     <div className={styles.pageWrapper}>
       <h2>JSON Converter</h2>
-      <h4 className={styles["mt-12"]}>1. Upload file*</h4>
+      <h4 className={styles["mt-12"]}>{hints.JsonConverter.UploadHeader}</h4>
       <div className={styles.optionsWrapper}>
         <FileInput handleChange={uploadFile} accept="application/json" />
         <div>{file && `Current file: ${file.name}`}</div>
       </div>
       <span className={cx({ hint: 1, "mt-6": 1 })}>
-        {hints.JsonConverter.UploadFile}
+        {hints.Global.UploadFileHint}
       </span>
       {fileString && (
         <>
-          <h4 className={styles["mt-12"]}>2. Choose settings</h4>
+          <h4 className={styles["mt-12"]}>
+            {hints.JsonConverter.SettingsHeader}
+          </h4>
           <div className={styles.optionsWrapper}>
             <div className={styles.checksWrapper}>
               <Check

@@ -7,7 +7,7 @@ import {
 import { BtnSubType, BtnType, Option, ValueType } from "../types/types";
 import { PlacesType } from "react-tooltip";
 
-export interface BaseSelectProps {
+export interface IBaseSelectProps {
   disabled?: boolean;
   options: Option[];
   value?: Option;
@@ -15,7 +15,7 @@ export interface BaseSelectProps {
   handleChange: (value: Option) => void;
 }
 
-export interface ButtonProps {
+export interface IButtonProps {
   text?: string;
   disabled?: boolean;
   type: BtnType;
@@ -26,7 +26,7 @@ export interface ButtonProps {
   onClick: () => void;
 }
 
-export interface CheckProps {
+export interface ICheckProps {
   checked: boolean;
   disabled?: boolean;
   id?: string;
@@ -36,20 +36,18 @@ export interface CheckProps {
   handleChange: (state: boolean) => void;
 }
 
-export interface CustomCheckboxProps extends CheckProps {}
-
-export interface DatePickerProps {
+export interface IDatePickerProps {
   startDate: Date | null;
   changeDate: (date: Date) => void;
 }
 
-export interface DiffResult {
+export interface IDiffResult {
   key: string;
   value1: string | number | boolean | undefined;
   value2: string | number | boolean | undefined;
 }
 
-export interface FileInputProps {
+export interface IFileInputProps {
   id?: string;
   labelText?: string;
   disabled?: boolean;
@@ -57,7 +55,7 @@ export interface FileInputProps {
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export interface TextAreaProps {
+export interface ITextAreaProps {
   value: InputHTMLAttributes<HTMLInputElement>["value"];
   placeholder?: string;
   disabled?: boolean;
@@ -67,7 +65,8 @@ export interface TextAreaProps {
   handleChange?: (e: string) => void;
 }
 
-export interface TextInputProps {
+export interface ITextInputProps {
+  type?: InputHTMLAttributes<HTMLInputElement>["type"];
   value: InputHTMLAttributes<HTMLInputElement>["value"];
   placeholder?: string;
   disabled?: boolean;
@@ -77,7 +76,7 @@ export interface TextInputProps {
   handleChange?: (e: string) => void;
 }
 
-export interface DoubleInputProps extends TextInputProps {
+export interface IDoubleInputProps extends ITextInputProps {
   numberKey: number;
   secondValue: string;
   selectValue: ValueType;
@@ -89,19 +88,19 @@ export interface DoubleInputProps extends TextInputProps {
   removeInputs: (idx: number) => void;
 }
 
-export interface BaseTooltipProps {
+export interface IBaseTooltipProps {
   id: string;
   place?: PlacesType;
   children: ReactNode;
 }
 
-export interface OptionsWrapperProps {
+export interface IOptionsWrapperProps {
   headerText?: string;
   helpText?: string;
   children?: ReactNode;
 }
 
-export interface SVGSpriteProps {
+export interface ISVGSpriteProps {
   id: string;
   viewBox?: string;
   width?: string;

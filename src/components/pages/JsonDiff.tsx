@@ -1,7 +1,7 @@
-import { useState, FC, Dispatch, ChangeEvent, SetStateAction } from "react";
+import { FC, useState, Dispatch, ChangeEvent, SetStateAction } from "react";
 import classNames from "classnames/bind";
 import { Button, FileInput, TextArea } from "../UI";
-import { DiffResult } from "../../ts/interfaces/interfaces";
+import { IDiffResult } from "../../ts/interfaces/interfaces";
 import { hints, placeholders } from "../../constants";
 import { setFormattedJson } from "../../utils";
 import styles from "./styles.module.scss";
@@ -13,7 +13,7 @@ export const JsonDiff: FC = () => {
   const [json2, setJson2] = useState<string>("");
   const [fileName1, setFileName1] = useState<string>("");
   const [fileName2, setFileName2] = useState<string>("");
-  const [diffs, setDiffs] = useState<DiffResult[]>([]);
+  const [diffs, setDiffs] = useState<IDiffResult[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   const compareJson = () => {
@@ -24,7 +24,7 @@ export const JsonDiff: FC = () => {
       const obj1 = json1 ? JSON.parse(json1) : {};
       const obj2 = json2 ? JSON.parse(json2) : {};
 
-      const differences: DiffResult[] = [];
+      const differences: IDiffResult[] = [];
 
       const compareObjects = (obj1: any, obj2: any, path = "") => {
         const allKeys = new Set([...Object.keys(obj1), ...Object.keys(obj2)]);
@@ -100,8 +100,23 @@ export const JsonDiff: FC = () => {
   return (
     <div className={styles.pageWrapper}>
       <h2>JSON Difference</h2>
+      <h4 className={styles["mt-12"]}>{hints.JsonDiff.UploadHeader}</h4>
       <div className={cx({ optionsWrapper: 1, "align-start": 1 })}>
         <div className={styles.jsonInputWrapper}>
+          <div>
+            <div className={cx({ optionsWrapper: 1, "mt-0": 1 })}>
+              <FileInput
+                handleChange={(e) =>
+                  handleFileUpload(e, setJson1, setFileName1)
+                }
+                accept="application/json"
+              />
+              <div>{fileName1 && `Current file: ${fileName1}`}</div>
+            </div>
+            <span className={cx({ hint: 1, "mt-6": 1 })}>
+              {hints.Global.UploadFileHint}
+            </span>
+          </div>
           <div className={styles.headerWrapper}>
             <h4>JSON 1</h4>
             {json1 && <p className={styles.hint}>{json1.length} chars</p>}
@@ -128,16 +143,22 @@ export const JsonDiff: FC = () => {
               />
             </div>
           </div>
-          <div className={cx({ optionsWrapper: 1, "mt-0": 1 })}>
-            <p>or </p>
-            <FileInput
-              handleChange={(e) => handleFileUpload(e, setJson1, setFileName1)}
-              accept="application/json"
-            />
-            <div>{fileName1 && `Current file: ${fileName1}`}</div>
-          </div>
         </div>
         <div className={styles.jsonInputWrapper}>
+          <div>
+            <div className={cx({ optionsWrapper: 1, "mt-0": 1 })}>
+              <FileInput
+                handleChange={(e) =>
+                  handleFileUpload(e, setJson2, setFileName2)
+                }
+                accept="application/json"
+              />
+              <div>{fileName2 && `Current file: ${fileName2}`}</div>
+            </div>
+            <span className={cx({ hint: 1, "mt-6": 1 })}>
+              {hints.Global.UploadFileHint}
+            </span>
+          </div>
           <div className={styles.headerWrapper}>
             <h4>JSON 2</h4>
             {json2 && <p className={styles.hint}>{json2.length} chars</p>}
@@ -163,14 +184,6 @@ export const JsonDiff: FC = () => {
                 onClick={() => clearJson(fileName2, setJson2, setFileName2)}
               />
             </div>
-          </div>
-          <div className={cx({ optionsWrapper: 1, "mt-0": 1 })}>
-            <p>or </p>
-            <FileInput
-              handleChange={(e) => handleFileUpload(e, setJson2, setFileName2)}
-              accept="application/json"
-            />
-            <div>{fileName2 && `Current file: ${fileName2}`}</div>
           </div>
         </div>
       </div>

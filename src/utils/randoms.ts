@@ -5,16 +5,20 @@ export const randomIntFromInterval = (
   max: number,
   isInt: boolean = true
 ) => {
-  const random = Math.random() * (max - min + 1) + min;
+  const random = Math.random() * (max - min) + min;
   if (isInt) {
     return Math.floor(random);
   }
   return random;
 };
 
-export const randomFractionFromInterval = (min: number, max: number) => {
+export const randomFractionFromInterval = (
+  min: number,
+  max: number,
+  digits: number = 2
+) => {
   const random = randomIntFromInterval(min, max, false);
-  return Number(random.toFixed(2));
+  return Number(random.toFixed(digits));
 };
 
 export const randomValueFromDictionary = (dictionary: Array<string>) => {
@@ -22,7 +26,9 @@ export const randomValueFromDictionary = (dictionary: Array<string>) => {
   return dictionary[random];
 };
 
-const rndRegion = randomValueFromDictionary(regionCodes);
+const rndRegion = () => {
+  return randomValueFromDictionary(regionCodes);
+};
 
 export const rndRegNumber = () => {
   return "".concat(
@@ -31,6 +37,6 @@ export const rndRegNumber = () => {
     randomIntFromInterval(10, 99).toString(),
     randomValueFromDictionary(regNumberLetters),
     randomValueFromDictionary(regNumberLetters),
-    rndRegion
+    rndRegion()
   );
 };

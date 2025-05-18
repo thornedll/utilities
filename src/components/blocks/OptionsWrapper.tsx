@@ -1,9 +1,9 @@
 import { FC } from "react";
-import { OptionsWrapperProps } from "../../ts/interfaces/interfaces";
+import { IOptionsWrapperProps } from "../../ts/interfaces/interfaces";
 import { Button } from "../UI";
 import styles from "./styles.module.scss";
 
-export const OptionsWrapper: FC<OptionsWrapperProps> = ({
+export const OptionsWrapper: FC<IOptionsWrapperProps> = ({
   headerText = "Options",
   helpText = "",
   children,

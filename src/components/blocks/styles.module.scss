@@ -76,24 +76,24 @@
   span {
     color: variables.$gray;
   }
-  p {
+  .wrapper {
+    margin-top: 0;
     &:not(:first-of-type) {
       position: relative;
-      margin-left: 18%;
+      margin-left: 24px;
     }
-  }
-}
-
-.buttonsWrapper {
-  display: flex;
-  position: absolute;
-  top: 20%;
-  right: 18px;
-  button {
-    padding: 0 !important;
-    height: 12px !important;
-    svg {
-      width: 12px !important;
+    .buttonsWrapper {
+      display: flex;
+      position: absolute;
+      top: 20%;
+      right: 24px;
+      button {
+        padding: 0 !important;
+        height: 12px !important;
+        svg {
+          width: 12px !important;
+        }
+      }
     }
   }
 }

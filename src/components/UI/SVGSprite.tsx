@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { SVGSpriteProps } from "../../ts/interfaces/interfaces";
+import { ISVGSpriteProps } from "../../ts/interfaces/interfaces";
 
 const SVGSpriteSheet = () => {
   return (
@@ -59,7 +59,7 @@ const SVGSpriteSheet = () => {
   );
 };
 
-export const SVGSprite: FC<SVGSpriteProps> = ({
+export const SVGSprite: FC<ISVGSpriteProps> = ({
   id,
   viewBox = "0 0 16 16",
   width = "16",

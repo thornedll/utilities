@@ -1,8 +1,9 @@
 import { FC, ChangeEvent } from "react";
-import { TextInputProps } from "../../ts/interfaces/interfaces";
+import { ITextInputProps } from "../../ts/interfaces/interfaces";
 import styles from "./styles.module.scss";
 
-export const TextInput: FC<TextInputProps> = ({
+export const TextInput: FC<ITextInputProps> = ({
+  type = "text",
   placeholder = "",
   value,
   disabled = false,
@@ -11,6 +12,10 @@ export const TextInput: FC<TextInputProps> = ({
   style,
   handleChange = () => {},
 }) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    handleChange(e.target.value);
+  };
+
   return (
     <>
       <label
@@ -21,11 +26,9 @@ export const TextInput: FC<TextInputProps> = ({
         {labelText}
       </label>
       <input
-        type="text"
+        type={type}
         placeholder={placeholder}
-        onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          handleChange(e.target.value)
-        }
+        onChange={onChange}
         value={value}
         className={styles.textInput}
         disabled={disabled}

@@ -1,12 +1,12 @@
 import { FC } from "react";
 import classNames from "classnames/bind";
-import { ButtonProps } from "../../ts/interfaces/interfaces";
+import { IButtonProps } from "../../ts/interfaces/interfaces";
 import { BaseTooltip, SVGSprite } from "./";
 import styles from "./styles.module.scss";
 
 const cx = classNames.bind(styles);
 
-export const Button: FC<ButtonProps> = ({
+export const Button: FC<IButtonProps> = ({
   text = "",
   disabled = false,
   type,
