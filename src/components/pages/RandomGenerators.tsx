@@ -1,13 +1,18 @@
 import { FC, useState } from "react";
 import classNames from "classnames/bind";
 import { Button, TextInput } from "../UI";
-import { RandomDecimalSettings, RandomIntSettings } from "../../ts/types/types";
+import {
+  BtnType,
+  RandomDecimalSettings,
+  RandomIntSettings,
+} from "../../ts/types/types";
 import {
   hints,
   defaultIntSettings,
   defaultDecimalSettings,
 } from "../../constants";
 import {
+  copy,
   randomFractionFromInterval,
   randomIntFromInterval,
   rndRegNumber,
@@ -17,6 +22,10 @@ import styles from "./styles.module.scss";
 const cx = classNames.bind(styles);
 
 export const RandomGenerators: FC = () => {
+  const [intBtnType, setIntBtnType] = useState<BtnType>("copy");
+  const [decimalBtnType, setDecimalBtnType] = useState<BtnType>("copy");
+  const [ruGrzBtnType, setRuGrzBtnType] = useState<BtnType>("copy");
+
   //* Strings
   const [ruGrz, setRuGrz] = useState<string>(rndRegNumber());
 
@@ -74,9 +83,16 @@ export const RandomGenerators: FC = () => {
             value={ruGrz}
             disabled
             id="ruGrz"
-            labelText="RU vehicle registration number"
+            labelText={hints.RandomGenerators.StringGenerators.RuGrz}
+            style={{ width: "170px" }}
           />
           <div className={styles.buttonsWrapper}>
+            <Button
+              text="copyRuGrz"
+              type={ruGrzBtnType}
+              tooltipPlace="top"
+              onClick={() => copy(ruGrz, setRuGrzBtnType)}
+            />
             <Button type="update" tooltipPlace="top" onClick={changeRuGrz} />
           </div>
         </div>
@@ -89,10 +105,16 @@ export const RandomGenerators: FC = () => {
             value={int}
             disabled
             id="int"
-            labelText="Integer"
+            labelText={hints.RandomGenerators.NumberGenerators.Integer}
             style={{ width: "100%" }}
           />
           <div className={styles.buttonsWrapper}>
+            <Button
+              text="copyInt"
+              type={intBtnType}
+              tooltipPlace="top"
+              onClick={() => copy(int.toString(), setIntBtnType)}
+            />
             <Button type="update" tooltipPlace="top" onClick={changeInt} />
           </div>
         </div>
@@ -120,10 +142,16 @@ export const RandomGenerators: FC = () => {
             value={decimal}
             disabled
             id="decimal"
-            labelText="Decimal"
+            labelText={hints.RandomGenerators.NumberGenerators.Decimal}
             style={{ width: "100%" }}
           />
           <div className={styles.buttonsWrapper}>
+            <Button
+              text="copyDecimal"
+              type={decimalBtnType}
+              tooltipPlace="top"
+              onClick={() => copy(decimal.toString(), setDecimalBtnType)}
+            />
             <Button type="update" tooltipPlace="top" onClick={changeDecimal} />
           </div>
         </div>
@@ -161,7 +189,8 @@ export const RandomGenerators: FC = () => {
             value={decimalSettings.digits}
             id="decimalSettingDigits"
             labelText="Digits after comma"
-            style={{ width: "56px" }}
+            max={99}
+            style={{ width: "58px" }}
             handleChange={(e) =>
               changeDecimalSettings(
                 decimalSettings.min,

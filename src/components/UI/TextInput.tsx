@@ -9,6 +9,8 @@ export const TextInput: FC<ITextInputProps> = ({
   disabled = false,
   id,
   labelText,
+  pattern,
+  max,
   style,
   handleChange = () => {},
 }) => {
@@ -33,6 +35,8 @@ export const TextInput: FC<ITextInputProps> = ({
         className={styles.textInput}
         disabled={disabled}
         id={id}
+        pattern={pattern}
+        max={max}
         style={style}
       />
     </>

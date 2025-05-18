@@ -111,6 +111,13 @@ export const hints = {
   RandomGenerators: {
     StringHeader: "String Generators",
     NumberHeader: "Number Generators",
+    StringGenerators: {
+      RuGrz: "RU vehicle registration number",
+    },
+    NumberGenerators: {
+      Integer: "Integer",
+      Decimal: "Decimal",
+    },
   },
 };
 

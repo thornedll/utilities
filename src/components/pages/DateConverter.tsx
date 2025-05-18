@@ -14,23 +14,29 @@ import styles from "./styles.module.scss";
 const cx = classNames.bind(styles);
 
 export const DateConverter: FC = () => {
-  // Global states
+  //* Global states
   const [toUnix, setToUnix] = useState<boolean>(true);
   const [btnType, setBtnType] = useState<BtnType>("copy");
-  // ISO -> UNIX states
+  //* ISO -> UNIX states
   const [unixResult, setUnixResult] = useState<string>("");
   const [startDate, setStartDate] = useState<Date>(
     new Date(new Date().setMilliseconds(0))
   );
   const [isoTimezone, setIsoTimezone] = useState<Option>(timezones[3]);
-  // UNIX -> ISO states
+  //* UNIX -> ISO states
   const [unixDate, setUnixDate] = useState<string>("");
   const [isoResult, setIsoResult] = useState<string | null>(null);
   const [unixTimezone, setUnixTimezone] = useState<Option>(timezones[0]);
 
+  const handleUnixDate = (newDate: string): void => {
+    setUnixDate(newDate);
+  };
+
   const convertUnixToIsoDate = (): void => {
-    setIsoResult(new Date(Number(unixDate) * 1000).toISOString());
-    setUnixTimezone(timezones[0]);
+    if (!isNaN(Number(unixDate))) {
+      setIsoResult(new Date(Number(unixDate) * 1000).toISOString());
+      setUnixTimezone(timezones[0]);
+    } else return;
   };
 
   const convertIsoToUnixDate = (): void => {
@@ -81,7 +87,7 @@ export const DateConverter: FC = () => {
               value={unixResult}
               disabled
               id="resultUNIX"
-              labelText="Result:"
+              labelText="Result"
             />
             <div className={styles.buttonsWrapper}>
               <Button
@@ -99,18 +105,18 @@ export const DateConverter: FC = () => {
               <div style={{ position: "relative" }}>
                 <TextInput
                   value={unixDate}
-                  handleChange={() => setUnixDate}
+                  handleChange={handleUnixDate}
                   placeholder={placeholders.DateConverter.UNIXTextInput}
                 />
                 {unixDate && (
                   <div className={styles.buttonsWrapper}>
-                    <Button type="delete" onClick={() => setUnixDate("")} />
+                    <Button type="delete" onClick={() => handleUnixDate("")} />
                   </div>
                 )}
               </div>
               <Button
                 text="Convert"
-                disabled={!unixDate}
+                disabled={!unixDate || isNaN(Number(unixDate))}
                 type="primary"
                 onClick={convertUnixToIsoDate}
               />

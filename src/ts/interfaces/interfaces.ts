@@ -72,6 +72,8 @@ export interface ITextInputProps {
   disabled?: boolean;
   id?: string;
   labelText?: string;
+  pattern?: InputHTMLAttributes<HTMLInputElement>["pattern"];
+  max?: InputHTMLAttributes<HTMLInputElement>["max"];
   style?: CSSProperties;
   handleChange?: (e: string) => void;
 }
