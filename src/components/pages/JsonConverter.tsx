@@ -78,7 +78,7 @@ export const JsonConverter: FC = () => {
       const currentType = newKeyValueChanges[itemKey].type;
       newKeyValueChanges[itemKey].type = type;
       if (!baseValueTypes.includes(type)) {
-        newKeyValueChanges[itemKey].value = rndRegNumber();
+        newKeyValueChanges[itemKey].value = rndRegNumber("ru");
       } else if (!baseValueTypes.includes(currentType)) {
         newKeyValueChanges[itemKey].value = "";
       }

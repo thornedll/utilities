@@ -112,7 +112,7 @@ export const hints = {
     StringHeader: "String Generators",
     NumberHeader: "Number Generators",
     StringGenerators: {
-      RuGrz: "RU vehicle registration number",
+      Grz: "Vehicle registration number",
     },
     NumberGenerators: {
       Integer: "Integer",
@@ -121,20 +121,21 @@ export const hints = {
   },
 };
 
-export const regNumberLetters = [
-  "А",
-  "В",
-  "Е",
-  "К",
-  "М",
-  "Н",
-  "О",
-  "Р",
-  "С",
-  "Т",
-  "У",
-  "Х",
+export const countries: Option[] = [
+  {
+    label: "RU",
+    value: "ru",
+  },
+  {
+    label: "BY",
+    value: "by",
+  },
 ];
+
+export const regNumberLetters = {
+  ru: ["А", "В", "Е", "К", "М", "Н", "О", "Р", "С", "Т", "У", "Х"],
+  by: ["A", "B", "E", "I", "K", "M", "H", "O", "P", "C", "T", "X"],
+};
 
 export const regionCodes = [
   "75",

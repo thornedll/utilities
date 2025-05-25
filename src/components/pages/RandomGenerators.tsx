@@ -1,8 +1,9 @@
 import { FC, useState } from "react";
 import classNames from "classnames/bind";
-import { Button, TextInput } from "../UI";
+import { BaseSelect, Button, TextInput } from "../UI";
 import {
   BtnType,
+  Option,
   RandomDecimalSettings,
   RandomIntSettings,
 } from "../../ts/types/types";
@@ -10,6 +11,7 @@ import {
   hints,
   defaultIntSettings,
   defaultDecimalSettings,
+  countries,
 } from "../../constants";
 import {
   copy,
@@ -24,13 +26,18 @@ const cx = classNames.bind(styles);
 export const RandomGenerators: FC = () => {
   const [intBtnType, setIntBtnType] = useState<BtnType>("copy");
   const [decimalBtnType, setDecimalBtnType] = useState<BtnType>("copy");
-  const [ruGrzBtnType, setRuGrzBtnType] = useState<BtnType>("copy");
+  const [grzBtnType, setGrzBtnType] = useState<BtnType>("copy");
 
   //* Strings
-  const [ruGrz, setRuGrz] = useState<string>(rndRegNumber());
+  const [grzCountry, setGrzCountry] = useState<Option>(countries[0]);
+  const [grz, setGrz] = useState<string>(rndRegNumber("ru"));
 
-  const changeRuGrz = (): void => {
-    setRuGrz(rndRegNumber());
+  const changeGrz = (): void => {
+    setGrz(rndRegNumber(grzCountry.value));
+  };
+  const changeCountry = (country: Option): void => {
+    setGrzCountry(country);
+    setGrz(rndRegNumber(country.value));
   };
 
   //* Numbers
@@ -52,6 +59,7 @@ export const RandomGenerators: FC = () => {
 
   const changeIntSettings = (min: number, max: number): void => {
     setIntSettings({ min, max });
+    setInt(randomIntFromInterval(min, max));
   };
   const changeDecimalSettings = (
     min: number,
@@ -59,6 +67,7 @@ export const RandomGenerators: FC = () => {
     digits: number
   ): void => {
     setDecimalSettings({ min, max, digits });
+    setDecimal(randomFractionFromInterval(min, max, digits));
   };
   const changeInt = (): void => {
     setInt(randomIntFromInterval(intSettings.min, intSettings.max));
@@ -80,21 +89,28 @@ export const RandomGenerators: FC = () => {
       <div className={styles.optionsWrapper}>
         <div className={styles.singleInputWrapper}>
           <TextInput
-            value={ruGrz}
+            value={grz}
             disabled
-            id="ruGrz"
-            labelText={hints.RandomGenerators.StringGenerators.RuGrz}
+            id="grz"
+            labelText={hints.RandomGenerators.StringGenerators.Grz}
             style={{ width: "170px" }}
           />
           <div className={styles.buttonsWrapper}>
             <Button
-              text="copyRuGrz"
-              type={ruGrzBtnType}
+              text="copyGrz"
+              type={grzBtnType}
               tooltipPlace="top"
-              onClick={() => copy(ruGrz, setRuGrzBtnType)}
+              onClick={() => copy(grz, setGrzBtnType)}
             />
-            <Button type="update" tooltipPlace="top" onClick={changeRuGrz} />
+            <Button type="update" tooltipPlace="top" onClick={changeGrz} />
           </div>
+        </div>
+        <div>
+          <BaseSelect
+            options={countries}
+            value={grzCountry}
+            handleChange={changeCountry}
+          />
         </div>
       </div>
       <h4 className={styles["mt-12"]}>{hints.RandomGenerators.NumberHeader}</h4>
