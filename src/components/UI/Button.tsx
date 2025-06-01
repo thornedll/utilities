@@ -1,12 +1,12 @@
 import { FC } from "react";
 import classNames from "classnames/bind";
-import { IButtonProps } from "../../ts/interfaces/interfaces";
+import { ButtonProps } from "../../ts/interfaces/interfaces";
 import { BaseTooltip, SVGSprite } from "./";
 import styles from "./styles.module.scss";
 
 const cx = classNames.bind(styles);
 
-export const Button: FC<IButtonProps> = ({
+export const Button: FC<ButtonProps> = ({
   text = "",
   disabled = false,
   type,
@@ -18,9 +18,11 @@ export const Button: FC<IButtonProps> = ({
 }) => {
   const btnClass = cx({
     btnPrimary: type === "primary",
+    btnPrimaryIcon: type === "primary" && subType?.includes("icon"),
     btnIcon: type !== "primary",
     btnControl: type === "add" || type === "remove",
     btnOutline: subType?.includes("outline"),
+    btnOutlineRed: subType?.includes("outline-red"),
     btnClear: subType?.includes("clear"),
   });
 
@@ -33,6 +35,7 @@ export const Button: FC<IButtonProps> = ({
         data-tooltip-id={type + text}
       >
         {type === "primary" && text}
+        {subType?.includes("icon") && <SVGSprite id="chevron-right" />}
         {type !== "primary" && (
           <SVGSprite
             id={type}

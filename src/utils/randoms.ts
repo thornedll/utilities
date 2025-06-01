@@ -17,8 +17,8 @@ export const randomFractionFromInterval = (
   max: number,
   digits: number = 2
 ) => {
-  const random = randomIntFromInterval(min, max, false);
-  return Number(random.toFixed(digits));
+  const randomInt = randomIntFromInterval(min, max, false);
+  return Number(randomInt.toFixed(digits));
 };
 
 export const randomValueFromDictionary = (dictionary: Array<string>) => {
@@ -26,9 +26,7 @@ export const randomValueFromDictionary = (dictionary: Array<string>) => {
   return dictionary[random];
 };
 
-const rndRegion = () => {
-  return randomValueFromDictionary(regionCodes);
-};
+const rndRegion = () => randomValueFromDictionary(regionCodes);
 
 // const rndLetter = (alphabet: string): string => {
 //   switch (alphabet) {
@@ -69,4 +67,8 @@ export const rndRegNumber = (country: string): string => {
     default:
       return "";
   }
+};
+
+export const rndUuid = (): string => {
+  return crypto.randomUUID();
 };

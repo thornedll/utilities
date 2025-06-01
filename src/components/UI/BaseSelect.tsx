@@ -1,9 +1,9 @@
 import { FC } from "react";
 import Select, { StylesConfig } from "react-select";
-import { IBaseSelectProps } from "../../ts/interfaces/interfaces";
+import { BaseSelectProps } from "../../ts/interfaces/interfaces";
 import styles from "./styles.module.scss";
 
-export const BaseSelect: FC<IBaseSelectProps> = ({
+export const BaseSelect: FC<BaseSelectProps> = ({
   disabled = false,
   options,
   value,

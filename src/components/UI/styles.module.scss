@@ -55,11 +55,21 @@
       background-color: #a9a9a9;
       cursor: not-allowed;
     }
+    &Icon {
+      display: flex;
+      align-items: center;
+      svg {
+        margin-left: 8px;
+      }
+    }
   }
   &Outline {
     border: 1px solid variables.$green;
     color: variables.$green;
     transition: background-color variables.$base-transition;
+    &Red {
+      border: 1px solid variables.$red;
+    }
     &:hover {
       background-color: variables.$green-light;
     }
@@ -70,7 +80,7 @@
     transition: color variables.$base-transition;
     &:hover {
       color: variables.$red-dark;
-      background-color: transparent;
+      background-color: variables.$red-light;
     }
   }
   &Outline,
@@ -141,7 +151,7 @@
 }
 
 textarea {
-  height: 250px;
+  min-height: 250px;
   width: 100%;
   padding: 4px 8px;
   font-size: variables.$small-fs;

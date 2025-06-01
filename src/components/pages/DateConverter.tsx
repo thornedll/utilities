@@ -77,8 +77,9 @@ export const DateConverter: FC = () => {
               />
               <Button
                 text={hints.Global.ConvertFile}
-                onClick={convertIsoToUnixDate}
                 type="primary"
+                subType={["icon"]}
+                onClick={convertIsoToUnixDate}
               />
             </div>
           </OptionsWrapper>
@@ -104,9 +105,9 @@ export const DateConverter: FC = () => {
             <div className={cx({ optionsWrapper: 1, "mt-0": 1 })}>
               <div style={{ position: "relative" }}>
                 <TextInput
+                  placeholder={placeholders.DateConverter.UNIXTextInput}
                   value={unixDate}
                   handleChange={handleUnixDate}
-                  placeholder={placeholders.DateConverter.UNIXTextInput}
                 />
                 {unixDate && (
                   <div className={styles.buttonsWrapper}>
@@ -115,9 +116,10 @@ export const DateConverter: FC = () => {
                 )}
               </div>
               <Button
-                text="Convert"
+                text={hints.Global.ConvertFile}
                 disabled={!unixDate || isNaN(Number(unixDate))}
                 type="primary"
+                subType={["icon"]}
                 onClick={convertUnixToIsoDate}
               />
             </div>

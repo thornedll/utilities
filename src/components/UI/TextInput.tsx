@@ -1,8 +1,8 @@
 import { FC, ChangeEvent } from "react";
-import { ITextInputProps } from "../../ts/interfaces/interfaces";
+import { TextInputProps } from "../../ts/interfaces/interfaces";
 import styles from "./styles.module.scss";
 
-export const TextInput: FC<ITextInputProps> = ({
+export const TextInput: FC<TextInputProps> = ({
   type = "text",
   placeholder = "",
   value,

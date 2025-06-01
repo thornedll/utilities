@@ -12,7 +12,7 @@ export type BtnType =
   | "help"
   | "update";
 
-export type BtnSubType = "outline" | "clear";
+export type BtnSubType = "outline" | "clear" | `outline-${string}` | "icon";
 
 export type ValueType = "string" | "number" | "boolean";
 
@@ -33,6 +33,16 @@ export type PagesData = PageData[];
 export type Option = {
   label: string;
   value: string | ValueType;
+};
+
+export type CronDetails = {
+  second: string;
+  minute: string;
+  hour: string;
+  dayOfMonth: string;
+  month: string;
+  dayOfWeek?: string;
+  year?: string;
 };
 
 export type RandomIntSettings = {

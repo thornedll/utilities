@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { ISVGSpriteProps } from "../../ts/interfaces/interfaces";
+import { SVGSpriteProps } from "../../ts/interfaces/interfaces";
 
 const SVGSpriteSheet = () => {
   return (
@@ -55,11 +55,17 @@ const SVGSpriteSheet = () => {
         />
         <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466" />
       </symbol>
+      <symbol id="chevron-right">
+        <path
+          fillRule="evenodd"
+          d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"
+        />
+      </symbol>
     </svg>
   );
 };
 
-export const SVGSprite: FC<ISVGSpriteProps> = ({
+export const SVGSprite: FC<SVGSpriteProps> = ({
   id,
   viewBox = "0 0 16 16",
   width = "16",

@@ -6,6 +6,7 @@ export {
   randomIntFromInterval,
   randomFractionFromInterval,
   rndRegNumber,
+  rndUuid,
 } from "./randoms";
 
 export const copy = async (

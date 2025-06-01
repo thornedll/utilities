@@ -3,6 +3,7 @@ import {
   DateConverter,
   JsonConverter,
   JsonDiff,
+  CronParser,
   RandomGenerators,
 } from "./components/pages";
 import { Navigation } from "./components/blocks";
@@ -18,6 +19,7 @@ function App() {
           element={<JsonConverter />}
         ></Route>
         <Route path="utilities/jsonDiff" element={<JsonDiff />}></Route>
+        <Route path="utilities/cronParser" element={<CronParser />}></Route>
         <Route
           path="utilities/randomGenerators"
           element={<RandomGenerators />}

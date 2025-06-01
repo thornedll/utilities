@@ -1,8 +1,8 @@
 import { FC, useRef, ChangeEvent, KeyboardEvent } from "react";
-import { ITextAreaProps } from "../../ts/interfaces/interfaces";
+import { TextAreaProps } from "../../ts/interfaces/interfaces";
 import styles from "./styles.module.scss";
 
-export const TextArea: FC<ITextAreaProps> = ({
+export const TextArea: FC<TextAreaProps> = ({
   placeholder,
   value,
   disabled = false,

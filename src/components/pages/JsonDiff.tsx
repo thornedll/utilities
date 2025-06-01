@@ -1,7 +1,7 @@
 import { FC, useState, Dispatch, ChangeEvent, SetStateAction } from "react";
 import classNames from "classnames/bind";
 import { Button, FileInput, TextArea } from "../UI";
-import { IDiffResult } from "../../ts/interfaces/interfaces";
+import { DiffResult } from "../../ts/interfaces/interfaces";
 import { hints, placeholders } from "../../constants";
 import { setFormattedJson } from "../../utils";
 import styles from "./styles.module.scss";
@@ -13,7 +13,7 @@ export const JsonDiff: FC = () => {
   const [json2, setJson2] = useState<string>("");
   const [fileName1, setFileName1] = useState<string>("");
   const [fileName2, setFileName2] = useState<string>("");
-  const [diffs, setDiffs] = useState<IDiffResult[]>([]);
+  const [diffs, setDiffs] = useState<DiffResult[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   const compareJson = () => {
@@ -24,7 +24,7 @@ export const JsonDiff: FC = () => {
       const obj1 = json1 ? JSON.parse(json1) : {};
       const obj2 = json2 ? JSON.parse(json2) : {};
 
-      const differences: IDiffResult[] = [];
+      const differences: DiffResult[] = [];
 
       const compareObjects = (obj1: any, obj2: any, path = "") => {
         const allKeys = new Set([...Object.keys(obj1), ...Object.keys(obj2)]);
@@ -111,11 +111,14 @@ export const JsonDiff: FC = () => {
                 }
                 accept="application/json"
               />
-              <div>{fileName1 && `Current file: ${fileName1}`}</div>
+              {fileName1 ? (
+                <div>{`Current file: ${fileName1}`}</div>
+              ) : (
+                <span className={cx({ hint: 1 })}>
+                  {hints.Global.UploadFileHint}
+                </span>
+              )}
             </div>
-            <span className={cx({ hint: 1, "mt-6": 1 })}>
-              {hints.Global.UploadFileHint}
-            </span>
           </div>
           <div className={styles.headerWrapper}>
             <h4>JSON 1</h4>
@@ -153,11 +156,14 @@ export const JsonDiff: FC = () => {
                 }
                 accept="application/json"
               />
-              <div>{fileName2 && `Current file: ${fileName2}`}</div>
+              {fileName2 ? (
+                <div>{`Current file: ${fileName2}`}</div>
+              ) : (
+                <span className={cx({ hint: 1 })}>
+                  {hints.Global.UploadFileHint}
+                </span>
+              )}
             </div>
-            <span className={cx({ hint: 1, "mt-6": 1 })}>
-              {hints.Global.UploadFileHint}
-            </span>
           </div>
           <div className={styles.headerWrapper}>
             <h4>JSON 2</h4>
@@ -189,10 +195,11 @@ export const JsonDiff: FC = () => {
       </div>
       <div className={styles.optionsWrapper}>
         <Button
-          type="primary"
-          onClick={compareJson}
           text={hints.Global.CompareFiles}
           disabled={json1 && json2 ? false : true}
+          type="primary"
+          subType={["icon"]}
+          onClick={compareJson}
         />
         {error && <div className={styles.error}>{error}</div>}
       </div>

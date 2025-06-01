@@ -18,19 +18,22 @@ import {
   randomFractionFromInterval,
   randomIntFromInterval,
   rndRegNumber,
+  rndUuid,
 } from "../../utils";
 import styles from "./styles.module.scss";
 
 const cx = classNames.bind(styles);
 
 export const RandomGenerators: FC = () => {
+  const [grzBtnType, setGrzBtnType] = useState<BtnType>("copy");
+  const [uuidBtnType, setUuidBtnType] = useState<BtnType>("copy");
   const [intBtnType, setIntBtnType] = useState<BtnType>("copy");
   const [decimalBtnType, setDecimalBtnType] = useState<BtnType>("copy");
-  const [grzBtnType, setGrzBtnType] = useState<BtnType>("copy");
 
   //* Strings
   const [grzCountry, setGrzCountry] = useState<Option>(countries[0]);
   const [grz, setGrz] = useState<string>(rndRegNumber("ru"));
+  const [uuid, setUuid] = useState<string>(rndUuid());
 
   const changeGrz = (): void => {
     setGrz(rndRegNumber(grzCountry.value));
@@ -38,6 +41,9 @@ export const RandomGenerators: FC = () => {
   const changeCountry = (country: Option): void => {
     setGrzCountry(country);
     setGrz(rndRegNumber(country.value));
+  };
+  const changeUuid = (): void => {
+    setUuid(rndUuid());
   };
 
   //* Numbers
@@ -111,6 +117,26 @@ export const RandomGenerators: FC = () => {
             value={grzCountry}
             handleChange={changeCountry}
           />
+        </div>
+      </div>
+      <div className={styles.optionsWrapper}>
+        <div className={styles.singleInputWrapper}>
+          <TextInput
+            value={uuid}
+            disabled
+            id="uuid"
+            labelText={hints.RandomGenerators.StringGenerators.Uuid}
+            style={{ width: "430px" }}
+          />
+          <div className={styles.buttonsWrapper}>
+            <Button
+              text="copyUuid"
+              type={uuidBtnType}
+              tooltipPlace="top"
+              onClick={() => copy(uuid, setUuidBtnType)}
+            />
+            <Button type="update" tooltipPlace="top" onClick={changeUuid} />
+          </div>
         </div>
       </div>
       <h4 className={styles["mt-12"]}>{hints.RandomGenerators.NumberHeader}</h4>

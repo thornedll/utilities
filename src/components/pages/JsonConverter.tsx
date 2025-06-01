@@ -187,79 +187,12 @@ export const JsonConverter: FC = () => {
       <h4 className={styles["mt-12"]}>{hints.JsonConverter.UploadHeader}</h4>
       <div className={styles.optionsWrapper}>
         <FileInput handleChange={uploadFile} accept="application/json" />
-        <div>{file && `Current file: ${file.name}`}</div>
+        {file ? (
+          <div>{`Current file: ${file.name}`}</div>
+        ) : (
+          <span className={cx({ hint: 1 })}>{hints.Global.UploadFileHint}</span>
+        )}
       </div>
-      <span className={cx({ hint: 1, "mt-6": 1 })}>
-        {hints.Global.UploadFileHint}
-      </span>
-      {fileString && (
-        <>
-          <h4 className={styles["mt-12"]}>
-            {hints.JsonConverter.SettingsHeader}
-          </h4>
-          <div className={styles.optionsWrapper}>
-            <div className={styles.checksWrapper}>
-              <Check
-                checked={isCaseChange}
-                id="changeCase"
-                labelText="camelCase -> UpperCamelCase"
-                handleChange={handleCaseChange}
-              />
-              <Check
-                checked={isKeyValueChange}
-                id="changeKeyValues"
-                labelText="Change key values"
-                handleChange={toggleKeyValueChange}
-              />
-              <ul className={styles.keyValueInputs}>
-                {keyValueChanges.map((element, index) => {
-                  return (
-                    <li key={index}>
-                      <DoubleInput
-                        numberKey={index + 1}
-                        value={element.key}
-                        secondValue={element.value}
-                        selectValue={element.type}
-                        placeholder="Key (full path)"
-                        secondPlaceholder="New value"
-                        handleKeyChange={handleKeyChange}
-                        handleValueChange={handleValueChange}
-                        handleTypeChange={handleTypeChange}
-                        addInputs={addKeyValueChange}
-                        removeInputs={removeKeyValueChange}
-                      />
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          </div>
-          <div className={styles.optionsWrapper}>
-            <Button
-              text={hints.Global.ConvertFile}
-              disabled={!(fileString && (isCaseChange || isKeyValueChange))}
-              type="primary"
-              onClick={
-                file
-                  ? () => convertFile(isCaseChange, isKeyValueChange, file)
-                  : () =>
-                      convertFileString(
-                        isCaseChange,
-                        isKeyValueChange,
-                        fileString
-                      )
-              }
-            />
-            <Button
-              text="Clear"
-              disabled={!(fileString || jsonString)}
-              type="primary"
-              subType={["clear"]}
-              onClick={clearStrings}
-            />
-          </div>
-        </>
-      )}
       <div className={styles.optionsWrapper}>
         <div className={styles.jsonInputWrapper}>
           <div className={styles.headerWrapper}>
@@ -315,6 +248,75 @@ export const JsonConverter: FC = () => {
           </div>
         </div>
       </div>
+      {fileString && (
+        <>
+          <h4 className={styles["mt-12"]}>
+            {hints.JsonConverter.SettingsHeader}
+          </h4>
+          <div className={styles.optionsWrapper}>
+            <div className={styles.checksWrapper}>
+              <Check
+                checked={isCaseChange}
+                id="changeCase"
+                labelText="camelCase -> UpperCamelCase"
+                handleChange={handleCaseChange}
+              />
+              <Check
+                checked={isKeyValueChange}
+                id="changeKeyValues"
+                labelText="Change key values"
+                handleChange={toggleKeyValueChange}
+              />
+              <ul className={styles.keyValueInputs}>
+                {keyValueChanges.map((element, index) => {
+                  return (
+                    <li key={index}>
+                      <DoubleInput
+                        numberKey={index + 1}
+                        value={element.key}
+                        secondValue={element.value}
+                        selectValue={element.type}
+                        placeholder="Key (full path)"
+                        secondPlaceholder="New value"
+                        handleKeyChange={handleKeyChange}
+                        handleValueChange={handleValueChange}
+                        handleTypeChange={handleTypeChange}
+                        addInputs={addKeyValueChange}
+                        removeInputs={removeKeyValueChange}
+                      />
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </div>
+          <div className={styles.optionsWrapper}>
+            <Button
+              text={hints.Global.ConvertFile}
+              disabled={!(fileString && (isCaseChange || isKeyValueChange))}
+              type="primary"
+              subType={["icon"]}
+              onClick={
+                file
+                  ? () => convertFile(isCaseChange, isKeyValueChange, file)
+                  : () =>
+                      convertFileString(
+                        isCaseChange,
+                        isKeyValueChange,
+                        fileString
+                      )
+              }
+            />
+            <Button
+              text="Clear"
+              disabled={!(fileString || jsonString)}
+              type="primary"
+              subType={["clear", "outline", "outline-red"]}
+              onClick={clearStrings}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 };

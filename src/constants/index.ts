@@ -23,6 +23,11 @@ export const navigation: PagesData = [
     component: "JsonDiff",
   },
   {
+    url: "utilities/cronParser",
+    visibleName: "Cron Parser",
+    component: "CronParser",
+  },
+  {
     url: "utilities/randomGenerators",
     visibleName: "Random Generators",
     component: "RandomGenerators",
@@ -89,6 +94,7 @@ export const hints = {
     UploadFile: "Choose file",
     CompareFiles: "Compare",
     ConvertFile: "Convert",
+    ParseFile: "Parse",
     UploadFileHint: "* or fill in the field below",
   },
   DateConverter: {
@@ -100,19 +106,28 @@ export const hints = {
       "<p>Enter UNIX timestamp to convert to ISO 8601 formatted date</p><p>Changing timezone will modify the result date and time</p>",
   },
   JsonConverter: {
-    UploadHeader: "1. Upload file to convert*",
-    SettingsHeader: "2. Choose settings",
+    UploadHeader: "Upload file to convert*",
+    SettingsHeader: "Choose settings",
   },
   JsonDiff: {
     UploadHeader: "Upload files to compare*",
     NoDifference: "No difference yet...",
     ParsingError: "Parsing JSON Error!",
   },
+  CronParser: {
+    ParseHeader: "Cron Expression",
+    EnterCron: "Enter Cron Expression",
+    EnterCronError:
+      "A cron expression must have 5 - 7 segments separated by space",
+    DescriptionHeader: "Cron Expression Description",
+    DetailsHeader: "Parsing Details",
+  },
   RandomGenerators: {
     StringHeader: "String Generators",
     NumberHeader: "Number Generators",
     StringGenerators: {
       Grz: "Vehicle registration number",
+      Uuid: "UUID",
     },
     NumberGenerators: {
       Integer: "Integer",
