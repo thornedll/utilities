@@ -130,7 +130,8 @@ export const DateConverter: FC = () => {
                 value={isoResult ? isoResult : ""}
                 disabled
                 id="resultISO"
-                labelText="Result:"
+                labelText="Result"
+                maxLength={12}
                 style={{ width: "300px" }}
               />
               <div className={styles.buttonsWrapper}>

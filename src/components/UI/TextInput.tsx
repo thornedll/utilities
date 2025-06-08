@@ -11,6 +11,7 @@ export const TextInput: FC<TextInputProps> = ({
   labelText,
   pattern,
   max,
+  maxLength,
   style,
   handleChange = () => {},
 }) => {
@@ -37,6 +38,7 @@ export const TextInput: FC<TextInputProps> = ({
         id={id}
         pattern={pattern}
         max={max}
+        maxLength={maxLength}
         style={style}
       />
     </>

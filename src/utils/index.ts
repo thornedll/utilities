@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import _ from "lodash";
 import { BtnType, Option } from "../ts/types/types";
+import { months, daysOfWeek } from "../constants";
 
 export {
   randomIntFromInterval,
@@ -132,4 +133,149 @@ export const changeIsoFromUnixDateTimezone = (
 
   timezoneSetter(timezone);
   dateSetter(result);
+};
+
+export const getNumberStringWithZero = (numberString: string): string => {
+  return Number(numberString) < 10 ? "0" + numberString : numberString;
+};
+
+export const parseCronDetail = (cronValue: string, type: string) => {
+  const parseText = (value: string): string => {
+    if (/^\d{1,2}$/gi.test(value)) {
+      if (type === "month") {
+        return months[Number(value) - 1].slice(0, 3);
+      } else if (type === "dayOfWeek") {
+        return daysOfWeek[Number(value) - 1].slice(0, 3);
+      } else
+        return (
+          value +
+          (Number(value) === 1
+            ? "st"
+            : Number(value) === 2
+            ? "nd"
+            : Number(value) === 3
+            ? "rd"
+            : "th")
+        );
+    } else if (/^\*$/gi.test(value)) {
+      return "every";
+    } else if (/^\*\/\d{1,2}$/gi.test(value)) {
+      return (
+        "every " +
+        value.slice(2) +
+        (Number(value.slice(2)) === 1
+          ? "st"
+          : Number(value.slice(2)) === 2
+          ? "nd"
+          : Number(value.slice(2)) === 3
+          ? "rd"
+          : "th")
+      );
+    } else return "";
+  };
+  return {
+    value: cronValue,
+    text: parseText(cronValue),
+    type: type.replace(/([a-z])([A-Z])/g, "$1 $2").toLowerCase(),
+  };
+};
+
+export const cronTimeReducer = (
+  previousValue: string,
+  currentValue: string,
+  currentIndex: number,
+  array: string[]
+): string => {
+  if (
+    /^\d{1,2}$/gi.test(array[0]) &&
+    /^\d{1,2}$/gi.test(array[1]) &&
+    /^\d{1,2}$/gi.test(array[2])
+  ) {
+    return (
+      "At " +
+      getNumberStringWithZero(array[2]) +
+      ":" +
+      getNumberStringWithZero(array[1]) +
+      ":" +
+      getNumberStringWithZero(array[0]) +
+      ", "
+    );
+  } else {
+    if (/^\d{1,2}$/gi.test(currentValue)) {
+      return (
+        previousValue +
+        `${
+          currentIndex === 0
+            ? "At " + currentValue + " seconds past the minute, "
+            : currentIndex === 1
+            ? "at " + currentValue + " minutes past the hour, "
+            : "between " +
+              getNumberStringWithZero(currentValue) +
+              ":00 and " +
+              getNumberStringWithZero(currentValue) +
+              ":59, "
+        }`
+      );
+    } else if (/^\*$/gi.test(currentValue)) {
+      return (
+        previousValue +
+        `every ${
+          currentIndex === 0 ? "second" : currentIndex === 1 ? "minute" : "hour"
+        }, `
+      );
+    } else if (/^\*\/\d{1,2}$/gi.test(currentValue)) {
+      return (
+        previousValue +
+        `every ${currentValue.slice(2)} ${
+          currentIndex === 0 ? "second" : currentIndex === 1 ? "minute" : "hour"
+        }s, `
+      );
+    } else return "";
+  }
+};
+
+export const cronDateReducer = (
+  previousValue: string,
+  currentValue: string,
+  currentIndex: number
+): string => {
+  const month = months[Number(currentValue) - 1];
+  const dayOfWeek = daysOfWeek[Number(currentValue) - 1];
+
+  if (/^\d{1,2}$/gi.test(currentValue)) {
+    return (
+      previousValue +
+      `${
+        currentIndex === 0
+          ? `on day ${currentValue} of the month, `
+          : currentIndex === 1
+          ? `only in ${month ? month : "unknown month"}, `
+          : currentIndex === 2
+          ? `and on ${dayOfWeek ? dayOfWeek : "unknown day of week"}, `
+          : `only in ${1900 + Number(currentValue)}`
+      }`
+    );
+  } else if (/^\*$/gi.test(currentValue)) {
+    return (
+      previousValue +
+      `every ${
+        currentIndex === 0 || currentIndex === 2
+          ? "day"
+          : currentIndex === 1
+          ? "month"
+          : "year"
+      }, `
+    );
+  } else if (/^\*\/\d{1,2}$/gi.test(currentValue)) {
+    return (
+      previousValue +
+      `every ${currentValue.slice(2)} ${
+        currentIndex === 0 || currentIndex === 2
+          ? "day"
+          : currentIndex === 1
+          ? "month"
+          : "year"
+      }s, `
+    );
+  } else return "";
 };

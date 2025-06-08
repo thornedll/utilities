@@ -35,6 +35,7 @@ input[type="text"],
 input[type="number"] {
   height: 32px;
   border-radius: 6px;
+  text-overflow: ellipsis;
   &:focus {
     outline-color: variables.$outline;
     outline-offset: 1px;

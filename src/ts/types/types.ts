@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { cronValueTypes } from "../../constants";
 
 export type BtnType =
   | "primary"
@@ -35,15 +36,15 @@ export type Option = {
   value: string | ValueType;
 };
 
-export type CronDetails = {
-  second: string;
-  minute: string;
-  hour: string;
-  dayOfMonth: string;
-  month: string;
-  dayOfWeek?: string;
-  year?: string;
+export type CronValueType = (typeof cronValueTypes)[number];
+
+export type CronTypeDetail = {
+  [value: string]: string;
+  text: string;
+  type: CronValueType;
 };
+
+export type CronDetails = CronTypeDetail[];
 
 export type RandomIntSettings = {
   min: number;

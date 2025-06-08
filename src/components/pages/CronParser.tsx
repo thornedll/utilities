@@ -1,8 +1,13 @@
 import { FC, useState } from "react";
 import { Button, TextInput } from "../UI";
 import { BtnType, CronDetails } from "../../ts/types/types";
-import { copy } from "../../utils";
-import { hints } from "../../constants";
+import {
+  copy,
+  cronDateReducer,
+  cronTimeReducer,
+  parseCronDetail,
+} from "../../utils";
+import { cronValueTypes, hints } from "../../constants";
 import styles from "./styles.module.scss";
 
 export const CronParser: FC = () => {
@@ -18,38 +23,44 @@ export const CronParser: FC = () => {
   const changeCronDescription = (cronDescription: string): void => {
     setCronDescription(cronDescription);
   };
-  const changeCronDetails = (cronDetails: CronDetails): void => {
+  const changeCronDetails = (cronDetails: CronDetails | null): void => {
     setCronDetails(cronDetails);
   };
 
   const parseCron = (cron: string): void => {
     const cronValues = cron.split(" ");
     if (cronValues.length > 4 && cronValues.length < 8) {
-      cronError && setCronError(null);
-      const cronDetails = {
-        second: cronValues[0],
-        minute: cronValues[1],
-        hour: cronValues[2],
-        dayOfMonth: cronValues[3],
-        month: cronValues[4],
-        dayOfWeek: cronValues[5],
-        year: cronValues[6],
-      };
-      changeCronDetails(cronDetails);
-      changeCronDescription(
-        `At ${cronDetails.hour}:${cronDetails.minute}:${cronDetails.second}, on day ${cronDetails.dayOfMonth} of the month, every ${cronDetails.month} months`
-      );
+      if (
+        /^(((\d*)|(\*)|(\*\/\d*)) ){4,6}((\d*)|(\*)|(\*\/\d*))$/gi.test(cron)
+      ) {
+        cronError && setCronError(null);
+        const newCronDetails = cronValues.map((value, index) => {
+          return parseCronDetail(value, cronValueTypes[index]);
+        });
+        changeCronDetails(newCronDetails);
+        const time = cronValues.slice(0, 3).reduce(cronTimeReducer, "");
+        const date = cronValues.slice(3).reduce(cronDateReducer, "");
+        changeCronDescription(
+          time.charAt(0).toUpperCase() +
+            time.slice(1) +
+            (date.slice(-2) === ", " ? date.slice(0, -2) : date)
+        );
+      } else {
+        setCronError(hints.CronParser.FormatCronError);
+        changeCronDescription("");
+        changeCronDetails(null);
+      }
     } else {
       setCronError(hints.CronParser.EnterCronError);
       changeCronDescription("");
+      changeCronDetails(null);
     }
   };
-  console.log(cronDetails);
 
   return (
     <div className={styles.pageWrapper}>
       <h2>Cron Parser</h2>
-      <h4 className={styles["mt-12"]}>{hints.CronParser.ParseHeader}</h4>
+      <h3 className={styles["mt-12"]}>{hints.CronParser.ParseHeader}</h3>
       <div className={styles.optionsWrapper}>
         <div style={{ position: "relative" }}>
           <TextInput
@@ -64,6 +75,12 @@ export const CronParser: FC = () => {
             </div>
           )}
         </div>
+        <Button
+          text="Set example"
+          type="primary"
+          subType={["outline"]}
+          onClick={() => changeCron("0 0 21 */3 * 1")}
+        />
         {cronError && <div className={styles.error}>{cronError}</div>}
       </div>
       <div className={styles.optionsWrapper}>
@@ -75,13 +92,13 @@ export const CronParser: FC = () => {
           onClick={() => parseCron(cron)}
         />
       </div>
-      <h4 className={styles["mt-12"]}>{hints.CronParser.DescriptionHeader}</h4>
+      <h3 className={styles["mt-12"]}>{hints.CronParser.DescriptionHeader}</h3>
       <div className={styles.optionsWrapper}>
-        <div style={{ position: "relative" }}>
+        <div style={{ position: "relative", width: "100%" }}>
           <TextInput
             value={cronDescription}
             disabled
-            style={{ width: "400px" }}
+            style={{ width: "100%" }}
           />
           <div className={styles.buttonsWrapper}>
             <Button
@@ -92,7 +109,26 @@ export const CronParser: FC = () => {
           </div>
         </div>
       </div>
-      <h4 className={styles["mt-12"]}>{hints.CronParser.DetailsHeader}</h4>
+      <div className={styles.resultWrapper}>
+        <div className={styles.results}>
+          <h3 className={styles["mt-12"]}>{hints.CronParser.DetailsHeader}</h3>
+          <table className={styles["mt-12"]}>
+            <tbody>
+              {cronDetails &&
+                Object.keys(cronDetails[0]).map((key, index) => (
+                  <tr
+                    key={index}
+                    style={index === 0 ? { fontWeight: 600 } : {}}
+                  >
+                    {cronDetails.map((detail, index) => (
+                      <td key={index}>{detail[key]}</td>
+                    ))}
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };

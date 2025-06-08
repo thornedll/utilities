@@ -119,6 +119,7 @@ export const hints = {
     EnterCron: "Enter Cron Expression",
     EnterCronError:
       "A cron expression must have 5 - 7 segments separated by space",
+    FormatCronError: "Wrong cron expression format",
     DescriptionHeader: "Cron Expression Description",
     DetailsHeader: "Parsing Details",
   },
@@ -145,6 +146,41 @@ export const countries: Option[] = [
     label: "BY",
     value: "by",
   },
+];
+
+export const cronValueTypes: string[] = [
+  "second",
+  "minute",
+  "hour",
+  "dayOfMonth",
+  "month",
+  "dayOfWeek",
+  "year",
+];
+
+export const months: string[] = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+export const daysOfWeek: string[] = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
 ];
 
 export const regNumberLetters = {

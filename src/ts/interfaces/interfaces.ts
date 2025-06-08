@@ -74,6 +74,7 @@ export interface TextInputProps {
   labelText?: string;
   pattern?: InputHTMLAttributes<HTMLInputElement>["pattern"];
   max?: InputHTMLAttributes<HTMLInputElement>["max"];
+  maxLength?: InputHTMLAttributes<HTMLInputElement>["maxLength"];
   style?: CSSProperties;
   handleChange?: (e: string) => void;
 }
