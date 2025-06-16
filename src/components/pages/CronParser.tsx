@@ -98,7 +98,7 @@ export const CronParser: FC = () => {
           <TextInput
             value={cronDescription}
             disabled
-            style={{ width: "100%" }}
+            style={{ width: "calc(100% - 32px)" }}
           />
           <div className={styles.buttonsWrapper}>
             <Button

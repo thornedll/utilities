@@ -4,6 +4,7 @@ export { Check } from "./Check";
 export { DateTimePicker } from "./DateTimePicker";
 export { DoubleInput } from "./DoubleInput";
 export { FileInput } from "./FileInput";
+export { Loader } from "./Loader";
 export { TextArea } from "./TextArea";
 export { TextInput } from "./TextInput";
 export { BaseTooltip } from "./BaseTooltip";

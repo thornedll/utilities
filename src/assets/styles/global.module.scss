@@ -135,6 +135,23 @@ tr {
   align-items: flex-start !important;
 }
 
-.fit-content {
+.align-center {
+  align-items: center !important;
+}
+
+.w-fc {
   width: fit-content !important;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.fd-column {
+  flex-direction: column !important;
+}
+
+.b-0 {
+  bottom: 0 !important;
+  top: auto !important;
 }

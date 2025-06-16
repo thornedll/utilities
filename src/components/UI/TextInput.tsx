@@ -4,8 +4,9 @@ import styles from "./styles.module.scss";
 
 export const TextInput: FC<TextInputProps> = ({
   type = "text",
-  placeholder = "",
   value,
+  placeholder = "",
+  hint,
   disabled = false,
   id,
   labelText,
@@ -26,7 +27,8 @@ export const TextInput: FC<TextInputProps> = ({
         style={labelText && id ? {} : { display: "none" }}
         className={styles.textInputLabel}
       >
-        {labelText}
+        <p>{labelText}</p>
+        {hint && <span className={styles.hint}>{hint}</span>}
       </label>
       <input
         type={type}

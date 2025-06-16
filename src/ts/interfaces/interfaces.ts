@@ -69,6 +69,7 @@ export interface TextInputProps {
   type?: InputHTMLAttributes<HTMLInputElement>["type"];
   value: InputHTMLAttributes<HTMLInputElement>["value"];
   placeholder?: string;
+  hint?: string;
   disabled?: boolean;
   id?: string;
   labelText?: string;

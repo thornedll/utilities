@@ -43,6 +43,28 @@
   gap: variables.$base-gap;
   position: relative;
   margin-top: variables.$base-gap;
+  .verticalWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: variables.$base-gap;
+  }
+  .imageWrapper {
+    height: 300px;
+    min-width: 400px;
+    max-width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid variables.$light-border;
+    border-radius: variables.$wrapper-radius;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUAQMAAAC3R49OAAAABlBMVEXv7+////9mUzfqAAAAFElEQVQIW2NksN/ISAz+f9CBGAwAxtEddZlnB4IAAAAASUVORK5CYII=);
+    img {
+      max-height: 300px;
+      max-width: -webkit-fill-available;
+      z-index: 2;
+    }
+  }
 }
 
 .jsonInputWrapper {
@@ -99,4 +121,20 @@
   display: flex;
   align-items: center;
   gap: variables.$base-gap;
+}
+
+.imageHeader {
+  width: 400px;
+  height: 20px;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  overflow: hidden;
+  span {
+    white-space: nowrap;
+    &:not(.hint) {
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
 }

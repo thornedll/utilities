@@ -6,6 +6,8 @@ import {
   RandomIntSettings,
 } from "../ts/types/types";
 
+export { hints } from "./hints";
+
 export const navigation: PagesData = [
   {
     url: "utilities/",
@@ -13,22 +15,27 @@ export const navigation: PagesData = [
     component: "DateConverter",
   },
   {
-    url: "utilities/jsonConverter",
+    url: "utilities/json-converter",
     visibleName: "JSON Converter",
     component: "JsonConverter",
   },
   {
-    url: "utilities/jsonDiff",
+    url: "utilities/json-diff",
     visibleName: "JSON Difference",
     component: "JsonDiff",
   },
   {
-    url: "utilities/cronParser",
+    url: "utilities/cron-parser",
     visibleName: "Cron Parser",
     component: "CronParser",
   },
   {
-    url: "utilities/randomGenerators",
+    url: "utilities/image-converter",
+    visibleName: "Image Converter",
+    component: "ImageConverter",
+  },
+  {
+    url: "utilities/random-generators",
     visibleName: "Random Generators",
     component: "RandomGenerators",
   },
@@ -89,54 +96,6 @@ export const placeholders = {
   },
 };
 
-export const hints = {
-  Global: {
-    UploadFile: "Choose file",
-    CompareFiles: "Compare",
-    ConvertFile: "Convert",
-    ParseFile: "Parse",
-    UploadFileHint: "* or fill in the field below",
-  },
-  DateConverter: {
-    Input: "Input",
-    Output: "Output",
-    ISOToUnixHelp:
-      "<p>Choose date and time with timezone to convert to UNIX timestamp</p><p>Current date and time are chosen by default</p>",
-    UnixToISOHelp:
-      "<p>Enter UNIX timestamp to convert to ISO 8601 formatted date</p><p>Changing timezone will modify the result date and time</p>",
-  },
-  JsonConverter: {
-    UploadHeader: "Upload file to convert*",
-    SettingsHeader: "Choose settings",
-  },
-  JsonDiff: {
-    UploadHeader: "Upload files to compare*",
-    NoDifference: "No difference yet...",
-    ParsingError: "Parsing JSON Error!",
-  },
-  CronParser: {
-    ParseHeader: "Cron Expression",
-    EnterCron: "Enter Cron Expression",
-    EnterCronError:
-      "A cron expression must have 5 - 7 segments separated by space",
-    FormatCronError: "Wrong cron expression format",
-    DescriptionHeader: "Cron Expression Description",
-    DetailsHeader: "Parsing Details",
-  },
-  RandomGenerators: {
-    StringHeader: "String Generators",
-    NumberHeader: "Number Generators",
-    StringGenerators: {
-      Grz: "Vehicle registration number",
-      Uuid: "UUID",
-    },
-    NumberGenerators: {
-      Integer: "Integer",
-      Decimal: "Decimal",
-    },
-  },
-};
-
 export const countries: Option[] = [
   {
     label: "RU",
@@ -181,6 +140,16 @@ export const daysOfWeek: string[] = [
   "Friday",
   "Saturday",
   "Sunday",
+];
+
+export const imageExtensions = [
+  "jpg",
+  "jpeg",
+  "png",
+  "bmp",
+  "gif",
+  "tiff",
+  "webp",
 ];
 
 export const regNumberLetters = {

@@ -54,3 +54,8 @@ export type RandomIntSettings = {
 export type RandomDecimalSettings = RandomIntSettings & {
   digits: number;
 };
+
+export type ImageDimensions = {
+  height: number;
+  width: number;
+};
