@@ -1,6 +1,10 @@
 @use "../../assets/styles/variables.module";
 @use "../../assets/styles/global.module";
 
+.pageWrapper {
+  padding: 0.5rem 1rem;
+}
+
 .headerWrapper {
   display: flex;
   align-items: end;

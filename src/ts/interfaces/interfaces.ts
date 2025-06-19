@@ -1,6 +1,7 @@
 import {
   ChangeEvent,
   CSSProperties,
+  HTMLAttributes,
   InputHTMLAttributes,
   ReactNode,
 } from "react";
@@ -110,4 +111,5 @@ export interface SVGSpriteProps {
   width?: string;
   height?: string;
   fill?: string;
+  className?: HTMLAttributes<string>["className"];
 }

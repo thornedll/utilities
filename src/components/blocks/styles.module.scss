@@ -1,45 +1,78 @@
 @use "../../assets/styles/variables.module";
 
+.navigation {
+  height: 100vh;
+  position: sticky;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: variables.$green-light;
+  transition: width 0.2s;
+  &SwitchWrapper {
+    padding: variables.$base-gap 0;
+    button {
+      margin-left: auto;
+    }
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
 .header {
+  width: 100%;
   display: flex;
   align-items: center;
-  margin-bottom: variables.$base-gap;
+  padding: 0.5rem 1rem;
 }
 
-.nav {
+nav {
   padding: variables.$base-gap;
-  display: flex;
-}
-
-.navLinkContainer {
-  padding: 0 variables.$base-gap;
-  border-left: 2px solid variables.$green;
-  &:first-of-type {
-    border: none;
-  }
 }
 
 .navLink {
+  width: 100%;
+  height: 100%;
+  padding: variables.$base-gap / 2 variables.$base-gap;
+  border-radius: 6px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
   position: relative;
   color: variables.$text;
   text-decoration: none;
-  &::after {
-    content: "";
+  transition: all 0.2s;
+  &:hover {
+    color: variables.$white;
     background-color: variables.$green;
-    width: 0;
   }
-  &:hover,
   &Active {
-    &::after {
-      content: "";
-      display: block;
-      position: absolute;
-      width: 100%;
-      height: 2px;
-      bottom: -4px;
-      left: 0%;
-      border-radius: 1px;
-      transition: all 0.5s;
+    color: variables.$white;
+    background-color: variables.$green;
+  }
+  svg {
+    width: 24px;
+    height: 24px;
+    transition: all 0.2s;
+    overflow: visible;
+  }
+  &Text {
+    visibility: visible;
+    text-wrap-mode: nowrap;
+    overflow: hidden;
+    transition:
+      width,
+      height 0.2s;
+    &Hidden {
+      width: 0;
+      height: 0;
+      visibility: hidden;
+      transition:
+        width,
+        height 0.2s;
     }
   }
 }
@@ -96,4 +129,12 @@
       }
     }
   }
+}
+
+.gap-0 {
+  gap: 0;
+}
+
+.m-auto {
+  margin: 0 auto !important;
 }

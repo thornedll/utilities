@@ -56,25 +56,26 @@ export const ImageConverter: FC = () => {
       <div className={styles.optionsWrapper}>
         <FileInput
           handleChange={uploadFile}
-          accept={imageExtensions
-            .map((extension) => {
-              return "." + extension;
-            })
-            .join(",")}
+          accept={imageExtensions.map((extension) => "." + extension).join(",")}
         />
       </div>
-      <div className={cx({ imageHeader: 1, "mt-12": 1 })}>
-        <span>{file && file.name}</span>
-        <span className={styles.hint}>
-          {imageDimensions
-            ? imageDimensions.width + " x " + imageDimensions.height + " pixels"
-            : "0 x 0 pixels"}
-        </span>
-      </div>
       <div className={styles.resultWrapper}>
-        <div className={styles.imageWrapper}>
-          {imageLoading && <Loader />}
-          {result && <img src={result} alt="uploaded img" />}
+        <div className={cx({ resultWrapper: 1, "fd-column": 1, "mt-0": 1 })}>
+          <div className={cx({ imageHeader: 1 })}>
+            <span>{file && file.name}</span>
+            <span className={styles.hint}>
+              {imageDimensions
+                ? imageDimensions.width +
+                  " x " +
+                  imageDimensions.height +
+                  " pixels"
+                : "0 x 0 pixels"}
+            </span>
+          </div>
+          <div className={styles.imageWrapper}>
+            {imageLoading && <Loader />}
+            {result && <img src={result} alt="uploaded img" />}
+          </div>
         </div>
         <div className={styles.verticalWrapper}>
           <div

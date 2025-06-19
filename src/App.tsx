@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { Route, Routes } from "react-router";
 import {
   DateConverter,
@@ -7,31 +8,32 @@ import {
   RandomGenerators,
   ImageConverter,
 } from "./components/pages";
-import { Navigation } from "./components/blocks";
+import { Header, Navigation } from "./components/blocks";
 
-function App() {
+export const App: FC = () => {
   return (
-    <div className="App">
+    <div style={{ display: "flex" }}>
       <Navigation />
-      <Routes>
-        <Route path="utilities/" element={<DateConverter />}></Route>
-        <Route
-          path="utilities/json-converter"
-          element={<JsonConverter />}
-        ></Route>
-        <Route path="utilities/json-diff" element={<JsonDiff />}></Route>
-        <Route path="utilities/cron-parser" element={<CronParser />}></Route>
-        <Route
-          path="utilities/image-converter"
-          element={<ImageConverter />}
-        ></Route>
-        <Route
-          path="utilities/random-generators"
-          element={<RandomGenerators />}
-        ></Route>
-      </Routes>
+      <div style={{ width: "100%" }}>
+        <Header />
+        <Routes>
+          <Route path="utilities/" element={<DateConverter />}></Route>
+          <Route
+            path="utilities/json-converter"
+            element={<JsonConverter />}
+          ></Route>
+          <Route path="utilities/json-diff" element={<JsonDiff />}></Route>
+          <Route path="utilities/cron-parser" element={<CronParser />}></Route>
+          <Route
+            path="utilities/image-converter"
+            element={<ImageConverter />}
+          ></Route>
+          <Route
+            path="utilities/random-generators"
+            element={<RandomGenerators />}
+          ></Route>
+        </Routes>
+      </div>
     </div>
   );
-}
-
-export default App;
+};

@@ -11,7 +11,9 @@ export type BtnType =
   | "format"
   | "delete"
   | "help"
-  | "update";
+  | "update"
+  | "bar-left"
+  | "bar-right";
 
 export type BtnSubType = "outline" | "clear" | `outline-${string}` | "icon";
 
@@ -27,6 +29,7 @@ type PageData = {
   url: string;
   visibleName: string;
   component: ReactNode;
+  icon: string;
 };
 
 export type PagesData = PageData[];

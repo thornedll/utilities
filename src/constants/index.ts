@@ -13,31 +13,37 @@ export const navigation: PagesData = [
     url: "utilities/",
     visibleName: "Date Converter",
     component: "DateConverter",
+    icon: "clock",
   },
   {
     url: "utilities/json-converter",
     visibleName: "JSON Converter",
     component: "JsonConverter",
+    icon: "json",
   },
   {
     url: "utilities/json-diff",
     visibleName: "JSON Difference",
     component: "JsonDiff",
+    icon: "file-diff",
   },
   {
     url: "utilities/cron-parser",
     visibleName: "Cron Parser",
     component: "CronParser",
+    icon: "calendar",
   },
   {
     url: "utilities/image-converter",
     visibleName: "Image Converter",
     component: "ImageConverter",
+    icon: "file-image",
   },
   {
     url: "utilities/random-generators",
     visibleName: "Random Generators",
     component: "RandomGenerators",
+    icon: "dice",
   },
 ];
 
