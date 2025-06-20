@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import _ from "lodash";
-import { BtnType, Option } from "../ts/types/types";
+import { Option } from "../ts/types/types";
 import { months, daysOfWeek } from "../constants";
 
 export {
@@ -10,14 +10,9 @@ export {
   rndUuid,
 } from "./randoms";
 
-export const copy = async (
-  text: string | null,
-  changeBtnType: Dispatch<SetStateAction<BtnType>>
-) => {
+export const copy = async (text: string | null) => {
   if (text) {
     await navigator.clipboard.writeText(text);
-    changeBtnType("success");
-    setTimeout(() => changeBtnType("copy"), 1500);
   } else return;
 };
 
@@ -116,7 +111,7 @@ export const setFormattedJson = (
 export const changeIsoFromUnixDateTimezone = (
   isoDateString: string,
   timezone: Option,
-  dateSetter: Dispatch<SetStateAction<string | null>>,
+  dateSetter: Dispatch<SetStateAction<string>>,
   timezoneSetter: Dispatch<SetStateAction<Option>>
 ): void => {
   const timezoneInt = Number(timezone.value);

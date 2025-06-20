@@ -1,6 +1,7 @@
 @use "../../assets/styles/variables.module";
 
 .navigation {
+  width: 250px;
   height: 100vh;
   position: sticky;
   left: 0;
@@ -10,6 +11,9 @@
   justify-content: space-between;
   background-color: variables.$green-light;
   transition: width 0.2s;
+  &Hidden {
+    width: 80px !important;
+  }
   &SwitchWrapper {
     padding: variables.$base-gap 0;
     button {

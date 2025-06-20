@@ -17,6 +17,12 @@ export const CronParser: FC = () => {
   const [cronDescription, setCronDescription] = useState<string>("");
   const [cronDetails, setCronDetails] = useState<CronDetails | null>(null);
 
+  const copyText = (text: string) => {
+    copy(text);
+    setBtnType("success");
+    setTimeout(() => setBtnType("copy"), 1500);
+  };
+
   const changeCron = (cron: string): void => {
     setCron(cron);
   };
@@ -104,7 +110,7 @@ export const CronParser: FC = () => {
             <Button
               type={btnType}
               disabled={!cronDescription}
-              onClick={() => copy(cronDescription, setBtnType)}
+              onClick={() => copyText(cronDescription)}
             />
           </div>
         </div>

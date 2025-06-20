@@ -25,8 +25,14 @@ export const DateConverter: FC = () => {
   const [isoTimezone, setIsoTimezone] = useState<Option>(timezones[3]);
   //* UNIX -> ISO states
   const [unixDate, setUnixDate] = useState<string>("");
-  const [isoResult, setIsoResult] = useState<string | null>(null);
+  const [isoResult, setIsoResult] = useState<string>("");
   const [unixTimezone, setUnixTimezone] = useState<Option>(timezones[0]);
+
+  const copyText = (text: string) => {
+    copy(text);
+    setBtnType("success");
+    setTimeout(() => setBtnType("copy"), 1500);
+  };
 
   const handleUnixDate = (newDate: string): void => {
     setUnixDate(newDate);
@@ -96,7 +102,7 @@ export const DateConverter: FC = () => {
               <Button
                 type={btnType}
                 disabled={unixResult === ""}
-                onClick={() => copy(unixResult, setBtnType)}
+                onClick={() => copyText(unixResult)}
               />
             </div>
           </div>
@@ -142,7 +148,7 @@ export const DateConverter: FC = () => {
                 <Button
                   type={btnType}
                   disabled={!isoResult}
-                  onClick={() => copy(isoResult, setBtnType)}
+                  onClick={() => copyText(isoResult)}
                 />
               </div>
             </div>

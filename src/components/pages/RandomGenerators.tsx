@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { Dispatch, FC, SetStateAction, useState } from "react";
 import classNames from "classnames/bind";
 import { BaseSelect, Button, TextInput } from "../UI";
 import {
@@ -25,10 +25,20 @@ import styles from "./styles.module.scss";
 const cx = classNames.bind(styles);
 
 export const RandomGenerators: FC = () => {
+  //* Global
   const [grzBtnType, setGrzBtnType] = useState<BtnType>("copy");
   const [uuidBtnType, setUuidBtnType] = useState<BtnType>("copy");
   const [intBtnType, setIntBtnType] = useState<BtnType>("copy");
   const [decimalBtnType, setDecimalBtnType] = useState<BtnType>("copy");
+
+  const copyText = (
+    text: string,
+    changeBtnType: Dispatch<SetStateAction<BtnType>>
+  ) => {
+    copy(text);
+    changeBtnType("success");
+    setTimeout(() => changeBtnType("copy"), 1500);
+  };
 
   //* Strings
   const [grzCountry, setGrzCountry] = useState<Option>(countries[0]);
@@ -106,7 +116,7 @@ export const RandomGenerators: FC = () => {
               text="copyGrz"
               type={grzBtnType}
               tooltipPlace="top"
-              onClick={() => copy(grz, setGrzBtnType)}
+              onClick={() => copyText(grz, setGrzBtnType)}
             />
             <Button type="update" tooltipPlace="top" onClick={changeGrz} />
           </div>
@@ -133,7 +143,7 @@ export const RandomGenerators: FC = () => {
               text="copyUuid"
               type={uuidBtnType}
               tooltipPlace="top"
-              onClick={() => copy(uuid, setUuidBtnType)}
+              onClick={() => copyText(uuid, setUuidBtnType)}
             />
             <Button type="update" tooltipPlace="top" onClick={changeUuid} />
           </div>
@@ -155,7 +165,7 @@ export const RandomGenerators: FC = () => {
               text="copyInt"
               type={intBtnType}
               tooltipPlace="top"
-              onClick={() => copy(int.toString(), setIntBtnType)}
+              onClick={() => copyText(int.toString(), setIntBtnType)}
             />
             <Button type="update" tooltipPlace="top" onClick={changeInt} />
           </div>
@@ -192,7 +202,7 @@ export const RandomGenerators: FC = () => {
               text="copyDecimal"
               type={decimalBtnType}
               tooltipPlace="top"
-              onClick={() => copy(decimal.toString(), setDecimalBtnType)}
+              onClick={() => copyText(decimal.toString(), setDecimalBtnType)}
             />
             <Button type="update" tooltipPlace="top" onClick={changeDecimal} />
           </div>

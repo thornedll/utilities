@@ -8,6 +8,11 @@ import {
 import { BtnSubType, BtnType, Option, ValueType } from "../types/types";
 import { PlacesType } from "react-tooltip";
 
+export interface NavigationProps {
+  isNavigationVisible: boolean;
+  handleNavigationVisibility: () => void;
+}
+
 export interface BaseSelectProps {
   disabled?: boolean;
   options: Option[];

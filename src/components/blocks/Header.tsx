@@ -8,6 +8,12 @@ export const Header: FC = () => {
   const [btnType, setBtnType] = useState<BtnType>("copy");
   const [currentTime, setCurrentTime] = useState<Date>(new Date());
 
+  const copyText = (text: string) => {
+    copy(text);
+    setBtnType("success");
+    setTimeout(() => setBtnType("copy"), 1500);
+  };
+
   useEffect(() => {
     setInterval(() => setCurrentTime(new Date()), 1000);
   }, []);
@@ -43,7 +49,7 @@ export const Header: FC = () => {
               text="nav"
               type={btnType}
               isTooltip={false}
-              onClick={() => copy(currentSecondsView, setBtnType)}
+              onClick={() => copyText(currentSecondsView)}
             />
           </div>
         </div>

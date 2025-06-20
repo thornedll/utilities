@@ -1,24 +1,22 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { NavLink, useLocation } from "react-router";
 import classNames from "classnames/bind";
+import { NavigationProps } from "../../ts/interfaces/interfaces";
 import { Button, SVGSprite } from "../UI";
 import { navigation } from "../../constants";
 import styles from "./styles.module.scss";
 
 const cx = classNames.bind(styles);
 
-export const Navigation: FC = () => {
+export const Navigation: FC<NavigationProps> = ({
+  isNavigationVisible,
+  handleNavigationVisibility,
+}) => {
   const location = useLocation();
-  const [isNavigationVisible, setIsNavigationVisible] = useState<boolean>(true);
-
-  const handleNavigationVisibility = () => {
-    setIsNavigationVisible(!isNavigationVisible);
-  };
 
   return (
     <div
-      className={styles.navigation}
-      style={{ width: `${isNavigationVisible ? "250px" : "80px"}` }}
+      className={cx({ navigation: 1, navigationHidden: !isNavigationVisible })}
     >
       <nav>
         <ul>

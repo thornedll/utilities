@@ -15,6 +15,12 @@ export const ImageConverter: FC = () => {
   const [imageDimensions, setImageDimensions] = useState<ImageDimensions>();
   const [result, setResult] = useState<string>("");
 
+  const copyText = (text: string) => {
+    copy(text);
+    setBtnType("success");
+    setTimeout(() => setBtnType("copy"), 1500);
+  };
+
   const uploadFile = async (e: ChangeEvent<HTMLInputElement>) => {
     setResult("");
     if (e.target.files) {
@@ -98,7 +104,7 @@ export const ImageConverter: FC = () => {
               <Button
                 type={btnType}
                 disabled={result === ""}
-                onClick={() => copy(result, setBtnType)}
+                onClick={() => copyText(result)}
               />
             </div>
           </div>
@@ -120,7 +126,7 @@ export const ImageConverter: FC = () => {
               <Button
                 type={btnType}
                 disabled={result === ""}
-                onClick={() => copy(`<img src="${result}" />`, setBtnType)}
+                onClick={() => copyText(`<img src="${result}" />`)}
               />
             </div>
           </div>

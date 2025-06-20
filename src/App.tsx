@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Route, Routes } from "react-router";
 import {
   DateConverter,
@@ -11,10 +11,26 @@ import {
 import { Header, Navigation } from "./components/blocks";
 
 export const App: FC = () => {
+  const [isNavigationVisible, setIsNavigationVisible] = useState<boolean>(true);
+
+  const handleNavigationVisibility = () => {
+    setIsNavigationVisible(!isNavigationVisible);
+  };
+
   return (
     <div style={{ display: "flex" }}>
-      <Navigation />
-      <div style={{ width: "100%" }}>
+      <Navigation
+        isNavigationVisible={isNavigationVisible}
+        handleNavigationVisibility={handleNavigationVisibility}
+      />
+      <div
+        style={{
+          width: `${
+            isNavigationVisible ? "calc(100% - 250px)" : "calc(100% - 80px)"
+          }`,
+          transition: "width 0.2s",
+        }}
+      >
         <Header />
         <Routes>
           <Route path="utilities/" element={<DateConverter />}></Route>

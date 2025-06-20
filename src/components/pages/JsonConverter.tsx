@@ -35,13 +35,22 @@ export const JsonConverter: FC = () => {
   const [fileString, setFileString] = useState<string>("");
   const [jsonString, setJsonString] = useState<string>("");
 
+  const copyText = (text: string) => {
+    copy(text);
+    setBtnType("success");
+    setTimeout(() => setBtnType("copy"), 1500);
+  };
+
   const handleCaseChange = (state: boolean) => {
     setIsCaseChange(state);
   };
 
   const toggleKeyValueChange = (state: boolean) => {
     setIsKeyValueChange(state);
-    state ? setKeyValueChanges([emptyKeyValueObject]) : setKeyValueChanges([]);
+    const newKeyValueChanges = [
+      JSON.parse(JSON.stringify(emptyKeyValueObject)),
+    ];
+    state ? setKeyValueChanges(newKeyValueChanges) : setKeyValueChanges([]);
   };
 
   const addKeyValueChange = () => {
@@ -236,7 +245,7 @@ export const JsonConverter: FC = () => {
                 disabled={jsonString === ""}
                 type={btnType}
                 tooltipPlace="left"
-                onClick={() => copy(jsonString, setBtnType)}
+                onClick={() => copyText(jsonString)}
               />
               <Button
                 disabled={jsonString === ""}
