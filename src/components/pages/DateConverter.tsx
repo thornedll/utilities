@@ -55,7 +55,7 @@ export const DateConverter: FC = () => {
       <div className={styles.optionsWrapper}>
         <div className={styles.hintWrapper}>
           <p>{toUnix ? "ISO" : "UNIX"}</p>
-          <p className={styles.hint}>{hints.DateConverter.Input}</p>
+          <p className={styles.hint}>{hints.Global.Input}</p>
         </div>
         <Check
           checked={toUnix}
@@ -64,8 +64,8 @@ export const DateConverter: FC = () => {
           handleChange={() => setToUnix(!toUnix)}
         />
         <div className={styles.hintWrapper}>
-          <p>{toUnix ? "UNIX" : "ISO"}</p>
-          <p className={styles.hint}>{hints.DateConverter.Output}</p>
+          <p style={{ fontWeight: "600" }}>{toUnix ? "UNIX" : "ISO"}</p>
+          <p className={styles.hint}>{hints.Global.Output}</p>
         </div>
       </div>
       {toUnix ? (

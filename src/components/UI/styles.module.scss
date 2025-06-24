@@ -153,10 +153,6 @@
   border: 1px solid variables.$light-border;
   cursor: text;
   box-shadow: variables.$base-shadow;
-  &Wrapper {
-    display: flex;
-    gap: variables.$base-gap;
-  }
 }
 
 .singleInputWrapper {

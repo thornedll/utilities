@@ -16,8 +16,8 @@ import {
   hints,
   baseValueTypes,
 } from "../../constants";
+import { rndRegNumber } from "../../utils";
 import styles from "./styles.module.scss";
-import { rndRegNumber } from "../../utils/randoms";
 
 const cx = classNames.bind(styles);
 
@@ -279,7 +279,7 @@ export const JsonConverter: FC = () => {
               <ul className={styles.keyValueInputs}>
                 {keyValueChanges.map((element, index) => {
                   return (
-                    <li key={index}>
+                    <li className={styles.doubleInputWrapper} key={index}>
                       <DoubleInput
                         numberKey={index + 1}
                         value={element.key}

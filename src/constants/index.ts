@@ -45,6 +45,12 @@ export const navigation: PagesData = [
     component: "RandomGenerators",
     icon: "dice",
   },
+  {
+    url: "utilities/url-converter",
+    visibleName: "URL Converter",
+    component: "UrlConverter",
+    icon: "link",
+  },
 ];
 
 export const emptyKeyValueObject: KeyValueChange = {
@@ -99,6 +105,10 @@ export const placeholders = {
   },
   JsonDiff: {
     Textarea: "Enter JSON to compare",
+  },
+  UrlConverter: {
+    InputTextarea: "Enter text to convert",
+    OutputTextarea: "Result will appear here",
   },
 };
 

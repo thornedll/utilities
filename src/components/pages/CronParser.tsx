@@ -117,7 +117,7 @@ export const CronParser: FC = () => {
       </div>
       <div className={styles.resultWrapper}>
         <div className={styles.results}>
-          <h3 className={styles["mt-12"]}>{hints.CronParser.DetailsHeader}</h3>
+          <h3>{hints.CronParser.DetailsHeader}</h3>
           <table className={styles["mt-12"]}>
             <tbody>
               {cronDetails &&

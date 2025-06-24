@@ -30,23 +30,23 @@ export const DoubleInput: FC<DoubleInputProps> = ({
   };
 
   return (
-    <div className={styles.doubleInputWrapper}>
+    <>
       <input
+        className={styles.doubleInput}
         type="text"
         disabled={disabled}
         placeholder={placeholder}
         value={value}
         onChange={(e) => handleKeyChange(numberKey - 1, e.target.value)}
-        className={styles.doubleInput}
       />
       <div className={styles.singleInputWrapper}>
         <input
+          className={styles.doubleInput}
           type={inputType}
           disabled={disabled || !baseValueTypes.includes(selectValue)}
           placeholder={secondPlaceholder}
           value={secondValue}
           onChange={(e) => handleValueChange(numberKey - 1, e.target.value)}
-          className={styles.doubleInput}
         />
         {!baseValueTypes.includes(selectValue) && (
           <div className={styles.buttonsWrapper}>
@@ -66,6 +66,6 @@ export const DoubleInput: FC<DoubleInputProps> = ({
       />
       <Button type="add" onClick={addInputs} />
       <Button type="remove" onClick={() => removeInputs(numberKey - 1)} />
-    </div>
+    </>
   );
 };

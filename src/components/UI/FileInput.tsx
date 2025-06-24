@@ -13,7 +13,7 @@ export const FileInput: FC<FileInputProps> = ({
 }) => {
   return (
     <>
-      <label htmlFor={id} className={styles.fileInputLabel}>
+      <label htmlFor={id} className={styles.fileInputLabel} tabIndex={0}>
         {labelText}
         {accept === "application/json" && <SVGSprite id="json" />}
         <input

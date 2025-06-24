@@ -6,10 +6,10 @@ export const hints = {
     ParseFile: "Parse",
     UploadFileHint: "* or fill in the field below",
     UploadFileError: "Error uploading the file. Please try again.",
-  },
-  DateConverter: {
     Input: "Input",
     Output: "Output",
+  },
+  DateConverter: {
     ISOToUnixHelp:
       "<p>Choose date and time with timezone to convert to UNIX timestamp</p><p>Current date and time are chosen by default</p>",
     UnixToISOHelp:
@@ -44,5 +44,11 @@ export const hints = {
       Integer: "Integer",
       Decimal: "Decimal",
     },
+  },
+  UrlConverter: {
+    DecodeUrlHelp: "<p>Type or insert text to decode</p>",
+    EncodeUrlHelp: "<p>Type or insert text to encode</p>",
+    Decode: "Decode",
+    Encode: "Encode",
   },
 };

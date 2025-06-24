@@ -7,6 +7,7 @@ import {
   CronParser,
   RandomGenerators,
   ImageConverter,
+  UrlConverter,
 } from "./components/pages";
 import { Header, Navigation } from "./components/blocks";
 
@@ -47,6 +48,10 @@ export const App: FC = () => {
           <Route
             path="utilities/random-generators"
             element={<RandomGenerators />}
+          ></Route>
+          <Route
+            path="utilities/url-converter"
+            element={<UrlConverter />}
           ></Route>
         </Routes>
       </div>

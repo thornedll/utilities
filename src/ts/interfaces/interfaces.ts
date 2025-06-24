@@ -80,6 +80,7 @@ export interface TextInputProps {
   id?: string;
   labelText?: string;
   pattern?: InputHTMLAttributes<HTMLInputElement>["pattern"];
+  min?: InputHTMLAttributes<HTMLInputElement>["min"];
   max?: InputHTMLAttributes<HTMLInputElement>["max"];
   maxLength?: InputHTMLAttributes<HTMLInputElement>["maxLength"];
   style?: CSSProperties;

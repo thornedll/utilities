@@ -241,7 +241,8 @@ export const RandomGenerators: FC = () => {
             value={decimalSettings.digits}
             id="decimalSettingDigits"
             labelText="Digits after comma"
-            max={99}
+            min="1"
+            max="10"
             style={{ width: "58px" }}
             handleChange={(e) =>
               changeDecimalSettings(

@@ -35,14 +35,21 @@ input[type="number"] {
   height: 32px;
   border-radius: 6px;
   text-overflow: ellipsis;
-  &:focus {
-    outline-color: variables.$outline;
-    outline-offset: 1px;
-  }
   &:disabled {
     cursor: not-allowed;
     border-color: variables.$disabled-border;
     background-color: variables.$disabled-bg;
+  }
+}
+
+a,
+button,
+input[type="text"],
+input[type="number"],
+label:has(input[type="file"]) {
+  &:focus {
+    outline-color: variables.$outline;
+    outline-offset: 1px;
   }
 }
 
