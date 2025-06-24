@@ -9,6 +9,10 @@ export const hints = {
     Input: "Input",
     Output: "Output",
   },
+  NotFound: {
+    Header: "Nothing to see here...",
+    BackToIndex: "Back to index page",
+  },
   DateConverter: {
     ISOToUnixHelp:
       "<p>Choose date and time with timezone to convert to UNIX timestamp</p><p>Current date and time are chosen by default</p>",

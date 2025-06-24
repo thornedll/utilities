@@ -26,16 +26,11 @@ export const Navigation: FC<NavigationProps> = ({
                 to={link.url}
                 className={cx({
                   navLink: true,
-                  navLinkActive: "/" + link.url === location.pathname,
+                  navLinkActive: link.url === location.pathname,
                   "gap-0": !isNavigationVisible,
                 })}
               >
-                <SVGSprite
-                  id={link.icon}
-                  className={cx({
-                    "m-auto": !isNavigationVisible,
-                  })}
-                />
+                <SVGSprite id={link.icon} />
                 <span
                   className={cx({
                     navLinkTextHidden: !isNavigationVisible,

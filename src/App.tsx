@@ -8,6 +8,7 @@ import {
   RandomGenerators,
   ImageConverter,
   UrlConverter,
+  NotFound,
 } from "./components/pages";
 import { Header, Navigation } from "./components/blocks";
 
@@ -34,25 +35,17 @@ export const App: FC = () => {
       >
         <Header />
         <Routes>
-          <Route path="utilities/" element={<DateConverter />}></Route>
+          <Route path="/" element={<DateConverter />}></Route>
+          <Route path="/json-converter" element={<JsonConverter />}></Route>
+          <Route path="/json-diff" element={<JsonDiff />}></Route>
+          <Route path="/cron-parser" element={<CronParser />}></Route>
+          <Route path="/image-converter" element={<ImageConverter />}></Route>
           <Route
-            path="utilities/json-converter"
-            element={<JsonConverter />}
-          ></Route>
-          <Route path="utilities/json-diff" element={<JsonDiff />}></Route>
-          <Route path="utilities/cron-parser" element={<CronParser />}></Route>
-          <Route
-            path="utilities/image-converter"
-            element={<ImageConverter />}
-          ></Route>
-          <Route
-            path="utilities/random-generators"
+            path="/random-generators"
             element={<RandomGenerators />}
           ></Route>
-          <Route
-            path="utilities/url-converter"
-            element={<UrlConverter />}
-          ></Route>
+          <Route path="/url-converter" element={<UrlConverter />}></Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </div>

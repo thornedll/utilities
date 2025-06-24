@@ -152,3 +152,17 @@
     }
   }
 }
+
+.linkContainer {
+  a {
+    color: variables.$blue-dark;
+    &:hover {
+      color: variables.$blue;
+      text-decoration: underline;
+    }
+    &:active,
+    &:focus {
+      color: variables.$blue-dark;
+    }
+  }
+}

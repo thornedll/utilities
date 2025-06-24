@@ -34,7 +34,7 @@
 }
 
 nav {
-  padding: variables.$base-gap;
+  padding: 16px;
 }
 
 .navLink {
@@ -47,7 +47,6 @@ nav {
   align-items: center;
   position: relative;
   color: variables.$text;
-  text-decoration: none;
   transition: all 0.2s;
   &:hover {
     color: variables.$white;
@@ -137,8 +136,4 @@ nav {
 
 .gap-0 {
   gap: 0;
-}
-
-.m-auto {
-  margin: 0 auto !important;
 }

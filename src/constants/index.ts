@@ -10,43 +10,43 @@ export { hints } from "./hints";
 
 export const navigation: PagesData = [
   {
-    url: "utilities/",
+    url: "/",
     visibleName: "Date Converter",
     component: "DateConverter",
     icon: "clock",
   },
   {
-    url: "utilities/json-converter",
+    url: "/json-converter",
     visibleName: "JSON Converter",
     component: "JsonConverter",
     icon: "json",
   },
   {
-    url: "utilities/json-diff",
+    url: "/json-diff",
     visibleName: "JSON Difference",
     component: "JsonDiff",
     icon: "file-diff",
   },
   {
-    url: "utilities/cron-parser",
+    url: "/cron-parser",
     visibleName: "Cron Parser",
     component: "CronParser",
     icon: "calendar",
   },
   {
-    url: "utilities/image-converter",
+    url: "/image-converter",
     visibleName: "Image Converter",
     component: "ImageConverter",
     icon: "file-image",
   },
   {
-    url: "utilities/random-generators",
+    url: "/random-generators",
     visibleName: "Random Generators",
     component: "RandomGenerators",
     icon: "dice",
   },
   {
-    url: "utilities/url-converter",
+    url: "/url-converter",
     visibleName: "URL Converter",
     component: "UrlConverter",
     icon: "link",
