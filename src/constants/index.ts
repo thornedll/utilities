@@ -1,57 +1,11 @@
 import {
   KeyValueChange,
   Option,
-  PagesData,
   RandomDecimalSettings,
   RandomIntSettings,
 } from "../ts/types/types";
 
 export { hints } from "./hints";
-
-export const navigation: PagesData = [
-  {
-    url: "/",
-    visibleName: "Date Converter",
-    component: "DateConverter",
-    icon: "clock",
-  },
-  {
-    url: "/json-converter",
-    visibleName: "JSON Converter",
-    component: "JsonConverter",
-    icon: "json",
-  },
-  {
-    url: "/json-diff",
-    visibleName: "JSON Difference",
-    component: "JsonDiff",
-    icon: "file-diff",
-  },
-  {
-    url: "/cron-parser",
-    visibleName: "Cron Parser",
-    component: "CronParser",
-    icon: "calendar",
-  },
-  {
-    url: "/image-converter",
-    visibleName: "Image Converter",
-    component: "ImageConverter",
-    icon: "file-image",
-  },
-  {
-    url: "/random-generators",
-    visibleName: "Random Generators",
-    component: "RandomGenerators",
-    icon: "dice",
-  },
-  {
-    url: "/url-converter",
-    visibleName: "URL Converter",
-    component: "UrlConverter",
-    icon: "link",
-  },
-];
 
 export const emptyKeyValueObject: KeyValueChange = {
   key: "",

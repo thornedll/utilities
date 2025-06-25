@@ -1,16 +1,7 @@
 import { FC, useState } from "react";
-import { Route, Routes } from "react-router";
-import {
-  DateConverter,
-  JsonConverter,
-  JsonDiff,
-  CronParser,
-  RandomGenerators,
-  ImageConverter,
-  UrlConverter,
-  NotFound,
-} from "./components/pages";
+import { useRoutes } from "react-router";
 import { Header, Navigation } from "./components/blocks";
+import { routes } from "./constants/routes";
 
 export const App: FC = () => {
   const [isNavigationVisible, setIsNavigationVisible] = useState<boolean>(true);
@@ -34,19 +25,12 @@ export const App: FC = () => {
         }}
       >
         <Header />
-        <Routes>
-          <Route path="/" element={<DateConverter />}></Route>
-          <Route path="/json-converter" element={<JsonConverter />}></Route>
-          <Route path="/json-diff" element={<JsonDiff />}></Route>
-          <Route path="/cron-parser" element={<CronParser />}></Route>
-          <Route path="/image-converter" element={<ImageConverter />}></Route>
-          <Route
-            path="/random-generators"
-            element={<RandomGenerators />}
-          ></Route>
-          <Route path="/url-converter" element={<UrlConverter />}></Route>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        {useRoutes(
+          routes[0].children.map((route) => ({
+            path: route.path,
+            Component: route.Component,
+          }))
+        )}
       </div>
     </div>
   );

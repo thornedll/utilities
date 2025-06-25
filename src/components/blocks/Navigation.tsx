@@ -3,7 +3,7 @@ import { NavLink, useLocation } from "react-router";
 import classNames from "classnames/bind";
 import { NavigationProps } from "../../ts/interfaces/interfaces";
 import { Button, SVGSprite } from "../UI";
-import { navigation } from "../../constants";
+import { routes } from "../../constants/routes";
 import styles from "./styles.module.scss";
 
 const cx = classNames.bind(styles);
@@ -20,28 +20,31 @@ export const Navigation: FC<NavigationProps> = ({
     >
       <nav>
         <ul>
-          {navigation.map((link, i) => (
-            <li className={styles.navLinkContainer} key={i}>
-              <NavLink
-                to={link.url}
-                className={cx({
-                  navLink: true,
-                  navLinkActive: link.url === location.pathname,
-                  "gap-0": !isNavigationVisible,
-                })}
-              >
-                <SVGSprite id={link.icon} />
-                <span
-                  className={cx({
-                    navLinkTextHidden: !isNavigationVisible,
-                    navLinkText: isNavigationVisible,
-                  })}
-                >
-                  {link.visibleName}
-                </span>
-              </NavLink>
-            </li>
-          ))}
+          {routes[0].children.map(
+            (route, i) =>
+              route.path !== "*" && (
+                <li className={styles.navLinkContainer} key={i}>
+                  <NavLink
+                    to={"/" + route.path}
+                    className={cx({
+                      navLink: true,
+                      navLinkActive: "/" + route.path === location.pathname,
+                      "gap-0": !isNavigationVisible,
+                    })}
+                  >
+                    {route.icon && <SVGSprite id={route.icon} />}
+                    <span
+                      className={cx({
+                        navLinkTextHidden: !isNavigationVisible,
+                        navLinkText: isNavigationVisible,
+                      })}
+                    >
+                      {route.visibleName}
+                    </span>
+                  </NavLink>
+                </li>
+              )
+          )}
         </ul>
       </nav>
       <div className={styles.navigationSwitchWrapper}>
