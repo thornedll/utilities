@@ -1,17 +1,22 @@
 import { FC, useState, ChangeEvent } from "react";
+import axios from "axios";
 import classNames from "classnames/bind";
+import { BtnType, FileContent, ImageDimensions } from "../../ts/types/types";
 import { Button, FileInput, TextInput, Loader } from "../UI";
-import { BtnType, ImageDimensions } from "../../ts/types/types";
+import { Modal } from "../blocks";
 import { hints, imageExtensions } from "../../constants";
-import { copy } from "../../utils";
+import { b64toBlob, copy } from "../../utils";
 import styles from "./styles.module.scss";
 
 const cx = classNames.bind(styles);
 
 export const ImageConverter: FC = () => {
   const [btnType, setBtnType] = useState<BtnType>("copy");
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [imageUrl, setImageUrl] = useState<string>("");
+  const [imageUrlError, setImageUrlError] = useState<string>("");
   const [imageLoading, setImageLoading] = useState<boolean>(false);
-  const [file, setFile] = useState<File>();
+  const [file, setFile] = useState<FileContent>();
   const [imageDimensions, setImageDimensions] = useState<ImageDimensions>();
   const [result, setResult] = useState<string>("");
 
@@ -19,6 +24,56 @@ export const ImageConverter: FC = () => {
     copy(text);
     setBtnType("success");
     setTimeout(() => setBtnType("copy"), 1500);
+  };
+
+  const handleModalVisibility = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
+  const changeImageUrl = (newImageUrl: string) => {
+    setImageUrl(newImageUrl);
+  };
+
+  const fetchImage = async (url: string) => {
+    const fileType = url.split(".").at(-1);
+    setImageUrlError("");
+    if (imageExtensions.some((extension) => fileType?.includes(extension))) {
+      let b64 = "";
+      setResult("");
+      axios.interceptors.request.use(function (config) {
+        setImageLoading(true);
+        setIsModalOpen(!isModalOpen);
+        return config;
+      });
+      await axios
+        .get(url, { responseType: "arraybuffer" })
+        .then(async (response) => {
+          const base64 = btoa(
+            new Uint8Array(response.data).reduce(
+              (data, byte) => data + String.fromCharCode(byte),
+              ""
+            )
+          );
+          b64 = base64;
+          setResult(`data:image/${fileType};base64,${base64}`);
+          setFile({
+            name: url,
+          });
+          setImageUrl("");
+          setImageLoading(false);
+          const bitmap = await createImageBitmap(
+            b64toBlob(b64, `image/${fileType}`)
+          );
+          setImageDimensions({ height: bitmap.height, width: bitmap.width });
+        })
+        .catch((error) => {
+          setImageLoading(false);
+          console.error(error);
+          setImageUrlError(error.message);
+        });
+    } else {
+      setImageUrlError(hints.ImageConverter.ImageUrlFormatError);
+    }
   };
 
   const uploadFile = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +85,10 @@ export const ImageConverter: FC = () => {
           file.name.split(".").at(-1)?.includes(extension)
         )
       ) {
-        setFile(file);
+        setFile({
+          name: file.name,
+          content: file,
+        });
         const reader = new FileReader();
         reader.onerror = () => {
           alert(hints.Global.UploadFileError);
@@ -63,6 +121,12 @@ export const ImageConverter: FC = () => {
         <FileInput
           handleChange={uploadFile}
           accept={imageExtensions.map((extension) => "." + extension).join(",")}
+        />
+        or
+        <Button
+          text={hints.ImageConverter.ImageUrlButton}
+          type="primary"
+          onClick={handleModalVisibility}
         />
       </div>
       <div className={styles.resultWrapper}>
@@ -132,6 +196,25 @@ export const ImageConverter: FC = () => {
           </div>
         </div>
       </div>
+      {imageUrlError && (
+        <span className={styles.hintError}>{imageUrlError}</span>
+      )}
+      <Modal
+        isOpen={isModalOpen}
+        headerText={hints.ImageConverter.ModalHeader}
+        handleClose={handleModalVisibility}
+      >
+        <div className={styles.imageConverterModalContent}>
+          <TextInput value={imageUrl} handleChange={changeImageUrl} />
+          <Button
+            text={hints.ImageConverter.GetImageFromUrl}
+            disabled={!imageUrl}
+            type="primary"
+            onClick={() => fetchImage(imageUrl)}
+          />
+        </div>
+        <span className={cx({ hint: 1, hintError: 1 })}>{imageUrlError}</span>
+      </Modal>
     </div>
   );
 };

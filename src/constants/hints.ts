@@ -37,6 +37,12 @@ export const hints = {
     DescriptionHeader: "Cron Expression Description",
     DetailsHeader: "Parsing Details",
   },
+  ImageConverter: {
+    ImageUrlButton: "Enter Image URL",
+    ModalHeader: "Enter the URL of an image",
+    GetImageFromUrl: "OK",
+    ImageUrlFormatError: "Incorrect URL",
+  },
   RandomGenerators: {
     StringHeader: "String Generators",
     NumberHeader: "Number Generators",

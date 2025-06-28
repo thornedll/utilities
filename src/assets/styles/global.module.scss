@@ -29,12 +29,15 @@ h2 {
   font-size: 22px;
 }
 
+h3 {
+  font-size: 20px;
+}
+
 button,
 input[type="text"],
 input[type="number"] {
   height: 32px;
   border-radius: 6px;
-  text-overflow: ellipsis;
   &:disabled {
     cursor: not-allowed;
     border-color: variables.$disabled-border;

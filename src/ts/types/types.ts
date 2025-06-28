@@ -62,3 +62,8 @@ export type ImageDimensions = {
   height: number;
   width: number;
 };
+
+export type FileContent = {
+  name?: string;
+  content?: File;
+};

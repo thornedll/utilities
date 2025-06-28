@@ -122,6 +122,11 @@
   display: block;
   font-size: 12px;
   color: variables.$gray;
+  &Error {
+    display: block;
+    color: variables.$red;
+    margin-top: 4px;
+  }
 }
 
 .doubleInputWrapper {
@@ -164,5 +169,15 @@
     &:focus {
       color: variables.$blue-dark;
     }
+  }
+}
+
+.imageConverterModalContent {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: variables.$base-gap;
+  input {
+    width: 100%;
   }
 }

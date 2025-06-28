@@ -45,6 +45,9 @@
   &:hover {
     background-color: variables.$green-hover;
   }
+  &:active {
+    background-color: variables.$green;
+  }
 }
 
 .fileInputLabel {

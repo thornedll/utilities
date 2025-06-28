@@ -11,7 +11,7 @@ export const NotFound: FC = () => {
     <div className={styles.pageWrapper}>
       <h2>{hints.NotFound.Header}</h2>
       <p className={cx({ linkContainer: 1, "mt-12": 1 })}>
-        <Link to="/">{hints.NotFound.BackToIndex}</Link>
+        <Link to="/utilities">{hints.NotFound.BackToIndex}</Link>
       </p>
     </div>
   );

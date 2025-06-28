@@ -8,6 +8,18 @@ import {
 import { BtnSubType, BtnType, Option, ValueType } from "../types/types";
 import { PlacesType } from "react-tooltip";
 
+export interface ReactPortalProps {
+  children: ReactNode;
+  wrapperId: string;
+}
+
+export interface ModalProps {
+  children: ReactNode;
+  isOpen: boolean;
+  headerText: string;
+  handleClose: () => void;
+}
+
 export interface NavigationProps {
   isNavigationVisible: boolean;
   handleNavigationVisibility: () => void;
