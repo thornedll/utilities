@@ -102,6 +102,9 @@
       color: variables.$disabled-btn;
       background-color: transparent;
     }
+    &:active {
+      background-color: transparent;
+    }
   }
 }
 
