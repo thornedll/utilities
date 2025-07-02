@@ -17,6 +17,8 @@
   Released under the MIT License.
 */
 
+/*! jsonpath 1.1.1 */
+
 /**
  * @license
  * Lodash <https://lodash.com/>
