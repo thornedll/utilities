@@ -1,4 +1,5 @@
 export { DateConverter } from "./DateConverter";
+export { JsonQuery } from "./JsonQuery";
 export { JsonConverter } from "./JsonConverter";
 export { JsonDiff } from "./JsonDiff";
 export { CronParser } from "./CronParser";

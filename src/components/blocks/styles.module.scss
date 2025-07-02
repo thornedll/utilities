@@ -11,6 +11,7 @@
   justify-content: space-between;
   background-color: variables.$green-light;
   transition: width 0.2s;
+  box-shadow: 2px 0px 6px rgba(0, 0, 0, 0.2);
   &Hidden {
     width: 80px !important;
   }
@@ -30,7 +31,7 @@
   width: 100%;
   display: flex;
   align-items: center;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.5rem;
 }
 
 nav {
@@ -142,12 +143,12 @@ nav {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease-in;
+  transition: all 0.2s linear;
   overflow: hidden;
   z-index: 999;
   padding: 40px 20px 20px;
   &Content {
-    width: 70%;
+    width: 800px;
     position: relative;
     border-radius: variables.$base-gap;
     background-color: variables.$white;
@@ -178,5 +179,5 @@ nav {
 }
 
 .gap-0 {
-  gap: 0;
+  gap: 0 !important;
 }

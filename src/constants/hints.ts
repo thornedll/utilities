@@ -28,6 +28,13 @@ export const hints = {
     NoDifference: "No difference yet...",
     ParsingError: "Parsing JSON Error!",
   },
+  JsonQuery: {
+    UploadHeader: "Upload file to query*",
+    JsonQueryHeader: "JSON to Query",
+    QueryHeader: "Query",
+    ResultHeader: "Result",
+    ParsingError: 'Invalid json in "Json to Query" field',
+  },
   CronParser: {
     ParseHeader: "Cron Expression",
     EnterCron: "Enter Cron Expression",

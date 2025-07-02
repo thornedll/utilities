@@ -150,7 +150,7 @@ export const RandomGenerators: FC = () => {
         </div>
       </div>
       <h4 className={styles["mt-12"]}>{hints.RandomGenerators.NumberHeader}</h4>
-      <div className={styles.optionsGridWrapper}>
+      <div className={cx({ optionsGridWrapper: 1, "grid-2-columns": 1 })}>
         <div className={styles.singleInputWrapper}>
           <TextInput
             type="number"

@@ -36,7 +36,7 @@ export const ImageConverter: FC = () => {
 
   const fetchImage = async (url: string) => {
     const fileType = url.split(".").at(-1);
-    setImageUrlError("");
+    imageUrlError !== "" && setImageUrlError("");
     if (imageExtensions.some((extension) => fileType?.includes(extension))) {
       let b64 = "";
       setResult("");
@@ -77,7 +77,8 @@ export const ImageConverter: FC = () => {
   };
 
   const uploadFile = async (e: ChangeEvent<HTMLInputElement>) => {
-    setResult("");
+    imageUrlError !== "" && setImageUrlError("");
+    result !== "" && setResult("");
     if (e.target.files) {
       const file = e.target.files[0];
       if (

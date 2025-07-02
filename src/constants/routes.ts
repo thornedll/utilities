@@ -1,6 +1,7 @@
 import { App } from "../App";
 import {
   DateConverter,
+  JsonQuery,
   JsonConverter,
   JsonDiff,
   CronParser,
@@ -20,6 +21,12 @@ export const routes = [
         Component: DateConverter,
         visibleName: "Date Converter",
         icon: "clock",
+      },
+      {
+        path: "utilities/json-query",
+        Component: JsonQuery,
+        visibleName: "JSON Query",
+        icon: "braces-asterisk",
       },
       {
         path: "utilities/json-converter",
