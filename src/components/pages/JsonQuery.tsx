@@ -3,7 +3,7 @@ import jp from "jsonpath";
 import classNames from "classnames/bind";
 import { Button, FileInput, TextArea } from "../UI";
 import { BtnType } from "../../ts/types/types";
-import { hints } from "../../constants";
+import { hints, jsonQueryRegex, placeholders } from "../../constants";
 import { copy, downloadFile, setFormattedJson } from "../../utils";
 import styles from "./styles.module.scss";
 
@@ -61,7 +61,9 @@ export const JsonQuery: FC = () => {
         const newValue = jp.query(JSON.parse(jsonQuery), query);
         setFormattedJson(JSON.stringify(newValue), setResult);
       } catch {
-        setError(hints.JsonQuery.ParsingError);
+        jsonQueryRegex.test(query)
+          ? setError(hints.JsonQuery.ParsingError)
+          : setError(hints.JsonQuery.QueryError);
       }
   };
 
@@ -84,61 +86,76 @@ export const JsonQuery: FC = () => {
       <div className={cx({ optionsGridWrapper: 1, "grid-3-columns": 1 })}>
         <div
           className={cx({
-            optionsWrapper: 1,
-            "fd-column": 1,
-            "align-start": 1,
-            "mt-0": 1,
+            jsonInputWrapper: 1,
           })}
         >
-          <h3>{hints.JsonQuery.JsonQueryHeader}</h3>
-          <TextArea
-            value={jsonQuery}
-            readOnly={false}
-            handleChange={changeJsonQuery}
-          />
-          <div className={styles.buttonsWrapper}>
-            <Button
-              disabled={!jsonQuery}
-              type="format"
-              tooltipPlace="left"
-              onClick={() => setFormattedJson(jsonQuery, setJsonQuery)}
+          <div className={styles.headerWrapper}>
+            <h4>{hints.JsonQuery.JsonQueryHeader}</h4>
+            {jsonQuery && (
+              <p className={styles.hint}>{jsonQuery.length} chars</p>
+            )}
+          </div>
+          <div className={cx({ resultWrapper: 1, "mt-0": 1 })}>
+            <TextArea
+              placeholder={placeholders.JsonQuery.InputTextArea}
+              value={jsonQuery}
+              readOnly={false}
+              handleChange={changeJsonQuery}
             />
+            <div className={styles.buttonsWrapper}>
+              <Button
+                disabled={!jsonQuery}
+                type="format"
+                tooltipPlace="left"
+                onClick={() => setFormattedJson(jsonQuery, setJsonQuery)}
+              />
+            </div>
           </div>
         </div>
         <div
           className={cx({
-            optionsWrapper: 1,
-            "fd-column": 1,
-            "align-start": 1,
-            "mt-0": 1,
+            jsonInputWrapper: 1,
           })}
         >
-          <h3>{hints.JsonQuery.QueryHeader}</h3>
-          <TextArea value={query} readOnly={false} handleChange={changeQuery} />
+          <div className={styles.headerWrapper}>
+            <h4>{hints.JsonQuery.QueryHeader}</h4>
+          </div>
+          <TextArea
+            placeholder={placeholders.JsonQuery.QueryTextArea}
+            value={query}
+            readOnly={false}
+            handleChange={changeQuery}
+          />
         </div>
         <div
           className={cx({
-            optionsWrapper: 1,
-            "fd-column": 1,
-            "align-start": 1,
-            "mt-0": 1,
+            jsonInputWrapper: 1,
           })}
         >
-          <h3>{hints.JsonQuery.ResultHeader}</h3>
-          <TextArea value={error === "" ? result : error} readOnly={true} />
-          <div className={styles.buttonsWrapper}>
-            <Button
-              disabled={result === "" || error !== ""}
-              type={btnType}
-              tooltipPlace="left"
-              onClick={() => copyText(result)}
+          <div className={styles.headerWrapper}>
+            <h4>{hints.JsonQuery.ResultHeader}</h4>
+            {result && <p className={styles.hint}>{result.length} chars</p>}
+          </div>
+          <div className={cx({ resultWrapper: 1, "mt-0": 1 })}>
+            <TextArea
+              placeholder={placeholders.Global.OutputTextarea}
+              value={error === "" ? result : error}
+              readOnly={true}
             />
-            <Button
-              disabled={result === "" || error !== ""}
-              type="download"
-              tooltipPlace="left"
-              onClick={() => downloadFile(result, "json")}
-            />
+            <div className={styles.buttonsWrapper}>
+              <Button
+                disabled={result === "" || error !== ""}
+                type={btnType}
+                tooltipPlace="left"
+                onClick={() => copyText(result)}
+              />
+              <Button
+                disabled={result === "" || error !== ""}
+                type="download"
+                tooltipPlace="left"
+                onClick={() => downloadFile(result, "json")}
+              />
+            </div>
           </div>
         </div>
       </div>

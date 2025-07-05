@@ -238,7 +238,7 @@ export const JsonConverter: FC = () => {
             <TextArea
               value={jsonString}
               readOnly={true}
-              placeholder={placeholders.JsonConverter.OutputTextarea}
+              placeholder={placeholders.Global.OutputTextarea}
             />
             <div className={styles.buttonsWrapper}>
               <Button

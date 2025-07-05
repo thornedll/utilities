@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import { useRoutes } from "react-router";
 import { Header, Navigation } from "./components/blocks";
 import { routes } from "./constants/routes";
+import { NotFound } from "./components/pages";
 
 export const App: FC = () => {
   const [isNavigationVisible, setIsNavigationVisible] = useState<boolean>(true);
@@ -29,6 +30,7 @@ export const App: FC = () => {
           routes[0].children.map((route) => ({
             path: route.path,
             Component: route.Component,
+            errorElement: <NotFound />,
           }))
         )}
       </div>

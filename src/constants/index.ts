@@ -7,6 +7,9 @@ import {
 
 export { hints } from "./hints";
 
+export const jsonQueryRegex =
+  /^\$(\.{1,2}([a-z]+(\[(\d+|\*|\(@\.length-[1-9]\)|-?\d+:|:-?\d+|\d+,\d+|\?\((@\.[a-z]+((<=?|>=?|==)(\d+(\.\d+)?|".*"))?)( ?&& ?(@\.[a-z]+((<=?|>=?|==)(\d+(\.\d+)?|".*"))?))?\))\])?|\d+|\*))*$/gim;
+
 export const emptyKeyValueObject: KeyValueChange = {
   key: "",
   value: "",
@@ -50,12 +53,18 @@ export const valueTypes: Option[] = [
 export const baseValueTypes: string[] = ["string", "number", "boolean"];
 
 export const placeholders = {
+  Global: {
+    OutputTextarea: "Result will appear here",
+  },
   DateConverter: {
     UNIXTextInput: "Enter UNIX date",
   },
+  JsonQuery: {
+    InputTextArea: "Enter JSON to query",
+    QueryTextArea: "Enter query",
+  },
   JsonConverter: {
     InputTextarea: "Enter JSON to convert",
-    OutputTextarea: "Result will appear here",
   },
   JsonDiff: {
     Textarea: "Enter JSON to compare",

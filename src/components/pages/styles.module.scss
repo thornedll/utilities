@@ -37,9 +37,6 @@
 
 .grid-3-columns {
   grid-template-columns: 1fr 1fr 1fr;
-  .buttonsWrapper {
-    top: 24px + variables.$base-gap;
-  }
 }
 
 .checksWrapper {
