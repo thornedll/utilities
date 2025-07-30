@@ -41,7 +41,7 @@ nav {
 .navLink {
   width: 100%;
   height: 100%;
-  padding: variables.$base-gap / 2 variables.$base-gap;
+  padding: calc(variables.$base-gap / 2) variables.$base-gap;
   border-radius: 6px;
   display: flex;
   gap: 8px;
