@@ -111,8 +111,8 @@ export const setFormattedJson = (
 export const changeIsoFromUnixDateTimezone = (
   isoDateString: string,
   timezone: Option,
-  dateSetter: Dispatch<SetStateAction<string>>,
-  timezoneSetter: Dispatch<SetStateAction<Option>>
+  dateSetter: (result: string) => void,
+  timezoneSetter: (timezone: Option) => void
 ): void => {
   const timezoneInt = Number(timezone.value);
   const newTimezone = timezone.label === "+00:00" ? "Z" : timezone.label;
