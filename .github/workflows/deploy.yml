@@ -3,7 +3,7 @@ name: Deploy static content to Pages
 on:
   push:
     branches:
-      - main
+      - master
 
   workflow_dispatch:
 
@@ -30,6 +30,7 @@ jobs:
         with:
           name: production-files
           path: ./dist
+
   deploy:
     name: Deploy
     needs: build
