@@ -132,7 +132,7 @@ export const ImageConverter: FC = () => {
       </div>
       <div className={styles.resultWrapper}>
         <div className={cx({ resultWrapper: 1, "fd-column": 1, "mt-0": 1 })}>
-          <div className={cx({ imageHeader: 1 })}>
+          <div className={styles.imageHeader}>
             <span>{file && file.name}</span>
             <span className={styles.hint}>
               {imageDimensions
